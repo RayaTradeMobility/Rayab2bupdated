@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "69886747923",
+    "project_id": "rayadistb2b",
+    "storage_bucket": "rayadistb2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69886747923:android:ab5eb1e314d8b955aba6e6",
+        "android_client_info": {
+          "package_name": "com.raya.RayaB2b.rayab2b"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69886747923-s3d6fhq9g0kjeon7il56r6f1jed7ti13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBderhQCJRUF7hGsh4l8AyzhtOaR4leTsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69886747923-s3d6fhq9g0kjeon7il56r6f1jed7ti13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
