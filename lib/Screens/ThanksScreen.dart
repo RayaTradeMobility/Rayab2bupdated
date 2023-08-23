@@ -9,13 +9,12 @@ class ThanksScreen extends StatefulWidget {
       {super.key,
       required this.token,
       required this.email,
-      required this.mobile,
       required this.firstname,
       required this.lastname,
       required this.customerId,
       required this.orderId});
 
-  final String token, email, mobile, firstname, lastname, customerId, orderId;
+  final String token, email, firstname, lastname, customerId, orderId;
 
   @override
   ThanksScreenState createState() => ThanksScreenState();
@@ -50,7 +49,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                             email: widget.email,
                             firstname: widget.firstname,
                             lastname: widget.lastname,
-                            mobile: widget.mobile,
+                            mobile: "",
                             customerId: widget.customerId,
                           );
                         }));
@@ -89,7 +88,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                         email: widget.email,
                         firstname: widget.firstname,
                         lastname: widget.lastname,
-                        mobile: widget.mobile,
+                        mobile: "",
                         customerId: widget.customerId,
                         orderId: widget.orderId,
                       );
@@ -98,8 +97,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                   style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Color(_fontcolor)),
-                  child: const Text(
-                      "Track Your Order"),
+                  child: const Text("Track Your Order"),
                 ),
               ),
               Center(
@@ -112,7 +110,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                         email: widget.email,
                         firstname: widget.firstname,
                         lastname: widget.lastname,
-                        mobile: widget.mobile,
+                        mobile: "",
                         customerId: widget.customerId,
                       );
                     }));

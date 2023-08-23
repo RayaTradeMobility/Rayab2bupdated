@@ -30,46 +30,64 @@ class GetCartResponseModel {
 }
 
 class Data {
-  int? itemId;
+  int? id;
   String? sku;
   int? qty;
-  String? name;
   String? price;
-  String? productType;
-  String? quoteId;
-  String? image;
+  String? totalPrice;
+  String? name;
+  ImageUrl? imageUrl;
 
   Data(
-      {this.itemId,
+      {this.id,
       this.sku,
       this.qty,
-      this.name,
       this.price,
-      this.productType,
-      this.quoteId,
-      this.image});
+      this.totalPrice,
+      this.name,
+      this.imageUrl});
 
   Data.fromJson(Map<String, dynamic> json) {
-    itemId = json['item_id'];
+    id = json['id'];
     sku = json['sku'];
     qty = json['qty'];
-    name = json['name'];
     price = json['price'];
-    productType = json['product_type'];
-    quoteId = json['quote_id'];
-    image = json['image'];
+    totalPrice = json['total_price'];
+    name = json['name'];
+    imageUrl =
+        json['image_url'] != null ? ImageUrl.fromJson(json['image_url']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['item_id'] = itemId;
+    data['id'] = id;
     data['sku'] = sku;
     data['qty'] = qty;
-    data['name'] = name;
     data['price'] = price;
-    data['product_type'] = productType;
-    data['quote_id'] = quoteId;
-    data['image'] = image;
+    data['total_price'] = totalPrice;
+    data['name'] = name;
+    if (imageUrl != null) {
+      data['image_url'] = imageUrl!.toJson();
+    }
+    return data;
+  }
+}
+
+class ImageUrl {
+  int? valueId;
+  String? imageLink;
+
+  ImageUrl({this.valueId, this.imageLink});
+
+  ImageUrl.fromJson(Map<String, dynamic> json) {
+    valueId = json['value_id'];
+    imageLink = json['image_link'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['value_id'] = valueId;
+    data['image_link'] = imageLink;
     return data;
   }
 }

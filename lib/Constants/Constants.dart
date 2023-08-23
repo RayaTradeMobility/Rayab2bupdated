@@ -52,8 +52,8 @@ class MyTextSample {
 
   static TextStyle medium(BuildContext context) {
     return Theme.of(context).textTheme.titleMedium!.copyWith(
-      fontSize: 18,
-    );
+          fontSize: 18,
+        );
   }
 
   static TextStyle? subhead(BuildContext context) {

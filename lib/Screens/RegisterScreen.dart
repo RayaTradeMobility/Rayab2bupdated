@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:rayab2bupdated/Models/RegisterRequestModel.dart' as request;
-import 'package:rayab2bupdated/Screens/LoginScreen.dart';
 import '../API/API.dart';
-import '../Models/RegisterResponseModel.dart' as response;
+import '../Models/RegisterResponseModel.dart';
+import 'RegisterAddressScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -62,39 +61,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fontSize: 16.0);
             } else {
               api.checkNetwork();
-              request.RegisterRequestModel requestModel =
-                  request.RegisterRequestModel();
-              requestModel.customer = request.Customer();
-              requestModel.customer!.firstname = firstName.text;
-              requestModel.customer!.lastname = lastName.text;
-              requestModel.customer!.email = email.text;
-              request.Addresses addresses = request.Addresses();
-              addresses.defaultShipping = true;
-              addresses.defaultBilling = true;
-              addresses.lastname = lastName.text;
-              addresses.firstname = firstName.text;
-              addresses.region = request.Region();
-              addresses.region!.regionCode = "EG";
-              addresses.region!.region = "Egypt";
-              addresses.region!.regionId = 1122;
-              addresses.postcode = postCode.text;
-              addresses.street = <String>[];
-              addresses.street!.add(street.text);
-              addresses.city = city.text;
-              addresses.telephone = mobileNumber.text;
-              addresses.countryId = "EG";
-              requestModel.customer!.addresses = <request.Addresses>[];
-              requestModel.customer!.addresses!.add(addresses);
-              requestModel.password = password.text;
-              response.RegisterResponseModel? res =
-                  await api.register(requestModel);
+
+              RegisterResponseModel res = await api.register(
+                  firstName.text.trim() + lastName.text.trim(),
+                  mobileNumber.text,
+                  companyName.text,
+                  email.text,
+                  password.text,
+                  '');
               if (res.success == true) {
                 setState(() {
                   _isLoading = false;
                 });
                 // ignore: use_build_context_synchronously
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const LoginScreen();
+                  return RegisterAddressScreen(token: res.data!.token!);
                 }));
               } else {
                 setState(() {
@@ -117,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         },
         label: _isLoading
             ? const CircularProgressIndicator()
-            : const Text('تسجيل'),
+            : const Text('تسجيل 1/2'),
         backgroundColor: Color(_fontcolor),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -243,79 +224,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           const SizedBox(
             height: 10.0,
-          ),
-          TextFormField(
-            controller: companyName,
-            decoration: InputDecoration(
-              hintText: "اسم الشركه",
-              prefixIcon: const Icon(Icons.add_business),
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          TextFormField(
-            controller: street,
-            decoration: InputDecoration(
-              hintText: "اسم الشارع",
-              prefixIcon: const Icon(Icons.streetview),
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          TextFormField(
-            controller: city,
-            decoration: InputDecoration(
-              hintText: "اسم المدينه",
-              prefixIcon: const Icon(Icons.location_city),
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          TextFormField(
-            controller: postCode,
-            decoration: InputDecoration(
-              hintText: "الرقم البريدي",
-              prefixIcon: const Icon(Icons.numbers),
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-            ),
           ),
           const SizedBox(
             height: 10.0,

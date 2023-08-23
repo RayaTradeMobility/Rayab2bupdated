@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "69886747923",
-    "project_id": "rayadistb2b",
-    "storage_bucket": "rayadistb2b.appspot.com"
+    "project_number": "689463555696",
+    "project_id": "asdaml",
+    "storage_bucket": "asdaml.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:69886747923:android:ab5eb1e314d8b955aba6e6",
+        "mobilesdk_app_id": "1:689463555696:android:f796f249500c0924de66b5",
         "android_client_info": {
-          "package_name": "com.raya.RayaB2b.rayab2b"
+          "package_name": "com.example.rayab2bupdated"
         }
       },
       "oauth_client": [
         {
-          "client_id": "69886747923-s3d6fhq9g0kjeon7il56r6f1jed7ti13.apps.googleusercontent.com",
+          "client_id": "689463555696-kk3or4igfjvpv2hvdbqplnt9jm0goamu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBderhQCJRUF7hGsh4l8AyzhtOaR4leTsE"
+          "current_key": "AIzaSyC-qQD9UJwZAOOtKtI39dROt4nVdPobzRA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "69886747923-s3d6fhq9g0kjeon7il56r6f1jed7ti13.apps.googleusercontent.com",
+              "client_id": "689463555696-kk3or4igfjvpv2hvdbqplnt9jm0goamu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

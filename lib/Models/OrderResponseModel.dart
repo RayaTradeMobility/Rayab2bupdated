@@ -25,17 +25,23 @@ class OrderResponseModel {
 }
 
 class Data {
-  int? orderId;
+  int? id;
+  String? grandTotal;
+  String? createdAt;
 
-  Data({this.orderId});
+  Data({this.id, this.grandTotal, this.createdAt});
 
   Data.fromJson(Map<String, dynamic> json) {
-    orderId = json['order_id'];
+    id = json['id'];
+    grandTotal = json['grand_total'];
+    createdAt = json['created_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['order_id'] = orderId;
+    data['id'] = id;
+    data['grand_total'] = grandTotal;
+    data['created_at'] = createdAt;
     return data;
   }
 }

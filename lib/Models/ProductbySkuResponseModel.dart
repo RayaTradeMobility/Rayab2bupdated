@@ -41,18 +41,18 @@ class Data {
 
   Data(
       {this.id,
-        this.name,
-        this.sku,
-        this.price,
-        this.qty,
-        this.salableQuantity,
-        this.description,
-        this.isStock,
-        this.minSaleQty,
-        this.maxSaleQty,
-        this.images,
-        this.categories,
-        this.attributes});
+      this.name,
+      this.sku,
+      this.price,
+      this.qty,
+      this.salableQuantity,
+      this.description,
+      this.isStock,
+      this.minSaleQty,
+      this.maxSaleQty,
+      this.images,
+      this.categories,
+      this.attributes});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -122,13 +122,13 @@ class Images {
 
   Images(
       {this.valueId,
-        this.storeId,
-        this.entityId,
-        this.label,
-        this.position,
-        this.disabled,
-        this.recordId,
-        this.imageLink});
+      this.storeId,
+      this.entityId,
+      this.label,
+      this.position,
+      this.disabled,
+      this.recordId,
+      this.imageLink});
 
   Images.fromJson(Map<String, dynamic> json) {
     valueId = json['value_id'];
@@ -164,10 +164,10 @@ class Categories {
 
   Categories(
       {this.entityId,
-        this.categoryId,
-        this.productId,
-        this.position,
-        this.nameCategary});
+      this.categoryId,
+      this.productId,
+      this.position,
+      this.nameCategary});
 
   Categories.fromJson(Map<String, dynamic> json) {
     entityId = json['entity_id'];
@@ -216,6 +216,7 @@ class Attributes {
 
 class NameAttribute {
   String? name;
+
   // ignore: prefer_typing_uninitialized_variables
   var value;
 

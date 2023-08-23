@@ -7,24 +7,24 @@ import 'package:rayab2bupdated/Screens/ProductScreen.dart';
 class CardScreenModel extends StatefulWidget {
   const CardScreenModel(
       {super.key,
-        required this.isfavouriteApi,
-        required this.fav,
-        required this.name,
-        required this.salePrice,
-        required this.image,
-        required this.price,
-        required this.regularPrice,
-        required this.id,
-        required this.token,
-        required this.stockStatus,
-        required this.isBundle,
-        required this.percentagePrice,
-        required this.sku,
-        required this.email,
-        required this.mobile,
-        required this.firstname,
-        required this.lastname,
-        required this.customerId});
+      required this.isfavouriteApi,
+      required this.fav,
+      required this.name,
+      required this.salePrice,
+      required this.image,
+      required this.price,
+      required this.regularPrice,
+      required this.id,
+      required this.token,
+      required this.stockStatus,
+      required this.isBundle,
+      required this.percentagePrice,
+      required this.sku,
+      required this.email,
+      required this.mobile,
+      required this.firstname,
+      required this.lastname,
+      required this.customerId});
 
   final String name;
   final String salePrice;
@@ -78,6 +78,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return ProductScreen(
               sku: widget.sku,
+              productId: widget.id,
               token: widget.token,
               mobile: widget.mobile,
               lastname: widget.lastname,
@@ -150,8 +151,8 @@ class _CardScreenModelState extends State<CardScreenModel> {
               margin: const EdgeInsets.all(5),
               child: FadeInImage(
                 image: NetworkImage(widget.image),
-                width: MediaQuery.of(context).size.width-300,
-                height: MediaQuery.of(context).size.width-300,
+                width: MediaQuery.of(context).size.width - 300,
+                height: MediaQuery.of(context).size.width - 300,
                 placeholder: const AssetImage("assets/no-img.jpg"),
                 imageErrorBuilder: (context, error, stackTrace) {
                   return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth);

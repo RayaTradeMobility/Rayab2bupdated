@@ -33,9 +33,7 @@ class Data {
   String? nextPageUrl;
   String? path;
   int? perPage;
-
-  // ignore: prefer_void_to_null
-  Null prevPageUrl;
+  String? prevPageUrl;
   int? to;
   int? total;
   List<Items>? items;
@@ -96,36 +94,52 @@ class Data {
 
 class Items {
   int? orderId;
-  String? status;
-  String? baseSubtotal;
-  String? shippingAmount;
-  String? grandTotal;
+  int? statusId;
+  int? shippingAmount;
+  int? grandTotal;
+  int? paymentMethodId;
+  int? totalQty;
+  int? totalQtyItem;
+  String? statusName;
+  String? paymentMethodName;
   String? createdAt;
 
   Items(
       {this.orderId,
-      this.status,
-      this.baseSubtotal,
+      this.statusId,
       this.shippingAmount,
-      this.grandTotal ,
+      this.grandTotal,
+      this.paymentMethodId,
+      this.totalQty,
+      this.totalQtyItem,
+      this.statusName,
+      this.paymentMethodName,
       this.createdAt});
 
   Items.fromJson(Map<String, dynamic> json) {
     orderId = json['order_id'];
-    status = json['status'];
-    baseSubtotal = json['base_subtotal'];
+    statusId = json['status_id'];
     shippingAmount = json['shipping_amount'];
     grandTotal = json['grand_total'];
+    paymentMethodId = json['payment_method_id'];
+    totalQty = json['total_qty'];
+    totalQtyItem = json['total_qty_item'];
+    statusName = json['status_name'];
+    paymentMethodName = json['payment_method_name'];
     createdAt = json['created_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['order_id'] = orderId;
-    data['status'] = status;
-    data['base_subtotal'] = baseSubtotal;
+    data['status_id'] = statusId;
     data['shipping_amount'] = shippingAmount;
     data['grand_total'] = grandTotal;
+    data['payment_method_id'] = paymentMethodId;
+    data['total_qty'] = totalQty;
+    data['total_qty_item'] = totalQtyItem;
+    data['status_name'] = statusName;
+    data['payment_method_name'] = paymentMethodName;
     data['created_at'] = createdAt;
     return data;
   }

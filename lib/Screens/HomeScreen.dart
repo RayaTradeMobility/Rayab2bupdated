@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:rayab2bupdated/API/API.dart';
@@ -64,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 100.0,
             )),
             bottom: AppBar(
-              backgroundColor:  MyColorsSample.fontColor,
+              backgroundColor: MyColorsSample.fontColor,
               title: customSearchBar,
               centerTitle: true,
               automaticallyImplyLeading: false,
@@ -87,21 +86,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             textFieldConfiguration: TextFieldConfiguration(
                               autocorrect: false,
                               autofocus: false,
-                              style: DefaultTextStyle.of(context).style.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.white
-                              ),
+                              style: DefaultTextStyle.of(context)
+                                  .style
+                                  .copyWith(
+                                      fontStyle: FontStyle.italic,
+                                      color: Colors.white),
                               decoration: const InputDecoration(
                                 labelText: 'Search for product',
                                 border: OutlineInputBorder(),
                               ),
                             ),
                             suggestionsCallback: (pattern) async {
-                              return await API.searchProducts(pattern, widget.token);
+                              return await API.searchProducts(
+                                  pattern, widget.token);
                             },
                             itemBuilder: (context, suggestion) {
-
-                              return  ListTile(
+                              return ListTile(
                                 leading: ConstrainedBox(
                                   constraints: const BoxConstraints(
                                     minWidth: 44,
@@ -110,17 +110,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     maxHeight: 64,
                                   ),
                                   child: FadeInImage(
-                                    image: NetworkImage(suggestion.images!.imageLink!),
-                                    placeholder: const AssetImage("assets/no-img.jpg"),
+                                    image: NetworkImage(
+                                        suggestion.images!.imageLink!),
+                                    placeholder:
+                                        const AssetImage("assets/no-img.jpg"),
                                     imageErrorBuilder:
-                                        (context, error,
-                                        stackTrace) {
-                                      return Image.asset(
-                                          'assets/no-img.jpg',
+                                        (context, error, stackTrace) {
+                                      return Image.asset('assets/no-img.jpg',
                                           height: 50.0,
                                           width: 120.0,
-                                          fit: BoxFit
-                                              .fitWidth);
+                                          fit: BoxFit.fitWidth);
                                     },
                                   ),
                                 ),
@@ -130,19 +129,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             onSuggestionSelected: (suggestion) {
                               final selectedSku = suggestion.sku;
-                              if (kDebugMode) {
-                                print(suggestion.name);
-                              }
+
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ProductScreen(
-                                    sku:selectedSku!,
-                                    token: widget.token, email: widget.email,firstname: widget.firstname,lastname: widget.lastname,mobile: widget.mobile, customerId: widget.customerId,
+                                    sku: selectedSku!,
+                                    productId: suggestion.id!,
+                                    token: widget.token,
+                                    email: widget.email,
+                                    firstname: widget.firstname,
+                                    lastname: widget.lastname,
+                                    mobile: widget.mobile,
+                                    customerId: widget.customerId,
                                   ),
                                 ),
                               );
                             },
-
                           ),
                         );
                       });

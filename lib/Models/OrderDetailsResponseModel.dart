@@ -26,26 +26,41 @@ class OrderDetailsResponseModel {
 
 class Data {
   int? orderId;
-  String? status;
-  String? baseSubtotal;
-  String? shippingAmount;
-  String? grandTotal;
+  int? statusId;
+  int? shippingAmount;
+  int? grandTotal;
+  int? paymentMethodId;
+  int? totalQty;
+  int? totalQtyItem;
+  String? statusName;
+  String? paymentMethodName;
+  String? createdAt;
   List<Items>? items;
 
   Data(
       {this.orderId,
-      this.status,
-      this.baseSubtotal,
+      this.statusId,
       this.shippingAmount,
       this.grandTotal,
+      this.paymentMethodId,
+      this.totalQty,
+      this.totalQtyItem,
+      this.statusName,
+      this.paymentMethodName,
+      this.createdAt,
       this.items});
 
   Data.fromJson(Map<String, dynamic> json) {
     orderId = json['order_id'];
-    status = json['status'];
-    baseSubtotal = json['base_subtotal'];
+    statusId = json['status_id'];
     shippingAmount = json['shipping_amount'];
     grandTotal = json['grand_total'];
+    paymentMethodId = json['payment_method_id'];
+    totalQty = json['total_qty'];
+    totalQtyItem = json['total_qty_item'];
+    statusName = json['status_name'];
+    paymentMethodName = json['payment_method_name'];
+    createdAt = json['created_at'];
     if (json['items'] != null) {
       items = <Items>[];
       json['items'].forEach((v) {
@@ -57,10 +72,15 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['order_id'] = orderId;
-    data['status'] = status;
-    data['base_subtotal'] = baseSubtotal;
+    data['status_id'] = statusId;
     data['shipping_amount'] = shippingAmount;
     data['grand_total'] = grandTotal;
+    data['payment_method_id'] = paymentMethodId;
+    data['total_qty'] = totalQty;
+    data['total_qty_item'] = totalQtyItem;
+    data['status_name'] = statusName;
+    data['payment_method_name'] = paymentMethodName;
+    data['created_at'] = createdAt;
     if (items != null) {
       data['items'] = items!.map((v) => v.toJson()).toList();
     }
@@ -69,42 +89,64 @@ class Data {
 }
 
 class Items {
-  int? itemId;
+  int? id;
   String? sku;
-  String? name;
-  String? qtyOrdered;
+  int? qty;
   String? price;
-  String? total;
-  String? imageUrl;
+  String? totalPrice;
+  String? name;
+  ImageUrl? imageUrl;
 
   Items(
-      {this.itemId,
+      {this.id,
       this.sku,
-      this.name,
-      this.qtyOrdered,
+      this.qty,
       this.price,
-      this.total,
+      this.totalPrice,
+      this.name,
       this.imageUrl});
 
   Items.fromJson(Map<String, dynamic> json) {
-    itemId = json['item_id'];
+    id = json['id'];
     sku = json['sku'];
-    name = json['name'];
-    qtyOrdered = json['qty_ordered'];
+    qty = json['qty'];
     price = json['price'];
-    total = json['total'];
-    imageUrl = json['image_url'];
+    totalPrice = json['total_price'];
+    name = json['name'];
+    imageUrl =
+        json['image_url'] != null ? ImageUrl.fromJson(json['image_url']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['item_id'] = itemId;
+    data['id'] = id;
     data['sku'] = sku;
-    data['name'] = name;
-    data['qty_ordered'] = qtyOrdered;
+    data['qty'] = qty;
     data['price'] = price;
-    data['total'] = total;
-    data['image_url'] = imageUrl;
+    data['total_price'] = totalPrice;
+    data['name'] = name;
+    if (imageUrl != null) {
+      data['image_url'] = imageUrl!.toJson();
+    }
+    return data;
+  }
+}
+
+class ImageUrl {
+  int? valueId;
+  String? imageLink;
+
+  ImageUrl({this.valueId, this.imageLink});
+
+  ImageUrl.fromJson(Map<String, dynamic> json) {
+    valueId = json['value_id'];
+    imageLink = json['image_link'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['value_id'] = valueId;
+    data['image_link'] = imageLink;
     return data;
   }
 }

@@ -27,7 +27,7 @@ class AddtoCartResponseModel {
 class Data {
   int? itemId;
   String? sku;
-  int? qty;
+  String? qty;
   String? name;
   var price;
   String? productType;

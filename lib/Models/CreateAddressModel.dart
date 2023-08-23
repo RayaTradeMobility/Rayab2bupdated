@@ -1,13 +1,13 @@
 // ignore_for_file: file_names
 
-class RegisterResponseModel {
+class CreateAddressModel {
   bool? success;
   String? message;
   Data? data;
 
-  RegisterResponseModel({this.success, this.message, this.data});
+  CreateAddressModel({this.success, this.message, this.data});
 
-  RegisterResponseModel.fromJson(Map<String, dynamic> json) {
+  CreateAddressModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
@@ -25,54 +25,46 @@ class RegisterResponseModel {
 }
 
 class Data {
-  String? name;
-  String? mobile;
-  String? companyName;
-  String? email;
-  String? oracleNumber;
-  int? roleId;
+  String? regionId;
+  String? address;
+  String? street;
+  String? buildingNumber;
+  int? userId;
   String? updatedAt;
   String? createdAt;
   int? id;
-  String? token;
 
   Data(
-      {this.name,
-      this.mobile,
-      this.companyName,
-      this.email,
-      this.oracleNumber,
-      this.roleId,
+      {this.regionId,
+      this.address,
+      this.street,
+      this.buildingNumber,
+      this.userId,
       this.updatedAt,
       this.createdAt,
-      this.id,
-      this.token});
+      this.id});
 
   Data.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    mobile = json['mobile'];
-    companyName = json['company_name'];
-    email = json['email'];
-    oracleNumber = json['oracle_number'];
-    roleId = json['role_id'];
+    regionId = json['region_id'];
+    address = json['address'];
+    street = json['street'];
+    buildingNumber = json['building_number'];
+    userId = json['user_id'];
     updatedAt = json['updated_at'];
     createdAt = json['created_at'];
     id = json['id'];
-    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['mobile'] = mobile;
-    data['company_name'] = companyName;
-    data['email'] = email;
-    data['oracle_number'] = oracleNumber;
-    data['role_id'] = roleId;
+    data['region_id'] = regionId;
+    data['address'] = address;
+    data['street'] = street;
+    data['building_number'] = buildingNumber;
+    data['user_id'] = userId;
     data['updated_at'] = updatedAt;
     data['created_at'] = createdAt;
     data['id'] = id;
-    data['token'] = token;
     return data;
   }
 }

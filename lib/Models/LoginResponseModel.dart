@@ -25,42 +25,32 @@ class LoginResponseModel {
 }
 
 class Data {
-  String? token;
   int? id;
+  String? name;
+  String? mobile;
   String? email;
-  String? fullname;
-  String? firstname;
-  String? lastname;
-  String? telephone;
+  String? image;
+  String? token;
 
-  Data(
-      {this.token,
-      this.id,
-      this.email,
-      this.fullname,
-      this.firstname,
-      this.lastname,
-      this.telephone});
+  Data({this.id, this.name, this.mobile, this.email, this.image, this.token});
 
   Data.fromJson(Map<String, dynamic> json) {
-    token = json['token'];
     id = json['id'];
+    name = json['name'];
+    mobile = json['mobile'];
     email = json['email'];
-    fullname = json['fullname'];
-    firstname = json['firstname'];
-    lastname = json['lastname'];
-    telephone = json['telephone'];
+    image = json['image'];
+    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['token'] = token;
     data['id'] = id;
+    data['name'] = name;
+    data['mobile'] = mobile;
     data['email'] = email;
-    data['fullname'] = fullname;
-    data['firstname'] = firstname;
-    data['lastname'] = lastname;
-    data['telephone'] = telephone;
+    data['image'] = image;
+    data['token'] = token;
     return data;
   }
 }

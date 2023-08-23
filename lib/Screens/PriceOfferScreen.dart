@@ -14,7 +14,6 @@ class PriceOfferScreen extends StatefulWidget {
 }
 
 class PriceOfferScreenState extends State<PriceOfferScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -25,7 +24,7 @@ class PriceOfferScreenState extends State<PriceOfferScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  MyColorsSample.fontColor,
+        backgroundColor: MyColorsSample.fontColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(10),
@@ -35,7 +34,7 @@ class PriceOfferScreenState extends State<PriceOfferScreen> {
         title: const Text(
           "عرض السعر",
           textAlign: TextAlign.center,
-          style: TextStyle(color:MyColorsSample.fontColor),
+          style: TextStyle(color: MyColorsSample.fontColor),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
@@ -68,7 +67,7 @@ class PriceOfferScreenState extends State<PriceOfferScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                 const Row(
+                                const Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -89,7 +88,7 @@ class PriceOfferScreenState extends State<PriceOfferScreen> {
                                 const SizedBox(
                                   height: 10.0,
                                 ),
-                                 const Row(
+                                const Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,

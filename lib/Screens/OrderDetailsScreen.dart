@@ -30,16 +30,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   void initState() {
     _futureData = api.getOrdersDetails(
       widget.token,
-      widget.customerId,
       widget.orderId,
     );
     super.initState();
   }
+
   Future<void> _refreshData() async {
     setState(() {
       _futureData = api.getOrdersDetails(
         widget.token,
-        widget.customerId,
         widget.orderId,
       );
     });
@@ -49,7 +48,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:MyColorsSample.fontColor,
+        backgroundColor: MyColorsSample.fontColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(10),
@@ -89,7 +88,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Container(
                             color: Colors.blue.withOpacity(0.2),
                             child: Text(
-                              ' ${order!.data?.status}',
+                              ' ${order!.data?.statusName}',
                               style: TextStyle(
                                 color: Colors.blue.withOpacity(0.8),
                                 fontSize: 16,
@@ -157,7 +156,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             ),
                           ),
                           Text(
-                            '${order!.data?.grandTotal!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")} ج.م ',
+                            '${order!.data?.grandTotal!} ج.م ',
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
@@ -169,7 +168,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       const Divider(
                         thickness: 2.0,
                       ),
-                       const Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.payment,
@@ -190,7 +189,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            ' المنتجات1}) ',
+                            ' المنتجات(${order!.data!.totalQty!}) ',
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.5),
                               fontSize: 12,
@@ -198,7 +197,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             ),
                           ),
                           Text(
-                            '${order!.data?.baseSubtotal!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")} ج.م ',
+                            '${order!.data?.grandTotal!} ج.م ',
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
@@ -243,7 +242,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             ),
                           ),
                           Text(
-                            '${order!.data?.grandTotal!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")} ج.م ',
+                            '${order!.data?.grandTotal!} ج.م ',
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
@@ -264,7 +263,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             ),
                           ),
                           Text(
-                            'كاش عند الاستلام ',
+                            '${order!.data!.paymentMethodName} ',
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.5),
                                 fontSize: 12,
@@ -297,7 +296,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       const Divider(
                         thickness: 2.0,
                       ),
-                       const Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.fire_truck_outlined,
@@ -388,8 +387,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                           Text(
-                            '${order!.data?.shippingAmount!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}',
+                          Text(
+                            '${order!.data?.shippingAmount!}',
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
@@ -401,7 +400,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       const Divider(
                         thickness: 2.0,
                       ),
-                       const Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.list_alt,
@@ -425,10 +424,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         itemBuilder: (context, index) {
                           var item = order!.data!.items![index];
                           return ListTile(
-                            leading: Image.network(item.imageUrl ?? ''),
+                            leading: Image.network(item.imageUrl!.imageLink!),
                             title: Text(item.name ?? ''),
-                            subtitle: Text('Price: ${item.price!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}'),
-                            trailing: Text('Qty: ${item.qtyOrdered!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}'),
+                            subtitle: Text(
+                                'Price: ${item.price!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}'),
+                            trailing: Text('Qty: ${item.qty!}'),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24),
                             ),

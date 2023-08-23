@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/NavScreen.dart';
@@ -27,6 +28,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
+  API api = API();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -83,14 +86,20 @@ class ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white70,
                   child: TextButton(
                     onPressed: () {},
-                    child:   Padding(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(width: 40 , height: 40 , decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)
-                          , color: MyColorsSample.primaryDark.withOpacity(0.2)),child: const Icon(LineAwesomeIcons.bell)),
+                          Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: MyColorsSample.primaryDark
+                                      .withOpacity(0.2)),
+                              child: const Icon(LineAwesomeIcons.bell)),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -145,14 +154,20 @@ class ProfileScreenState extends State<ProfileScreen> {
                         return AboutScreen(token: widget.token);
                       }));
                     },
-                    child:   Padding(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(width: 40 , height: 40 , decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)
-                          , color: MyColorsSample.primaryDark.withOpacity(0.2)), child: const Icon(LineAwesomeIcons.info)),
+                          Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: MyColorsSample.primaryDark
+                                      .withOpacity(0.2)),
+                              child: const Icon(LineAwesomeIcons.info)),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -183,14 +198,20 @@ class ProfileScreenState extends State<ProfileScreen> {
                         return const ContactUsScreen();
                       }));
                     },
-                    child:   Padding(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(width: 40 , height: 40 , decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)
-                          , color: MyColorsSample.primaryDark.withOpacity(0.2)),child: const Icon(LineAwesomeIcons.user_check)),
+                          Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: MyColorsSample.primaryDark
+                                      .withOpacity(0.2)),
+                              child: const Icon(LineAwesomeIcons.user_check)),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -221,14 +242,20 @@ class ProfileScreenState extends State<ProfileScreen> {
                         return SettingsScreen(token: widget.token);
                       }));
                     },
-                    child:   Padding(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(width: 40 , height: 40 , decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)
-                              , color: MyColorsSample.primaryDark.withOpacity(0.2)), child: const Icon(LineAwesomeIcons.cog)),
+                          Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: MyColorsSample.primaryDark
+                                      .withOpacity(0.2)),
+                              child: const Icon(LineAwesomeIcons.cog)),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -247,14 +274,23 @@ class ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 12.0 ),
+                  padding: const EdgeInsets.only(right: 12.0),
                   child: Row(
                     children: [
-                      Container( width: 40 , height: 40 , decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)
-                          , color: MyColorsSample.primaryDark.withOpacity(0.2)), child: const Icon(LineAwesomeIcons.alternate_sign_out ,)),
+                      Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color:
+                                  MyColorsSample.primaryDark.withOpacity(0.2)),
+                          child: const Icon(
+                            LineAwesomeIcons.alternate_sign_out,
+                          )),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context,
+                          api.logOut(widget.token);
+                          Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (context) {
                             return const NavScreen();
                           }));
@@ -262,9 +298,9 @@ class ProfileScreenState extends State<ProfileScreen> {
                         child: const Text(
                           "تسجيل الخروج",
                           style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              ),
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

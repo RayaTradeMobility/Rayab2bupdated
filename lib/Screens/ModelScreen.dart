@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:rayab2bupdated/API/API.dart';
@@ -81,15 +80,26 @@ class ModelScreenState extends State<ModelScreen> {
         title: Text(widget.categoryName),
       ),
       body: FutureBuilder<GetProductSearchModel>(
-
         future: _futureData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             category = snapshot.data;
             if (category!.data!.items!.isEmpty) {
-              return  Center(
-                child: Column(children:[ Image.asset('assets/nodata.jpg'),  Text('لا توجد منتجات في الوقت الحالي',
-                  style:TextStyle(color:Colors.deepPurple.withOpacity(0.7) , fontWeight: FontWeight.w700,fontSize: 22 ),)]),
+              return Center(
+                child: Column(children: [
+                  Image.asset(
+                    'assets/nodata.jpg',
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width - 1,
+                  ),
+                  Text(
+                    'لا توجد منتجات في الوقت الحالي',
+                    style: TextStyle(
+                        color: Colors.deepPurple.withOpacity(0.7),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22),
+                  )
+                ]),
               );
             }
             return Column(
@@ -99,28 +109,23 @@ class ModelScreenState extends State<ModelScreen> {
                     autocorrect: false,
                     autofocus: false,
                     style: DefaultTextStyle.of(context).style.copyWith(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.black
-                    ),
+                        fontStyle: FontStyle.italic, color: Colors.black),
                     decoration: const InputDecoration(
                       labelText: 'Search for product',
                       border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
-                      disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
-                        
-
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-
                   ),
                   suggestionsCallback: (pattern) async {
                     return await API.searchProducts(pattern, widget.token);
                   },
                   itemBuilder: (context, suggestion) {
-
-                    return  ListTile(
+                    return ListTile(
                       leading: ConstrainedBox(
                         constraints: const BoxConstraints(
                           minWidth: 44,
@@ -131,15 +136,11 @@ class ModelScreenState extends State<ModelScreen> {
                         child: FadeInImage(
                           image: NetworkImage(suggestion.images!.imageLink!),
                           placeholder: const AssetImage("assets/no-img.jpg"),
-                          imageErrorBuilder:
-                              (context, error,
-                              stackTrace) {
-                            return Image.asset(
-                                'assets/no-img.jpg',
+                          imageErrorBuilder: (context, error, stackTrace) {
+                            return Image.asset('assets/no-img.jpg',
                                 height: 50.0,
                                 width: 120.0,
-                                fit: BoxFit
-                                    .fitWidth);
+                                fit: BoxFit.fitWidth);
                           },
                         ),
                       ),
@@ -149,19 +150,22 @@ class ModelScreenState extends State<ModelScreen> {
                   },
                   onSuggestionSelected: (suggestion) {
                     final selectedSku = suggestion.sku;
-                    if (kDebugMode) {
-                      print(suggestion.name);
-                    }
+
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductScreen(
-                          sku:selectedSku!,
-                          token: widget.token, email: widget.email,firstname: widget.firstname,lastname: widget.lastname,mobile: widget.mobile, customerId: widget.customerId,
+                          sku: selectedSku!,
+                          productId: suggestion.id!,
+                          token: widget.token,
+                          email: widget.email,
+                          firstname: widget.firstname,
+                          lastname: widget.lastname,
+                          mobile: widget.mobile,
+                          customerId: widget.customerId,
                         ),
                       ),
                     );
                   },
-
                 ),
                 Expanded(
                   child: NotificationListener<ScrollNotification>(
@@ -209,7 +213,8 @@ class ModelScreenState extends State<ModelScreen> {
                     ),
                   ),
                 ),
-                if (isLoadingMore) const Center(child: CircularProgressIndicator()),
+                if (isLoadingMore)
+                  const Center(child: CircularProgressIndicator()),
               ],
             );
           } else if (snapshot.hasError) {

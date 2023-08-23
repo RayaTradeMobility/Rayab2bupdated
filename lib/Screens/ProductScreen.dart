@@ -16,6 +16,7 @@ class ProductScreen extends StatefulWidget {
   const ProductScreen({
     Key? key,
     required this.sku,
+    required this.productId,
     required this.token,
     required this.email,
     required this.mobile,
@@ -24,6 +25,8 @@ class ProductScreen extends StatefulWidget {
     required this.customerId,
   }) : super(key: key);
   final String sku, token, email, mobile, firstname, lastname, customerId;
+
+  final int productId;
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -35,7 +38,9 @@ class _ProductScreenState extends State<ProductScreen> {
   final int _fontcolor = 0xFF031639;
   double total = 0;
 
-  double? result ;
+  TextEditingController quantityController = TextEditingController();
+  double? result;
+
   API api = API();
   int quantity = 1;
   bool _isloading = false;
@@ -44,6 +49,12 @@ class _ProductScreenState extends State<ProductScreen> {
   void initState() {
     _product = api.getProductBySku(widget.sku);
     super.initState();
+    quantityController.addListener(() {
+      final enteredQuantity = int.parse(quantityController.text);
+      setState(() {
+        quantity = enteredQuantity;
+      });
+    });
   }
 
   @override
@@ -128,7 +139,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                   onPressed: () {
                                     setState(() {
                                       quantity += 1;
-                                      double sale = double.parse(snapshot.data!.data!.price!);
+                                      double sale = double.parse(
+                                          snapshot.data!.data!.price!);
                                       double price = sale;
                                       total = quantity * price;
                                       result = total;
@@ -138,7 +150,18 @@ class _ProductScreenState extends State<ProductScreen> {
                                   iconSize: 15.0,
                                 ),
                                 const SizedBox(width: 5.0),
-                                Text('$quantity'),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 10,
+                                  height:
+                                      MediaQuery.of(context).size.height / 20,
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    controller: quantityController,
+                                    decoration: InputDecoration(
+                                      hintText: '$quantity',
+                                    ),
+                                  ),
+                                ),
                                 const SizedBox(
                                   width: 5.0,
                                 ),
@@ -146,8 +169,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                   onPressed: () {
                                     setState(() {
                                       if (quantity != 1) {
-                                        double sale = double.parse(snapshot
-                                            .data!.data!.price!) ;
+                                        double sale = double.parse(
+                                            snapshot.data!.data!.price!);
                                         double price = sale;
                                         quantity -= 1;
                                         total = quantity * price;
@@ -196,7 +219,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                   color: Colors.black, style: BorderStyle.none),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(15))),
-                          child:  const Padding(
+                          child: const Padding(
                             padding: EdgeInsets.all(10.0),
                             child: Row(
                               children: [
@@ -269,8 +292,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ],
                     );
-                  }
-                  else if (snapshot.hasError) {
+                  } else if (snapshot.hasError) {
                     return Text(
                         '${snapshot.error}' "You don't have data in this time");
                   } else {
@@ -286,12 +308,11 @@ class _ProductScreenState extends State<ProductScreen> {
             _isloading = true;
           });
           if (widget.token.isNotEmpty) {
-            AddtoCartResponseModel msg =
-                await api.addToCart(widget.token, widget.sku, quantity);
+            AddtoCartResponseModel msg = await api.addToCart(
+                widget.token, widget.productId, widget.sku, quantity);
             if (msg.success == true) {
               setState(() {
                 _isloading = false;
-
               });
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return ShoppingCardScreen(
@@ -308,7 +329,6 @@ class _ProductScreenState extends State<ProductScreen> {
             } else {
               setState(() {
                 _isloading = false;
-
               });
               Fluttertoast.showToast(
                   msg: msg.message!,

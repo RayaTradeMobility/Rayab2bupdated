@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, file_names
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/API/API.dart';
 
@@ -17,6 +18,7 @@ class ShoppingCards extends StatefulWidget {
         required this.postTitle,
         required this.totalPriceProduct,
         required this.productId,
+        required this.sku,
         required this.price,
         required this.quantity,
         required this.email,
@@ -28,6 +30,7 @@ class ShoppingCards extends StatefulWidget {
   final int quantity;
   final String price;
   final int productId;
+  final String sku;
   final double totalPriceProduct;
   final double totalPrice;
   final String postTitle;
@@ -63,12 +66,13 @@ class ShoppingCardsState extends State<ShoppingCards> {
                 children: [
                   FadeInImage(
                     image: NetworkImage(widget.image),
-                    width: 60,
-                    height: 60,
+                    width: MediaQuery.of(context).size.width/7  ,
+                    height: MediaQuery.of(context).size.height/7  ,
                     placeholder: const AssetImage("assets/no-img.jpg"),
                     imageErrorBuilder: (context, error, stackTrace) {
                       return Image.asset('assets/no-img.jpg',
-                          fit: BoxFit.fitWidth);
+                          fit: BoxFit.fitWidth, width: MediaQuery.of(context).size.width/7  ,
+                        height: MediaQuery.of(context).size.height/7  ,);
                     },
                     fit: BoxFit.fitWidth,
                   ),
@@ -102,22 +106,25 @@ class ShoppingCardsState extends State<ShoppingCards> {
                               Text(widget.quantity.toString()),
                               IconButton(
                                   onPressed: () async {
+                                    if (kDebugMode) {
+                                      print(widget.productId);
+                                    }
                                     await api.deleteProducts(
-                                        widget.token, widget.productId);
+                                        widget.token, widget.productId , widget.sku);
                                     // ignore: use_build_context_synchronously
                                     Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder: (context) {
-                                          return ShoppingCardScreen(
-                                            token: widget.token,
-                                            email: widget.email,
-                                            mobile: widget.mobile,
-                                            lastname: widget.lastname,
-                                            firstname: widget.firstname,
-                                            street: '',
-                                            city: '',
-                                            customerId: widget.customerId,
-                                          );
-                                        }));
+                                      return ShoppingCardScreen(
+                                        token: widget.token,
+                                        email: widget.email,
+                                        mobile: widget.mobile,
+                                        lastname: widget.lastname,
+                                        firstname: widget.firstname,
+                                        street: '',
+                                        city: '',
+                                        customerId: widget.customerId,
+                                      );
+                                    }));
                                   },
                                   icon: const Icon(
                                     CupertinoIcons.delete,

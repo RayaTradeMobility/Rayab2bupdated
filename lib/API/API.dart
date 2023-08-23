@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:rayab2bupdated/Models/AddtoCartResponseModel.dart';
 import 'package:rayab2bupdated/Models/CustomerModel.dart';
+import 'package:rayab2bupdated/Models/GetAddressModel.dart';
 import 'package:rayab2bupdated/Models/GetCartResponseModel.dart';
 import 'package:rayab2bupdated/Models/GetCategoriesResponseModel.dart';
 import 'package:rayab2bupdated/Models/GetOrdersResponseModel.dart';
@@ -20,13 +21,12 @@ import 'package:rayab2bupdated/Models/OrderResponseModel.dart';
 import 'package:rayab2bupdated/Models/ProductbySkuResponseModel.dart';
 import 'package:rayab2bupdated/Models/RegisterResponseModel.dart';
 import 'package:rayab2bupdated/Models/ShippingInformationResponseModel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../Models/CreateAddressModel.dart';
 import '../Models/EstimateShippingMethodResponse.dart';
 import '../Models/GetCategoriesNewResponseModel.dart';
-import '../Models/LoginModelRequest.dart';
-import '../Models/RegisterRequestModel.dart';
 import '../Models/GetProductSearchModel.dart' as getpro;
-import'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 class API {
   String url = 'http://41.78.23.95:8021/dist/api';
   final firebaseMessaging = FirebaseMessaging.instance;
@@ -57,90 +57,63 @@ class API {
   }
 
   Future<RegisterResponseModel> register(
-      RegisterRequestModel requestModel) async {
-    var headers = {'Content-Type': 'application/json'};
-    var request =
-    http.Request('POST', Uri.parse('$url/customer/registerCustomer'));
-    String body = json.encode({
-      "customer": {
-        "email": requestModel.customer!.email,
-        "firstname": requestModel.customer!.firstname,
-        "lastname": requestModel.customer!.lastname,
-        "addresses": [
-          {
-            "defaultShipping":
-            requestModel.customer!.addresses![0].defaultShipping,
-            "defaultBilling":
-            requestModel.customer!.addresses![0].defaultBilling,
-            "firstname": requestModel.customer!.addresses![0].firstname,
-            "lastname": requestModel.customer!.addresses![0].lastname,
-            "region": {
-              "regionCode":
-              requestModel.customer!.addresses![0].region!.regionCode,
-              "region": requestModel.customer!.addresses![0].region!.region,
-              "regionId": requestModel.customer!.addresses![0].region!.regionId
-            },
-            "postcode": requestModel.customer!.addresses![0].postcode,
-            "street": [requestModel.customer!.addresses![0].street![0]],
-            "city": requestModel.customer!.addresses![0].city,
-            "telephone": requestModel.customer!.addresses![0].telephone,
-            "countryId": requestModel.customer!.addresses![0].countryId
-          }
-        ]
-      },
-      "password": requestModel.password
+      String name,
+      String mobile,
+      String companyName,
+      String email,
+      String password,
+      String oracleNumber) async {
+    var headers = {'Accept': 'application/json'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/register'));
+    request.fields.addAll({
+      'name': name,
+      'mobile': mobile,
+      'company_name': companyName,
+      'email': email,
+      'password': password,
+      'oracle_number': oracleNumber,
     });
-    request.body = body;
+
     request.headers.addAll(headers);
 
-    var streamedResponse = await request.send();
-    var response = await http.Response.fromStream(streamedResponse);
-    RegisterResponseModel res = RegisterResponseModel();
-    if (response.statusCode == 200) {
-      res = RegisterResponseModel.fromJson(jsonDecode(response.body));
+    http.StreamedResponse response = await request.send();
 
-      return res;
-    } else if (response.statusCode == 401) {
-      res = RegisterResponseModel.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200) {
       if (kDebugMode) {
-        print(res);
+        print(await response.stream.bytesToString());
       }
-      return res;
     } else {
-      return res;
+      if (kDebugMode) {
+        print(response.reasonPhrase);
+      }
     }
+    return RegisterResponseModel.fromJson(response.headers);
   }
 
-  Future<LoginResponseModel?> login(LoginModelRequest loginModelRequest) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  Future<LoginResponseModel?> login(String mobile, String password,
+      String deviceToken, String businessUnitID) async {
+    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var headers = {'Content-Type': 'application/json'};
-    var request =
-    http.Request('POST', Uri.parse('$url/customer/loginCustomer'));
+    var request = http.Request('POST', Uri.parse('$url/v2/login'));
     request.body = json.encode({
-      "username": loginModelRequest.username,
-      "password": loginModelRequest.password
+      'mobile': mobile,
+      'password': password,
+      'device_token': deviceToken,
+      'business_unit_id': businessUnitID
     });
     request.headers.addAll(headers);
 
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
-      // if(kDebugMode)
-      //   {
-      //     print("response:${response.body}");
-      //   }
       LoginResponseModel? user =
-      LoginResponseModel.fromJson(jsonDecode(response.body));
-      // if (kDebugMode) {
-      //   print('User : $user');
-      // }
-      sharedPreferences.setString('username', loginModelRequest.username!);
-      sharedPreferences.setString('password', loginModelRequest.password!);
+          LoginResponseModel.fromJson(jsonDecode(response.body));
       return user;
     } else {
       LoginResponseModel? user =
-      LoginResponseModel.fromJson(jsonDecode(response.body));
+          LoginResponseModel.fromJson(jsonDecode(response.body));
       if (kDebugMode) {
         print('User : $user');
         return user;
@@ -152,7 +125,7 @@ class API {
   getDataCustomer(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
     var request =
-    http.Request('GET', Uri.parse('$url/customer/getDataCustomer'));
+        http.Request('GET', Uri.parse('$url/customer/getDataCustomer'));
     request.body = '''''';
     request.headers.addAll(headers);
 
@@ -162,6 +135,26 @@ class API {
       return CustomerModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Error");
+    }
+  }
+
+  logOut(String token) async {
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/logout'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print(await response.stream.bytesToString());
+      }
+    } else {
+      if (kDebugMode) {
+        print(response.reasonPhrase);
+      }
     }
   }
 
@@ -183,19 +176,21 @@ class API {
   }
 
   Future<AddtoCartResponseModel> addToCart(
-      String token, String sku, int qty) async {
+      String token, int productId, String sku, int qty) async {
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token'
     };
-    var request = http.Request('POST', Uri.parse('$url/customer/add-to-cart'));
-    request.body = json.encode({
-      "cartItem": {"sku": sku, "qty": qty}
+    var request =
+        http.MultipartRequest('POST', Uri.parse('$url/v2/cart/add-to-cart'));
+    request.fields.addAll({
+      'product_id': productId.toString(),
+      'sku': sku,
+      'qty': qty.toString()
     });
+
     request.headers.addAll(headers);
-    if (kDebugMode) {
-      print(request.body);
-    }
+
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     AddtoCartResponseModel mod = AddtoCartResponseModel();
@@ -215,11 +210,11 @@ class API {
 
   Future<GetCartResponseModel> getCart(String token) async {
     // await openCart(token);
-    var headers = {'Authorization': 'Bearer $token',
+    var headers = {
+      'Authorization': 'Bearer $token',
       'Connection': 'keep-alive',
     };
-    var request = http.Request('GET',
-        Uri.parse('$url/customer/getCartNew'));
+    var request = http.Request('GET', Uri.parse('$url/v2/cart/getCart'));
     request.body = '''''';
     request.headers.addAll(headers);
 
@@ -228,20 +223,13 @@ class API {
     GetCartResponseModel res = GetCartResponseModel();
     if (response.statusCode == 200) {
       res = GetCartResponseModel.fromJson(jsonDecode(response.body));
-      if (kDebugMode) {
-        print("200:${response.body}");
-      }
+
       return res;
     } else if (response.statusCode == 404) {
       res = GetCartResponseModel.fromJson(jsonDecode(response.body));
-      if (kDebugMode) {
-        print("404:${response.body}");
-      }
+
       return res;
     } else {
-      if (kDebugMode) {
-        print(response.body);
-      }
       return res;
     }
   }
@@ -258,7 +246,7 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
       GetCategoriesResponseModel res =
-      GetCategoriesResponseModel.fromJson(jsonDecode(response.body));
+          GetCategoriesResponseModel.fromJson(jsonDecode(response.body));
       return res;
     } else {
       throw Exception("Error");
@@ -268,7 +256,7 @@ class API {
   getProducts(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
     var request =
-    http.Request('GET', Uri.parse('$url/getProducts?current_page='));
+        http.Request('GET', Uri.parse('$url/getProducts?current_page='));
 
     request.headers.addAll(headers);
 
@@ -315,13 +303,10 @@ class API {
     var headers = {'Accept': 'application/json'};
     http.Request request;
     if (page != null) {
-      request = http.Request(
-          'GET',
-          Uri.parse(
-              '$url/getCategoriesNew?page=$page'));
+      request =
+          http.Request('GET', Uri.parse('$url/getCategoriesNew?page=$page'));
     } else {
-      request = http.Request('GET',
-          Uri.parse('$url/getCategoriesNew'));
+      request = http.Request('GET', Uri.parse('$url/getCategoriesNew'));
     }
     request.headers.addAll(headers);
 
@@ -334,12 +319,13 @@ class API {
     }
   }
 
-  Future <getpro.GetProductSearchModel> getProductsNew(String sku,String name,String categoryId,int page,String token)async {
-    var headers = {
-      'Authorization': 'Bearer $token'
-    };
-    var request = http.Request('GET', Uri.parse(
-        '$url/getProductsNew?sku=$sku&name=$name&category_id=$categoryId&page=$page'));
+  Future<getpro.GetProductSearchModel> getProductsNew(String sku, String name,
+      String categoryId, int page, String token) async {
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            '$url/getProductsNew?sku=$sku&name=$name&category_id=$categoryId&page=$page'));
 
     request.headers.addAll(headers);
 
@@ -347,8 +333,7 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
       return getpro.GetProductSearchModel.fromJson(jsonDecode(response.body));
-    }
-    else {
+    } else {
       throw Exception("Error");
     }
   }
@@ -366,9 +351,7 @@ class API {
       'Authorization': 'Bearer $token'
     };
     var request = http.Request(
-        'POST',
-        Uri.parse(
-            '$url/customer/estimate-shipping-methods'));
+        'POST', Uri.parse('$url/customer/estimate-shipping-methods'));
     request.body = json.encode({
       "address": {
         "region": "Egypt",
@@ -397,22 +380,18 @@ class API {
     }
   }
 
-  Future <getpro.GetProductSearchModel> getProductCat(int categoryID,int pageNumber, String token ) async {
-    var headers = {
-      'Authorization': 'Bearer $token'
-    };
+  Future<getpro.GetProductSearchModel> getProductCat(
+      int categoryID, int pageNumber, String token) async {
+    var headers = {'Authorization': 'Bearer $token'};
     http.Request request;
-    if(categoryID != 0)
-    {
-      request = http.Request('GET',
-          Uri.parse('$url/getProductsNew?category_id=$categoryID&page=$pageNumber'));
-
-    }
-
-    else{
-      request = http.Request('GET',
-          Uri.parse('$url/getProductsNew?page=$pageNumber'));
-
+    if (categoryID != 0) {
+      request = http.Request(
+          'GET',
+          Uri.parse(
+              '$url/getProductsNew?category_id=$categoryID&page=$pageNumber'));
+    } else {
+      request = http.Request(
+          'GET', Uri.parse('$url/getProductsNew?page=$pageNumber'));
     }
     request.headers.addAll(headers);
 
@@ -420,19 +399,21 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
       return getpro.GetProductSearchModel.fromJson(jsonDecode(response.body));
-    }
-    else {
+    } else {
       throw Exception("Error");
     }
   }
 
-  static Future<List<getpro.Items>> searchProducts(String name, String token) async {
+  static Future<List<getpro.Items>> searchProducts(
+      String name, String token) async {
     var headers = {
       'Authorization': 'Bearer $token',
     };
 
-    var request = http.Request('GET',
-        Uri.parse('http://41.78.23.95:8021/dist/api/getProductsNew?name=$name'));
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            'http://41.78.23.95:8021/dist/api/getProductsNew?name=$name'));
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -454,38 +435,18 @@ class API {
   }
 
   Future<OrderResponseModel> createOrder(
-      String token,
-      String paymentMethod,
-      String email,
-      String street,
-      String city,
-      String mobile,
-      String firstName,
-      String lastName) async {
+      String token, int addressId, int paymentMethod) async {
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token'
     };
-    var request = http.Request(
-        'POST',
-        Uri.parse(
-            '$url/customer/payment-information'));
-    request.body = json.encode({
-      "paymentMethod": {"method": paymentMethod},
-      "billing_address": {
-        "email": "jignesh.meetanshi@gmail.com",
-        "region": "Egypt",
-        "region_id": 1122,
-        "region_code": "EG",
-        "country_id": "EG",
-        "street": [street],
-        "postcode": "12345",
-        "city": city,
-        "telephone": mobile,
-        "firstname": firstName,
-        "lastname": lastName
-      }
+    var request =
+        http.MultipartRequest('POST', Uri.parse('$url/v2/orders/create'));
+    request.fields.addAll({
+      'addresse_id': addressId.toString(),
+      'payment_method_id': paymentMethod.toString()
     });
+
     request.headers.addAll(headers);
 
     var streamedResponse = await request.send();
@@ -501,28 +462,17 @@ class API {
       res.success = false;
       res.message = "ConnectionError";
     }
-    if (kDebugMode) {
-      print(response.body);
-    }
     return res;
   }
 
   Future<ShippingInformationResponseModel> getShippingInformation(
-      String token,
-      String street,
-      String city,
-      String firsName,
-      String lastName,
-      String mobile,
-      String email) async {
+      String token, String firsName, String lastName, String email) async {
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token'
     };
-    var request = http.Request(
-        'POST',
-        Uri.parse(
-            '$url/customer/shipping-information'));
+    var request =
+        http.Request('POST', Uri.parse('$url/customer/shipping-information'));
     request.body = json.encode({
       "addressInformation": {
         "shipping_address": {
@@ -530,26 +480,26 @@ class API {
           "region_id": 1122,
           "region_code": "EG",
           "country_id": "EG",
-          "street": [street],
+          "street": '[street]',
           "postcode": "12345",
-          "city": city,
-          "firstname": firsName,
-          "lastname": lastName,
-          "email": email,
-          "telephone": mobile
+          "city": 'city',
+          "firstname": 'abc',
+          "lastname": 'cde',
+          "email": "@emd",
+          "telephone": "01129"
         },
         "billing_address": {
           "region": "Egypt",
           "region_id": 1122,
           "region_code": "EG",
           "country_id": "EG",
-          "street": [street],
+          "street": 's',
           "postcode": "12345",
-          "city": city,
+          "city": "city",
           "firstname": firsName,
           "lastname": lastName,
           "email": email,
-          "telephone": mobile
+          "telephone": "011"
         },
         "shipping_carrier_code": "flatrate",
         "shipping_method_code": "flatrate"
@@ -571,14 +521,14 @@ class API {
     }
   }
 
-  deleteProducts(String token, int itemId) async {
+  deleteProducts(String token, int productId, String sku) async {
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token'
     };
-    var request = http.Request('DELETE',
-        Uri.parse('$url/customer/delete-to-cart'));
-    request.body = json.encode({"item_id": itemId});
+    var request =
+        http.MultipartRequest('POST', Uri.parse('$url/v2/cart/delete-to-cart'));
+    request.fields.addAll({'product_id': productId.toString(), 'sku': sku});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -594,13 +544,63 @@ class API {
     }
   }
 
-  Future<GetOrdersResponseModel> getOrders(
-      String token, String customerId, String orderId) async {
+  Future<CreateAddressModel> createAddress(
+      String token, String address, String street, int buildingNumber) async {
     var headers = {'Authorization': 'Bearer $token'};
+    var request = http.MultipartRequest('POST',
+        Uri.parse('http://41.78.23.95:8021/dist/api/v2/addresses/create'));
+    request.fields.addAll({
+      'region_id': '1122',
+      'address': address,
+      'street': street,
+      'building_number': buildingNumber.toString()
+    });
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    var res = CreateAddressModel();
+    if (response.statusCode == 200) {
+      res = CreateAddressModel.fromJson(jsonDecode(response.body));
+      return res;
+    } else {
+      res.success = false;
+      res.message = "Error";
+      return res;
+    }
+  }
+
+  Future<GetAddressModel> getAddress(String token) async {
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.MultipartRequest(
+        'GET', Uri.parse('http://41.78.23.95:8021/dist/api/v2/addresses'));
+
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    var res = GetAddressModel();
+    if (response.statusCode == 200) {
+      res = GetAddressModel.fromJson(jsonDecode(response.body));
+      return res;
+    } else {
+      res.success = false;
+      res.message = "Error";
+      return res;
+    }
+  }
+
+  Future<GetOrdersResponseModel> getOrders(String token) async {
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+      'Cookie':
+          'XSRF-TOKEN=eyJpdiI6IlBaNTRnbXQrV2N1MGVyV0lZa2cyUmc9PSIsInZhbHVlIjoiYlVlOFY3SXdwYW41OWgvbXNUWDdoM3A1T1YvWlhGYUNYcVI0QzZJcGdqTW5hdXlzQ0IySVJDdi9TbkYwUURoMUNDdmdKRnI0c1Nzdmp5bzdTUkRSdEZGNGhIM0NlbzB5VDNFK1ZXSzdhM3NCVDg3Uy9LMjF4YlZzUXdwVUI1NksiLCJtYWMiOiIzYjFiMWZkZGRmYzNkZjY5NmQyMGJhNjhlMGYyYzJiOWFmNzllOTVjNjY1ZTNlMDk5NTc4ZTViNWMwMzNjNDRhIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6Ik9JK0tkcFV1MEpBdzI3WmFBVkgzbUE9PSIsInZhbHVlIjoia2o5V2VaOGFWRk9EUDFnQzVacDJ0eTluYUFDci9vbWxsRTNSNUZnSXA4WTRuYm5UQkFXMFk0b3prenFwRUw5ZzVjb2pLb25qMkRQekZoUngrR1dkM3htSEVXaUtZaUM3OE1ncmdxZzhFamRYb0JKMVhpTXRRRm1tL2MzYmZMV1MiLCJtYWMiOiJiNjJjMzQ0M2ZlMjEwNjM0ZDFhMDFlNmYyMDllNjA3ZGNlNTllZTVkZTVjZThhYzU0MmFiMjYwOTczM2ExMDNkIiwidGFnIjoiIn0%3D'
+    };
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$url/customer/getOrders?customer_id=$customerId&order_id=$orderId&status'));
+            'http://41.78.23.95:8021/dist/api/v2/orders?order_id&status_id'));
     request.body = '''''';
     request.headers.addAll(headers);
 
@@ -618,12 +618,12 @@ class API {
   }
 
   Future<OrderDetailsResponseModel> getOrdersDetails(
-      String token, String customerId, int orderId) async {
+      String token, int orderId) async {
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$url/customer/getOrderDetails?customer_id=$customerId&order_id=$orderId'));
+            'http://41.78.23.95:8021/dist/api/v2/orders/orderDetail?order_id=$orderId'));
     request.body = '''''';
     request.headers.addAll(headers);
 
@@ -640,7 +640,7 @@ class API {
     }
   }
 
-  Future<void> handleBackgroundMessage(RemoteMessage message) async{
+  Future<void> handleBackgroundMessage(RemoteMessage message) async {
     if (kDebugMode) {
       print("title: ${message.notification?.title}");
     }
@@ -650,16 +650,14 @@ class API {
     if (kDebugMode) {
       print("Payload: ${message.data}");
     }
-
   }
 
-  Future<void>initNotification ()async{
+  late String fcmToken;
 
+  Future<void> initNotification() async {
     await firebaseMessaging.requestPermission();
-    final fcmToken= await firebaseMessaging.getToken();
-    if (kDebugMode) {
-      print("Token: $fcmToken" );
-    }
+    fcmToken = (await firebaseMessaging.getToken())!;
+
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
   }
 }

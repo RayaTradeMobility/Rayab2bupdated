@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Screens/ProductScreen.dart';
@@ -46,7 +47,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -84,7 +84,8 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        if (snapshot.data!.success == false || snapshot.data!.data!.isEmpty)
+                        if (snapshot.data!.success == false ||
+                            snapshot.data!.data!.isEmpty)
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,19 +127,22 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                   backgroundColor: Color(_fontcolor))
                             ],
                           )
-                        else if (snapshot.data!.success! == true && snapshot.data!.data!.isNotEmpty)
+                        else if (snapshot.data!.success! == true &&
+                            snapshot.data!.data!.isNotEmpty)
                           for (var i in snapshot.data!.data!)
                             TextButton(
                               child: ShoppingCards(
                                 token: widget.token,
-                                image: i.image!,
+                                image: i.imageUrl!.imageLink!,
                                 quantity: i.qty!,
-                                price: i.price!.replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), ""),
-                                productId: i.itemId!,
+                                price: i.price!.replaceAll(
+                                    RegExp(r"([.]*0+)(?!.*\d)"), ""),
+                                productId: i.id!,
+                                sku: i.sku!,
                                 totalPriceProduct:
                                     double.parse(i.price!) * i.qty!,
                                 postTitle: i.name ?? '',
-                                cardID: i.quoteId ?? '0',
+                                cardID: i.id!.toString(),
                                 countProducts: i.qty!,
                                 totalPrice: double.parse(i.price!) * i.qty!,
                                 email: widget.email,
@@ -152,6 +156,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                     MaterialPageRoute(builder: (context) {
                                   return ProductScreen(
                                     sku: i.sku!,
+                                    productId: i.id!,
                                     token: widget.token,
                                     email: widget.email,
                                     firstname: widget.firstname,
@@ -162,23 +167,22 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                 }));
                               },
                             ),
-                        if (snapshot.data!.success! == true)
+                        if (snapshot.data!.success! == true &&
+                            snapshot.data!.data!.isNotEmpty)
                           FloatingActionButton.extended(
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialogPage(
-                                      token: widget.token,
-                                      email: widget.email,
-                                      firstname: widget.firstname,
-                                      lastname: widget.lastname,
-                                      mobile: 0,
-                                      street: widget.street,
-                                      city: widget.city,
-                                      customerId: widget.customerId,
-                                    );
-                                  });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return PayScreen(
+                                    token: widget.token,
+                                    email: widget.email,
+                                    lastname: widget.lastname,
+                                    firstname: widget.firstname,
+                                    customerId: widget.customerId,
+                                  );
+                                }),
+                              );
                             },
                             label: const Text("احصل على المنتج بعد الخصم"),
                             backgroundColor: Color(_fontcolor),
@@ -197,133 +201,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                   }
                 }),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class AlertDialogPage extends StatefulWidget {
-  final String token, email, firstname, lastname, street, city, customerId;
-  final int mobile;
-
-  const AlertDialogPage({
-    Key? key,
-    required this.token,
-    required this.email,
-    required this.mobile,
-    required this.firstname,
-    required this.lastname,
-    required this.street,
-    required this.city,
-    required this.customerId,
-  }) : super(key: key);
-
-  @override
-  AlertDialogPageState createState() => AlertDialogPageState();
-}
-
-class AlertDialogPageState extends State<AlertDialogPage> {
-  TextEditingController streetController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-  TextEditingController mobileController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Center(child: Text('العنوان')),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: mobileController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: 'الموبايل',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: cityController,
-              decoration: InputDecoration(
-                hintText: 'المدينه',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: streetController,
-              decoration: InputDecoration(
-                hintText: 'الشارع',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: MyColorsSample.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              onPressed: () {
-                if (cityController.text.isEmpty ||
-                    streetController.text.isEmpty ||
-                    mobileController.text.isEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('خطأ'),
-                        content: const Text('يرجى ملء جميع البيانات'),
-                        actions: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor:
-                                  MyColorsSample.primary.withOpacity(0.8),
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Center(child: Text('حسنًا')),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) {
-                      return PayScreen(
-                        token: widget.token,
-                        email: widget.email,
-                        mobile: mobileController.text,
-                        lastname: widget.lastname,
-                        firstname: widget.firstname,
-                        street: streetController.text,
-                        city: cityController.text,
-                        customerId: widget.customerId,
-                      );
-                    }),
-                  );
-                }
-              },
-              child: const Text('طلب'),
-            ),
-          ],
         ),
       ),
     );

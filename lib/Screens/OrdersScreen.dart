@@ -34,21 +34,19 @@ class OrdersScreenState extends State<OrdersScreen>
   bool noOrder = false;
   late Future<GetOrdersResponseModel> _futureData;
   GetOrdersResponseModel? order;
+
   Future<void> _refreshData() async {
     setState(() {
-      _futureData =
-          api.getOrders(widget.token, widget.customerId, widget.orderId);
+      _futureData = api.getOrders(widget.token);
     });
   }
-
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
 
-    _futureData =
-        api.getOrders(widget.token, widget.customerId, widget.orderId);
+    _futureData = api.getOrders(widget.token);
   }
 
   @override
@@ -131,12 +129,17 @@ class OrdersScreenState extends State<OrdersScreen>
                           onRefresh: _refreshData,
                           child: Column(children: [
                             for (var i in snapshot.data!.data!.items!)
-                              if (i.status != "canceled" && i.status != "complete")
+                              if (i.statusId != 5 && i.statusId != 6)
                                 buildSingleChildScrollView(
-                                    i.grandTotal!, i.status!, i.orderId! , i.createdAt!),
+                                    i.grandTotal!,
+                                    i.statusName!,
+                                    i.orderId!,
+                                    i.createdAt!,
+                                    i.totalQty!),
                             if (snapshot.data!.data!.items!.isEmpty)
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset("assets/No_orders_img.jpeg"),
@@ -144,7 +147,7 @@ class OrdersScreenState extends State<OrdersScreen>
                                     height: 10.0,
                                   ),
                                   Text(
-                                    "You don't have any order yet Shopping now and track your order",
+                                    "لا يوجد طلبات الان تسوق و تابع طلبك",
                                     style: TextStyle(
                                         color: Color(_fontColor),
                                         fontWeight: FontWeight.w900),
@@ -155,7 +158,8 @@ class OrdersScreenState extends State<OrdersScreen>
                                   FloatingActionButton.extended(
                                       onPressed: () {
                                         Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) {
+                                            MaterialPageRoute(
+                                                builder: (context) {
                                           return CategoriesScreen(
                                               token: widget.token,
                                               email: widget.email,
@@ -165,7 +169,7 @@ class OrdersScreenState extends State<OrdersScreen>
                                               mobile: widget.mobile);
                                         }));
                                       },
-                                      label: const Text("Shopping now"),
+                                      label: const Text("تسوق الان"),
                                       backgroundColor: Color(_fontColor))
                                 ],
                               )
@@ -200,12 +204,15 @@ class OrdersScreenState extends State<OrdersScreen>
                       if (snapshot.hasData) {
                         return Column(children: [
                           for (var i in snapshot.data!.data!.items!)
-                            if (i.status == "canceled" ||
-                                i.status == "complete")
+                            if (i.statusId == 5 || i.statusId == 6)
                               RefreshIndicator(
                                 onRefresh: _refreshData,
                                 child: buildSingleChildScrollView(
-                                    i.grandTotal!, i.status!, i.orderId! , i.createdAt!),
+                                    i.grandTotal!,
+                                    i.statusName!,
+                                    i.orderId!,
+                                    i.createdAt!,
+                                    i.totalQty!),
                               ),
                           if (snapshot.data!.data!.items!.isEmpty)
                             Column(
@@ -273,8 +280,8 @@ class OrdersScreenState extends State<OrdersScreen>
     );
   }
 
-  Column buildSingleChildScrollView(
-      String netTotal, String status, int orderId ,String createdDate) {
+  Column buildSingleChildScrollView(int netTotal, String status, int orderId,
+      String createdDate, int qtyTotal) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -341,7 +348,7 @@ class OrdersScreenState extends State<OrdersScreen>
                       const SizedBox(
                         height: 5.0,
                       ),
-                       const Row(
+                      const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [],
@@ -360,7 +367,7 @@ class OrdersScreenState extends State<OrdersScreen>
                                 color: Color(_fontColor)),
                           ),
                           Text(
-                            'منتج',
+                            '$qtyTotal',
                             style: TextStyle(color: Color(_fontColor)),
                           ),
                         ],
@@ -385,7 +392,7 @@ class OrdersScreenState extends State<OrdersScreen>
                                 color: Color(_fontColor)),
                           ),
                           Text(
-                            ' ${netTotal.toString().replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")} ج.م',
+                            ' ${netTotal.toString()} ج.م',
                             style: const TextStyle(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.w800),

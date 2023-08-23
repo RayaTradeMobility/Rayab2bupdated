@@ -7,24 +7,24 @@ import 'package:rayab2bupdated/Screens/ProductScreen.dart';
 class CardScreen extends StatefulWidget {
   const CardScreen(
       {super.key,
-        required this.isfavouriteApi,
-        required this.fav,
-        required this.name,
-        required this.salePrice,
-        required this.image,
-        required this.price,
-        required this.regularPrice,
-        required this.id,
-        required this.token,
-        required this.stockStatus,
-        required this.isBundle,
-        required this.percentagePrice,
-        required this.sku,
-        required this.email,
-        required this.mobile,
-        required this.firstname,
-        required this.lastname,
-        required this.customerId});
+      required this.isfavouriteApi,
+      required this.fav,
+      required this.name,
+      required this.salePrice,
+      required this.image,
+      required this.price,
+      required this.regularPrice,
+      required this.id,
+      required this.token,
+      required this.stockStatus,
+      required this.isBundle,
+      required this.percentagePrice,
+      required this.sku,
+      required this.email,
+      required this.mobile,
+      required this.firstname,
+      required this.lastname,
+      required this.customerId});
 
   final String name;
   final String salePrice;
@@ -76,6 +76,7 @@ class _CardScreenState extends State<CardScreen> {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return ProductScreen(
               sku: widget.sku,
+              productId: widget.id,
               token: widget.token,
               mobile: widget.mobile,
               lastname: widget.lastname,
@@ -200,7 +201,7 @@ class _CardScreenState extends State<CardScreen> {
               if (widget.name != null)
                 Container(
                   constraints:
-                  const BoxConstraints(minWidth: 100, maxWidth: 200),
+                      const BoxConstraints(minWidth: 100, maxWidth: 200),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
