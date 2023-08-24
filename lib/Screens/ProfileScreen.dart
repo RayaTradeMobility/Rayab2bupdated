@@ -6,6 +6,7 @@ import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/NavScreen.dart';
+import 'package:rayab2bupdated/Screens/NotificationScreen.dart';
 
 import 'AboutScreen.dart';
 import 'ContactScreen.dart';
@@ -85,7 +86,12 @@ class ProfileScreenState extends State<ProfileScreen> {
                   elevation: 10,
                   color: Colors.white70,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return NotificationScreen(token: widget.token , customerId : widget.customerId);
+                          }));
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -112,6 +118,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                             ),
                           )),
                           const Icon(LineAwesomeIcons.angle_left),
+
                         ],
                       ),
                     ),

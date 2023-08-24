@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../API/API.dart';
@@ -69,6 +70,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   email.text,
                   password.text,
                   '');
+              if (kDebugMode) {
+                print(res);
+              }
               if (res.success == true) {
                 setState(() {
                   _isLoading = false;

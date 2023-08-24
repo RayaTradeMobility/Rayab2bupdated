@@ -59,15 +59,15 @@ class ContactUsScreen extends StatelessWidget {
 
                       //color: Colors.white,
                       child:  const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.alternate_email,
                             color: MyColorsSample.fontColor,
                             size: 50,
                           ),
-                          Text('Write to us'),
                           Text(
-                            'mohamed@gmail.com',
+                            'Raya@rayacorp.com',
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -87,6 +87,7 @@ class ContactUsScreen extends StatelessWidget {
                     width: 150,
                     // color: Colors.white,
                     child:  const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.help,
@@ -117,6 +118,7 @@ class ContactUsScreen extends StatelessWidget {
                     width: 150,
                     // color: Colors.white,
                     child:  const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.phone,
@@ -142,6 +144,7 @@ class ContactUsScreen extends StatelessWidget {
                     ]),
                     //color: Colors.white,
                     child:  const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.home,

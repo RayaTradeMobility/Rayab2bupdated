@@ -12,9 +12,9 @@ class ThanksScreen extends StatefulWidget {
       required this.firstname,
       required this.lastname,
       required this.customerId,
-      required this.orderId});
+      required this.orderId, required this.totalPrice});
 
-  final String token, email, firstname, lastname, customerId, orderId;
+  final String token, email, firstname, lastname, customerId, orderId ,totalPrice;
 
   @override
   ThanksScreenState createState() => ThanksScreenState();
@@ -133,7 +133,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                     style: TextStyle(color: Color(_fontcolor)),
                   ),
                   Text(
-                    'Date',
+                    '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
                     style: TextStyle(color: Color(_fontcolor)),
                   )
                 ],
@@ -157,7 +157,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                     style: TextStyle(color: Color(_fontcolor)),
                   ),
                   Text(
-                    'total',
+                    widget.totalPrice,
                     style: TextStyle(color: Color(_fontcolor)),
                   )
                 ],

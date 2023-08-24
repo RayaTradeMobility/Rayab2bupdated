@@ -3,19 +3,14 @@
 class GetCartResponseModel {
   bool? success;
   String? message;
-  List<Data>? data;
+  Data? data;
 
   GetCartResponseModel({this.success, this.message, this.data});
 
   GetCartResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -23,13 +18,45 @@ class GetCartResponseModel {
     data['success'] = success;
     data['message'] = message;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
 }
 
 class Data {
+  String? totalPrice;
+  int? totalItem;
+  int? totalQtyItems;
+  List<Items>? items;
+
+  Data({this.totalPrice, this.totalItem, this.totalQtyItems, this.items});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    totalPrice = json['total_price'];
+    totalItem = json['total_item'];
+    totalQtyItems = json['total_qty_items'];
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(Items.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total_price'] = totalPrice;
+    data['total_item'] = totalItem;
+    data['total_qty_items'] = totalQtyItems;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Items {
   int? id;
   String? sku;
   int? qty;
@@ -38,24 +65,25 @@ class Data {
   String? name;
   ImageUrl? imageUrl;
 
-  Data(
+  Items(
       {this.id,
-      this.sku,
-      this.qty,
-      this.price,
-      this.totalPrice,
-      this.name,
-      this.imageUrl});
+        this.sku,
+        this.qty,
+        this.price,
+        this.totalPrice,
+        this.name,
+        this.imageUrl});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sku = json['sku'];
     qty = json['qty'];
     price = json['price'];
     totalPrice = json['total_price'];
     name = json['name'];
-    imageUrl =
-        json['image_url'] != null ? ImageUrl.fromJson(json['image_url']) : null;
+    imageUrl = json['image_url'] != null
+        ? ImageUrl.fromJson(json['image_url'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

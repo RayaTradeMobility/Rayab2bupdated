@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:rayab2bupdated/Models/GetAddressModel.dart';
+import 'package:rayab2bupdated/Models/CreateAddressModel.dart';
 import 'package:rayab2bupdated/Screens/LoginScreen.dart';
 import '../API/API.dart';
 
@@ -43,7 +43,11 @@ class _RegisterAddressScreenState extends State<RegisterAddressScreen> {
           if (_formKey.currentState!.validate()) {
             api.checkNetwork();
 
-            GetAddressModel get = await api.getAddress(widget.token);
+            CreateAddressModel get = await api.createAddress(
+                widget.token,
+                city.text,
+                street.text,
+                int.parse(building.text));
             if (get.success == true) {
               setState(() {
                 _isLoading = false;

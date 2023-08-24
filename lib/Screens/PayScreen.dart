@@ -16,9 +16,10 @@ class PayScreen extends StatefulWidget {
       required this.email,
       required this.firstname,
       required this.lastname,
-      required this.customerId});
+      required this.customerId, required this.totalPrice, required this.totalQty,});
 
-  final String token, email, firstname, lastname, customerId;
+  final String token, email, firstname, lastname, customerId ,totalPrice  ;
+  final int totalQty;
 
   @override
   PayScreenState createState() => PayScreenState();
@@ -69,296 +70,302 @@ class PayScreenState extends State<PayScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
-        child: FutureBuilder<GetAddressModel>(
-            future: _futureData,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                getAddress = snapshot.data;
-                if (getAddress!.data!.isEmpty) {
-                  return const Center(
-                    child: Text('No data available.'),
-                  );
-                }
-              }
-              return RefreshIndicator(
+        child: RefreshIndicator(
                 onRefresh: _refreshData,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            ' اختر العنوان',
-                            style: TextStyle(
-                                color: Color(_fontColor),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ),
-                          const SizedBox(width: 5.0),
-                          const Icon(Icons.info_rounded),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SizedBox(
-                          child: Card(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            elevation: 10.0,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                  child:  FutureBuilder<GetAddressModel>(
+                  future: _futureData,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            getAddress = snapshot.data;
+                            if (getAddress!.data!.isEmpty) {
+                              return const Center(
+                                child: Text('No data available.'),
+                              );
+                            }
+                          }
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceEvenly,
                                 children: [
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: getAddress?.data!.length ?? 0,
-                                    itemBuilder: (context, index) {
-                                      var item = getAddress?.data![index];
-                                      return ListTile(
-                                        title: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(item!.street!),
-                                            InkWell(
-                                                onTap: () {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GetAddressAlert(
-                                                          token: widget.token,
-                                                          address: getAddress!
-                                                              .data![index]
-                                                              .address!,
-                                                          street: getAddress!
-                                                              .data![index]
-                                                              .street!,
-                                                          building: getAddress!
-                                                              .data![index]
-                                                              .buildingNumber!,
-                                                        );
-                                                      });
-                                                },
-                                                child: const Icon(
-                                                    Icons.info_rounded)),
-                                          ],
-                                        ),
-                                        leading: Radio<int>(
-                                          value: item.id!,
-                                          groupValue: radioSelectedAddress,
-                                          activeColor: Colors.blue,
-                                          onChanged: (int? value) {
-                                            setState(() {
-                                              radioSelectedAddress = value;
-                                            });
-                                          },
-                                        ),
-                                      );
-                                    },
+                                  Text(
+                                    ' اختر العنوان',
+                                    style: TextStyle(
+                                        color: Color(_fontColor),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
                                   ),
-                                  const SizedBox(
-                                    height: 7,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      InkWell(
-                                          onTap: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialogPage(
-                                                      token: widget.token);
-                                                });
-                                          },
-                                          child: const Row(
-                                            children: [
-                                              Icon(Icons.add),
-                                              Text("اضافه عنوان جديد"),
-                                            ],
-                                          ))
-                                    ],
-                                  )
+                                  const SizedBox(width: 5.0),
+                                  const Icon(Icons.info_rounded),
                                 ],
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Divider(
-                        color: Colors.black,
-                        thickness: 0.5,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            'اختر طريقة شحن',
-                            style: TextStyle(
-                                color: Color(_fontColor),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ),
-                          const SizedBox(width: 5.0),
-                          const Icon(Icons.local_shipping),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Card(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          elevation: 10.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ListTile(
-                                  title: const Text("الشحن اليوم التالي"),
-                                  leading: Radio(
-                                    value: 1,
-                                    groupValue: _radioSelected,
-                                    activeColor: Colors.blue,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _radioSelected1 = value!;
-                                      });
-                                    },
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: SizedBox(
+                                  child: Card(
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                    elevation: 10.0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .start,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start,
+                                        children: [
+                                          ListView.builder(
+                                            shrinkWrap: true,
+                                            physics:
+                                            const NeverScrollableScrollPhysics(),
+                                            itemCount: getAddress?.data!
+                                                .length ?? 0,
+                                            itemBuilder: (context, index) {
+                                              var item = getAddress
+                                                  ?.data![index];
+                                              return ListTile(
+                                                title: Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Text(item!.street!),
+                                                    InkWell(
+                                                        onTap: () {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder: (
+                                                                  context) {
+                                                                return GetAddressAlert(
+                                                                  token: widget
+                                                                      .token,
+                                                                  address: getAddress!
+                                                                      .data![index]
+                                                                      .address!,
+                                                                  street: getAddress!
+                                                                      .data![index]
+                                                                      .street!,
+                                                                  building: getAddress!
+                                                                      .data![index]
+                                                                      .buildingNumber!,
+                                                                );
+                                                              });
+                                                        },
+                                                        child: const Icon(
+                                                            Icons
+                                                                .info_rounded)),
+                                                  ],
+                                                ),
+                                                leading: Radio<int>(
+                                                  value: item.id!,
+                                                  groupValue: radioSelectedAddress,
+                                                  activeColor: Colors.blue,
+                                                  onChanged: (int? value) {
+                                                    setState(() {
+                                                      radioSelectedAddress =
+                                                          value;
+                                                    });
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          const SizedBox(
+                                            height: 7,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              InkWell(
+                                                  onTap: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialogPage(
+                                                              token: widget
+                                                                  .token, email: widget.email,
+                                                            firstname: widget.firstname, lastname: widget.lastname, customerId: widget.customerId,
+                                                            totalPrice: widget.totalPrice, totalQty: widget.totalQty,);
+                                                        });
+                                                  },
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(Icons.add),
+                                                      Text("اضافه عنوان جديد"),
+                                                    ],
+                                                  ))
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Divider(
-                        color: Colors.black,
-                        thickness: 0.5,
-                      ),
-                      paymentRadio(),
-                      const Divider(
-                        color: Colors.black,
-                        thickness: 0.5,
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.lightBlue[100],
-                                border: Border.all(
-                                    color: Colors.black,
-                                    style: BorderStyle.none),
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(15))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                              ),
+                              const Divider(
+                                color: Colors.black,
+                                thickness: 0.5,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceEvenly,
+                                children: [
+                                  Text(
+                                    'اختر طريقة شحن',
+                                    style: TextStyle(
+                                        color: Color(_fontColor),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(width: 5.0),
+                                  const Icon(Icons.local_shipping),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Card(
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                                  elevation: 10.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceEvenly,
                                       children: [
-                                        Text("المنتجات : ${widget.lastname} "),
-                                        const Text(" جنيه مصري  ")
+                                        ListTile(
+                                          title: const Text(
+                                              "الشحن اليوم التالي"),
+                                          leading: Radio(
+                                            value: 1,
+                                            groupValue: _radioSelected,
+                                            activeColor: Colors.blue,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _radioSelected1 = value!;
+                                              });
+                                            },
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    const Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('مصاريف الشحن'),
-                                        Text(" جنيه مصري ")
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    const Divider(
-                                      color: Colors.black,
-                                    ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    const Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('اجمالي الطلب'),
-                                        Text(
-                                          " جنيه مصري ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          )),
-                    ],
-                  ),
+                              const Divider(
+                                color: Colors.black,
+                                thickness: 0.5,
+                              ),
+                              paymentRadio(),
+                              const Divider(
+                                color: Colors.black,
+                                thickness: 0.5,
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.lightBlue[100],
+                                        border: Border.all(
+                                            color: Colors.black,
+                                            style: BorderStyle.none),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15))),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .center,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text("المنتجات : ${widget
+                                                    .totalQty} "),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            const Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text('مصاريف الشحن'),
+                                                Text(" 0 جنيه مصري ")
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            const SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            const Divider(
+                                              color: Colors.black,
+                                            ),
+                                            const SizedBox(
+                                              height: 10.0,
+                                            ),
+                                             Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                const Text('اجمالي الطلب'),
+                                                Text(
+                                                  "  ${widget.totalPrice} جنيه مصري ",
+                                                  style: const TextStyle(
+                                                      fontWeight: FontWeight
+                                                          .bold),
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 40.0,
+                                            ),
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                            ],
+                          );
+
+                        }
+                        ),
                 ),
-              );
-            }),
+              )
+
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           api.checkNetwork();
-          setState(() {
-            _isLoading = true;
-          });
-          OrderResponseModel res = await api.createOrder(
-              widget.token, radioSelectedAddress!, _radioSelected1);
-          if (res.success == true) {
-            setState(() {
-              _isLoading = false;
-            });
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ThanksScreen(
-                  token: widget.token,
-                  email: widget.email,
-                  firstname: widget.firstname,
-                  lastname: widget.lastname,
-                  customerId: widget.customerId,
-                  orderId: res.data!.id!.toString());
-            }));
-          } else {
-            setState(() {
-              _isLoading = false;
-            });
+          if (radioSelectedAddress == null) {
             Fluttertoast.showToast(
-                msg: res.message!,
+                msg: "Please select Address",
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.CENTER,
                 timeInSecForIosWeb: 1,
@@ -366,13 +373,50 @@ class PayScreenState extends State<PayScreen> {
                 textColor: Colors.white,
                 fontSize: 16.0);
           }
-        },
-        icon: _isLoading
-            ? const CircularProgressIndicator()
-            : const Icon(Icons.payment),
-        label: const Text('اكمال الاوردر'),
-        backgroundColor: Color(_fontColor),
-      ),
+          {
+            setState(() {
+              _isLoading = true;
+            });
+            OrderResponseModel res = await api.createOrder(
+                widget.token, radioSelectedAddress!, _radioSelected1);
+            if (res.success == true) {
+              setState(() {
+                _isLoading = false;
+              });
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                return ThanksScreen(
+                    token: widget.token,
+                    email: widget.email,
+                    firstname: widget.firstname,
+                    lastname: widget.lastname,
+                    customerId: widget.customerId,
+                    orderId: res.data!.id!.toString(),totalPrice: widget.totalPrice,);
+              }));
+            } else {
+              setState(() {
+                _isLoading = false;
+              });
+              Fluttertoast.showToast(
+                  msg: res.message!,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            }
+          }
+
+          _isLoading
+          ? const CircularProgressIndicator()
+              : const Icon(Icons.payment);
+
+
+
+        }, label: const Text('اكمال الاوردر'),
+          backgroundColor: Color(
+          _fontColor
+      )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
@@ -441,11 +485,12 @@ class PayScreenState extends State<PayScreen> {
 }
 
 class AlertDialogPage extends StatefulWidget {
-  final String token;
+  final String token, email, firstname, lastname, customerId , totalPrice ;
+  final int totalQty;
 
   const AlertDialogPage({
     Key? key,
-    required this.token,
+    required this.token, required this.email, required this.firstname, required this.lastname, required this.customerId, required this.totalPrice, required this.totalQty,
   }) : super(key: key);
 
   @override
@@ -525,7 +570,13 @@ class AlertDialogPageState extends State<AlertDialogPage> {
                                   MyColorsSample.primary.withOpacity(0.8),
                             ),
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                                return  PayScreen(
+                                  token: widget
+                                      .token, email: widget.email,
+                                  firstname: widget.firstname, lastname: widget.lastname, customerId: widget.customerId,
+                                  totalPrice: widget.totalPrice, totalQty: widget.totalQty,);
+                              }));
                             },
                             child: const Center(child: Text('حسنًا')),
                           ),

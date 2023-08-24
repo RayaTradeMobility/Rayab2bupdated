@@ -1,4 +1,4 @@
-package com.example.rayab2bupdated;
+package com.raya.rayab2bupdated;
 
 import io.flutter.embedding.android.FlutterActivity;
 

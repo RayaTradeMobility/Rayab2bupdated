@@ -15,6 +15,7 @@ import 'package:rayab2bupdated/Models/GetOrdersResponseModel.dart';
 import 'package:rayab2bupdated/Models/GetProductsResponseModel.dart';
 import 'package:rayab2bupdated/Models/HomeResponseModel.dart';
 import 'package:rayab2bupdated/Models/LoginResponseModel.dart';
+import 'package:rayab2bupdated/Models/NotificationModel.dart';
 import 'package:rayab2bupdated/Models/OpenCartResponseModel.dart';
 import 'package:rayab2bupdated/Models/OrderDetailsResponseModel.dart';
 import 'package:rayab2bupdated/Models/OrderResponseModel.dart';
@@ -76,19 +77,20 @@ class API {
     });
 
     request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    RegisterResponseModel res = RegisterResponseModel();
     if (response.statusCode == 200) {
+      res = RegisterResponseModel.fromJson(jsonDecode(response.body));
       if (kDebugMode) {
-        print(await response.stream.bytesToString());
+        print(response.body);
       }
     } else {
       if (kDebugMode) {
-        print(response.reasonPhrase);
+        print(response.body);
       }
     }
-    return RegisterResponseModel.fromJson(response.headers);
+    return res ;
   }
 
   Future<LoginResponseModel?> login(String mobile, String password,
@@ -110,6 +112,9 @@ class API {
     if (response.statusCode == 200) {
       LoginResponseModel? user =
           LoginResponseModel.fromJson(jsonDecode(response.body));
+      if (kDebugMode) {
+        print(user.data!.token);
+      }
       return user;
     } else {
       LoginResponseModel? user =
@@ -544,6 +549,29 @@ class API {
     }
   }
 
+  Future<NotificationModel> getNotification(String token) async {
+    var headers = {'Authorization': 'Bearer $token'};
+
+    var request = http.Request('GET', Uri.parse('http://41.78.23.95:8021/dist/api/v2/getNotifications'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print(response.body);
+      }
+      return NotificationModel.fromJson(jsonDecode(response.body));
+    } else {
+      if (kDebugMode) {
+        print(response.body);
+      }
+
+      throw Exception("Error");
+    }
+  }
+
   Future<CreateAddressModel> createAddress(
       String token, String address, String street, int buildingNumber) async {
     var headers = {'Authorization': 'Bearer $token'};
@@ -561,9 +589,16 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     var res = CreateAddressModel();
     if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print(response.body);
+      }
       res = CreateAddressModel.fromJson(jsonDecode(response.body));
       return res;
     } else {
+      if (kDebugMode) {
+        print(response.body);
+      }
+
       res.success = false;
       res.message = "Error";
       return res;
@@ -631,9 +666,17 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     var res = OrderDetailsResponseModel();
     if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print(response.body);
+      }
       res = OrderDetailsResponseModel.fromJson(jsonDecode(response.body));
       return res;
     } else {
+      if (kDebugMode) {
+        print(response.body);
+      }
+
+
       res.success = false;
       res.message = "Error";
       return res;

@@ -144,6 +144,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       double price = sale;
                                       total = quantity * price;
                                       result = total;
+                                      quantityController.value = TextEditingValue(text: quantity.toString());
                                     });
                                   },
                                   icon: const Icon(Icons.add),
@@ -160,6 +161,20 @@ class _ProductScreenState extends State<ProductScreen> {
                                     decoration: InputDecoration(
                                       hintText: '$quantity',
                                     ),
+                                    onChanged: (val) {
+                                      setState(() {
+                                        if (quantity != 0) {
+                                          double sale = double.parse(snapshot.data!.data!.price!);
+                                          double price = sale;
+                                          total = quantity * price;
+                                          result = total;
+                                        }
+                                      });
+
+                                      if (double.tryParse(val) != null && double.parse(val) < 0) {
+                                        quantityController.text = '0'; // Reset the value to 0 if a negative value is entered
+                                      }
+                                    },
                                   ),
                                 ),
                                 const SizedBox(
@@ -175,6 +190,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                         quantity -= 1;
                                         total = quantity * price;
                                         result = total;
+                                        quantityController.value = TextEditingValue(text: quantity.toString());
                                       }
                                     });
                                   },
@@ -185,7 +201,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             )
                           ],
                         ),
-                        if (result != null)
+                        if (result != null && result! >0)
                           Row(
                             children: [
                               const Text(
@@ -195,7 +211,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     fontSize: 18.0,
                                     color: Colors.lightBlue),
                               ),
-                              Text(
+                                Text(
                                 "$result جنيه مصري ",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,

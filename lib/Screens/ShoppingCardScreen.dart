@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Screens/ProductScreen.dart';
@@ -40,7 +39,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
   final int _fontcolor = 0xFF4C53A5;
   late Future<GetCartResponseModel> card;
   API api = API();
-
   @override
   void initState() {
     card = api.getCart(widget.token);
@@ -80,12 +78,15 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                 future: card,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    String totalPrice = snapshot.data!.data!.totalPrice! ;
+                    int totalQty = snapshot.data!.data!.totalQtyItems!;
+
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         if (snapshot.data!.success == false ||
-                            snapshot.data!.data!.isEmpty)
+                            snapshot.data!.data!.items!.isEmpty)
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,8 +129,8 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                             ],
                           )
                         else if (snapshot.data!.success! == true &&
-                            snapshot.data!.data!.isNotEmpty)
-                          for (var i in snapshot.data!.data!)
+                            snapshot.data!.data!.items!.isNotEmpty)
+                          for (var i in snapshot.data!.data!.items!)
                             TextButton(
                               child: ShoppingCards(
                                 token: widget.token,
@@ -168,7 +169,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                               },
                             ),
                         if (snapshot.data!.success! == true &&
-                            snapshot.data!.data!.isNotEmpty)
+                            snapshot.data!.data!.items!.isNotEmpty)
                           FloatingActionButton.extended(
                             onPressed: () {
                               Navigator.push(
@@ -179,7 +180,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                     email: widget.email,
                                     lastname: widget.lastname,
                                     firstname: widget.firstname,
-                                    customerId: widget.customerId,
+                                    customerId: widget.customerId, totalPrice: totalPrice, totalQty:totalQty,
                                   );
                                 }),
                               );

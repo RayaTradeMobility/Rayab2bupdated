@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _isLoading = false;
                     });
 
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) {
                       return BottomNavMenu(
                         token: loginUser.data!.token!,
