@@ -151,12 +151,12 @@ class _CardScreenModelState extends State<CardScreenModel> {
               margin: const EdgeInsets.all(5),
               child: FadeInImage(
                 image: NetworkImage(widget.image),
-                width: MediaQuery.of(context).size.width - 300,
-                height: MediaQuery.of(context).size.width - 300,
+                width: MediaQuery.of(context).size.width/3.3,
+                height: MediaQuery.of(context).size.width/3.3,
                 placeholder: const AssetImage("assets/no-img.jpg"),
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth  , width: MediaQuery.of(context).size.width - 300,
-                    height: MediaQuery.of(context).size.height /10,
+                  return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth , width: MediaQuery.of(context).size.width/3.3,
+                  height: MediaQuery.of(context).size.width/3.3,
 
                   );
                 },
