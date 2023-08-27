@@ -1,9 +1,10 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
+import 'package:rayab2bupdated/Models/LogoutModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/NavScreen.dart';
 import 'package:rayab2bupdated/Screens/NotificationScreen.dart';
@@ -295,12 +296,17 @@ class ProfileScreenState extends State<ProfileScreen> {
                             LineAwesomeIcons.alternate_sign_out,
                           )),
                       TextButton(
-                        onPressed: () {
-                          api.logOut(widget.token);
-                          Navigator.pushReplacement(context,
+                        onPressed: ()async {
+                          LogoutModel? User= await api.logOutCustomer(widget.token);
+
+                          if(User!.success==true) {
+                            // ignore: use_build_context_synchronously
+                            Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (context) {
                             return const NavScreen();
                           }));
+                          }
+
                         },
                         child: const Text(
                           "تسجيل الخروج",

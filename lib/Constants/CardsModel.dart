@@ -155,7 +155,10 @@ class _CardScreenModelState extends State<CardScreenModel> {
                 height: MediaQuery.of(context).size.width - 300,
                 placeholder: const AssetImage("assets/no-img.jpg"),
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth);
+                  return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth  , width: MediaQuery.of(context).size.width - 300,
+                    height: MediaQuery.of(context).size.height /10,
+
+                  );
                 },
                 fit: BoxFit.fitWidth,
               ),

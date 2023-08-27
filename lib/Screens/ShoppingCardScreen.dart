@@ -188,7 +188,27 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                             label: const Text("احصل على المنتج بعد الخصم"),
                             backgroundColor: Color(_fontcolor),
                             elevation: 5,
-                          )
+                          ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        FloatingActionButton.extended(
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return CategoriesScreen(
+                                      token: widget.token,
+                                      email: widget.email,
+                                      firstname: widget.firstname,
+                                      lastname: widget.lastname,
+                                      mobile: widget.mobile,
+                                      customerId: widget.customerId,
+                                    );
+                                  }));
+                            },
+                            label: const Text("تسوق "),
+                            backgroundColor: Color(_fontcolor))
+
                       ],
                     );
                   } else if (snapshot.hasError) {

@@ -110,7 +110,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             ),
                           ),
                           Text(
-                            'الخميس 17/02/2022 ',
+                            '${order!.data!.createdAt!}  ',
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.5),
                               fontSize: 12,

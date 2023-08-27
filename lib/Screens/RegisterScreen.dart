@@ -199,6 +199,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
               }
             },
           ),
+          // TextFormField(
+          //   controller: password,
+          //   obscureText: _passwordVisibility,
+          //   decoration: InputDecoration(
+          //     suffixIcon: IconButton(
+          //       icon: Icon(
+          //         // Based on passwordVisible state choose the icon
+          //         _passwordVisibility ? Icons.visibility : Icons.visibility_off,
+          //         color: Theme.of(context).primaryColorDark,
+          //       ),
+          //       onPressed: () {
+          //         // Update the state i.e. toogle the state of passwordVisible variable
+          //         setState(() {
+          //           _passwordVisibility = !_passwordVisibility;
+          //         });
+          //       },
+          //     ),
+          //     hintText: "تأكيد الباسورد",
+          //     prefixIcon: const Icon(Icons.password),
+          //     enabledBorder: const OutlineInputBorder(
+          //       borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          //       borderSide: BorderSide(
+          //         color: Colors.grey,
+          //       ),
+          //     ),
+          //     focusedBorder: OutlineInputBorder(
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          //   validator: (password) {
+          //     if (isPasswordValid(password!)) {
+          //       return null;
+          //     } else {
+          //       return 'ادخل باسورد اكبر من 6 حروف';
+          //     }
+          //   },
+          // ),
+
           const SizedBox(
             height: 10.0,
           ),
@@ -248,6 +286,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
+            validator: (mobile) {
+              if (isMobileValid(mobile!)) {
+                return null;
+              } else {
+                return 'برجاء ادخال رقم الموبايل المكون من 11 رقم';
+              }
+            },
           ),
           const SizedBox(
             height: 10.0,
@@ -274,6 +319,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   bool isPasswordValid(String password) => password.length >= 6;
+  bool isMobileValid(String mobile) => mobile.length == 11;
 
   bool isEmailValid(String email) {
     bool emailValid = RegExp(

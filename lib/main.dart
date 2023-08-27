@@ -55,6 +55,7 @@ Future<void> main() async {
     await _handleMessage(message);
   });
 
+
   // Initialize the notification plugin
   const AndroidInitializationSettings androidInitializationSettings =
   AndroidInitializationSettings('@mipmap/ic_launcher');

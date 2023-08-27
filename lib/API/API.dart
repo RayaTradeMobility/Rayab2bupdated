@@ -15,6 +15,7 @@ import 'package:rayab2bupdated/Models/GetOrdersResponseModel.dart';
 import 'package:rayab2bupdated/Models/GetProductsResponseModel.dart';
 import 'package:rayab2bupdated/Models/HomeResponseModel.dart';
 import 'package:rayab2bupdated/Models/LoginResponseModel.dart';
+import 'package:rayab2bupdated/Models/LogoutModel.dart';
 import 'package:rayab2bupdated/Models/NotificationModel.dart';
 import 'package:rayab2bupdated/Models/OpenCartResponseModel.dart';
 import 'package:rayab2bupdated/Models/OrderDetailsResponseModel.dart';
@@ -154,15 +155,35 @@ class API {
 
     if (response.statusCode == 200) {
       if (kDebugMode) {
+        print(response.stream);
         print(await response.stream.bytesToString());
       }
     } else {
       if (kDebugMode) {
+        print(response.stream);
+
         print(response.reasonPhrase);
       }
     }
   }
+  Future<LogoutModel?> logOutCustomer( String token) async {
 
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/logout'));
+
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    if (response.statusCode == 200) {
+      LogoutModel? user =
+      LogoutModel.fromJson(jsonDecode(response.body));
+
+      return user;
+    }
+    return null;
+  }
   Future<String> openCart(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request('POST', Uri.parse('$url/customer/quote'));

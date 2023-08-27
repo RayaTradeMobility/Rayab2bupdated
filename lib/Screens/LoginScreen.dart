@@ -101,13 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 )),
-            // validator: (email) {
-            //   if (isEmailValid(email!)) {
-            //     return null;
-            //   } else {
-            //     return 'البريد الشخصي غير صحيح';
-            //   }
-            // },
+            validator: (mobile) {
+              if (isMobileValid(mobile!)) {
+                return null;
+              } else {
+                return 'رقم الموبايل غير صحيح';
+              }
+            },
           ),
           const SizedBox(height: 20.0),
           TextFormField(
@@ -281,6 +281,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+  bool isMobileValid(String mobile) => mobile.length >= 10;
 
   bool isPasswordValid(String password) => password.length >= 6;
 

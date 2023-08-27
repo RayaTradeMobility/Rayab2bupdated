@@ -43,6 +43,7 @@ class _RegisterAddressScreenState extends State<RegisterAddressScreen> {
           if (_formKey.currentState!.validate()) {
             api.checkNetwork();
 
+
             CreateAddressModel get = await api.createAddress(
                 widget.token,
                 city.text,
@@ -114,6 +115,13 @@ class _RegisterAddressScreenState extends State<RegisterAddressScreen> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
+            validator: (street) {
+              if (isAddressValid(street!)) {
+                return null;
+              } else {
+                return 'ادخل العنوان';
+              }
+            },
           ),
           const SizedBox(
             height: 10.0,
@@ -133,6 +141,13 @@ class _RegisterAddressScreenState extends State<RegisterAddressScreen> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
+            validator: (street) {
+              if (isStreetValid(street!)) {
+                return null;
+              } else {
+                return 'ادخل الشارع';
+              }
+            },
           ),
           const SizedBox(
             height: 10.0,
@@ -152,7 +167,13 @@ class _RegisterAddressScreenState extends State<RegisterAddressScreen> {
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-            ),
+            ), validator: (building) {
+            if (isBuildingValid(building!)) {
+              return null;
+            } else {
+              return 'ادخل رقم العماره';
+            }
+          },
           ),
           const SizedBox(
             height: 10.0,
@@ -162,3 +183,7 @@ class _RegisterAddressScreenState extends State<RegisterAddressScreen> {
     );
   }
 }
+bool isStreetValid(String street) => street.isNotEmpty;
+bool isAddressValid(String address) => address.isNotEmpty;
+bool isBuildingValid(String building) => building.isNotEmpty;
+

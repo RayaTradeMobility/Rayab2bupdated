@@ -334,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: Row(
+                            child: Row( 
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

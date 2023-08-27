@@ -1,9 +1,7 @@
 // ignore_for_file: file_names
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/Models/NotificationModel.dart';
-import 'package:rayab2bupdated/Screens/OrderDetailsScreen.dart';
 
 import '../API/API.dart';
 import '../Constants/Constants.dart';
@@ -129,16 +127,16 @@ class CustomerCardState extends State<CustomerCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        if (kDebugMode) {
-          print(widget.token);
-        }
-
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) {
-              return OrderDetailsScreen(token: widget.token, customerId: widget.customerId, orderId: 0);
-            }));
-      },
+      // onTap: (){
+      //   if (kDebugMode) {
+      //     print(widget.token);
+      //   }
+      //
+      //   Navigator.push(context,
+      //       MaterialPageRoute(builder: (context) {
+      //         return OrderDetailsScreen(token: widget.token, customerId: widget.customerId, orderId: 0);
+      //       }));
+      // },
       child: Card(
           elevation: 12,
 
