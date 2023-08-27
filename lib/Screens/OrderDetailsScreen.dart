@@ -324,9 +324,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Text(
-                            'Raya Trade',
-                            style: TextStyle(
+                           Text(
+                            order!.data!.companyName!,
+                            style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
@@ -345,9 +345,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Text(
-                            '011262849924',
-                            style: TextStyle(
+                           Text(
+                            order!.data!.mobile!,
+                            style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
@@ -366,9 +366,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Text(
-                            '6 اكتوبر الحي الاول',
-                            style: TextStyle(
+                           Text(
+                            '${order!.data!.getAddress!.fullAddress!} ',
+                            style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),

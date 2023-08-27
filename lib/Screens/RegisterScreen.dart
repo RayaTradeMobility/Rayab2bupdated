@@ -139,6 +139,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
+            validator: (name) {
+              if (isNameValid(name!)) {
+                return null;
+              } else {
+                return 'ادخل الاسم الاول';
+              }
+            },
           ),
           const SizedBox(
             height: 10.0,
@@ -158,6 +165,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
+            validator: (name) {
+              if (isNameValid(name!)) {
+                return null;
+              } else {
+                return 'ادخل الاسم الاخير';
+              }
+            },
           ),
           const SizedBox(
             height: 10.0,
@@ -297,6 +311,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SizedBox(
             height: 10.0,
           ),
+          TextFormField(
+            controller: companyName,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              hintText: "اسم المنشأه",
+              prefixIcon: const Icon(Icons.home),
+              enabledBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                borderSide: BorderSide(
+                  color: Colors.grey,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+            validator: (company) {
+              if (isCompanyValid(company!)) {
+                return null;
+              } else {
+                return 'ادخل اسم المنشأه';
+              }
+            },
+          ),
+
+          const SizedBox(
+            height: 10.0,
+          ),
           Row(
             children: [
               Checkbox(
@@ -320,6 +362,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool isPasswordValid(String password) => password.length >= 6;
   bool isMobileValid(String mobile) => mobile.length == 11;
+  bool isCompanyValid(String company) => company.isNotEmpty;
+  bool isNameValid(String name) => name.isNotEmpty;
+
+
 
   bool isEmailValid(String email) {
     bool emailValid = RegExp(

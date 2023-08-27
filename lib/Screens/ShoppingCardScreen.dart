@@ -126,6 +126,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                   },
                                   label: const Text("تسوق الان"),
                                   backgroundColor: Color(_fontcolor))
+
                             ],
                           )
                         else if (snapshot.data!.success! == true &&
@@ -189,25 +190,10 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                             backgroundColor: Color(_fontcolor),
                             elevation: 5,
                           ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        FloatingActionButton.extended(
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return CategoriesScreen(
-                                      token: widget.token,
-                                      email: widget.email,
-                                      firstname: widget.firstname,
-                                      lastname: widget.lastname,
-                                      mobile: widget.mobile,
-                                      customerId: widget.customerId,
-                                    );
-                                  }));
-                            },
-                            label: const Text("تسوق "),
-                            backgroundColor: Color(_fontcolor))
+
+
+
+
 
                       ],
                     );

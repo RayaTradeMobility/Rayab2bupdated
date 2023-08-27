@@ -23,6 +23,7 @@ import 'package:rayab2bupdated/Models/OrderResponseModel.dart';
 import 'package:rayab2bupdated/Models/ProductbySkuResponseModel.dart';
 import 'package:rayab2bupdated/Models/RegisterResponseModel.dart';
 import 'package:rayab2bupdated/Models/ShippingInformationResponseModel.dart';
+import '../Models/CheckOTPModel.dart';
 import '../Models/CreateAddressModel.dart';
 import '../Models/EstimateShippingMethodResponse.dart';
 import '../Models/GetCategoriesNewResponseModel.dart';
@@ -144,6 +145,76 @@ class API {
     }
   }
 
+  mobileOTP(String mobile)async{
+    var headers = {
+      'Accept': 'application/json'
+    };
+    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/SendOTPSMS'));
+    request.fields.addAll({
+      'mobile': mobile
+    });
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+  }
+  resetPassword(String mobile , String otp , String password)async{
+    var headers = {
+      'lang': 'en',
+      'Accept': 'application/json'
+    };
+    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/reset-password'));
+    request.fields.addAll({
+      'otp': otp,
+      'mobile': mobile,
+      'password': password
+    });
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  Future<OtpCheckModel?>checkOTP(String mobile , String otpPin)async{
+    var headers = {
+      'Accept': 'application/json'
+    };
+    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/checkOtp'));
+    request.fields.addAll({
+      'mobile': mobile,
+      'otp': otpPin
+    });
+
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode == 200) {
+      return OtpCheckModel.fromJson(jsonDecode(response.body));
+    }
+    else{
+      return OtpCheckModel.fromJson(jsonDecode(response.body));
+
+    }
+
+    return null;
+  }
+
   logOut(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.MultipartRequest(
@@ -184,6 +255,8 @@ class API {
     }
     return null;
   }
+
+
   Future<String> openCart(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request('POST', Uri.parse('$url/customer/quote'));

@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 class OrderDetailsResponseModel {
   bool? success;
   String? message;
@@ -34,21 +32,29 @@ class Data {
   int? totalQtyItem;
   String? statusName;
   String? paymentMethodName;
+  String? clientName;
+  String? companyName;
+  String? mobile;
   String? createdAt;
+  GetAddress? getAddress;
   List<Items>? items;
 
   Data(
       {this.orderId,
-      this.statusId,
-      this.shippingAmount,
-      this.grandTotal,
-      this.paymentMethodId,
-      this.totalQty,
-      this.totalQtyItem,
-      this.statusName,
-      this.paymentMethodName,
-      this.createdAt,
-      this.items});
+        this.statusId,
+        this.shippingAmount,
+        this.grandTotal,
+        this.paymentMethodId,
+        this.totalQty,
+        this.totalQtyItem,
+        this.statusName,
+        this.paymentMethodName,
+        this.clientName,
+        this.companyName,
+        this.mobile,
+        this.createdAt,
+        this.getAddress,
+        this.items});
 
   Data.fromJson(Map<String, dynamic> json) {
     orderId = json['order_id'];
@@ -60,7 +66,13 @@ class Data {
     totalQtyItem = json['total_qty_item'];
     statusName = json['status_name'];
     paymentMethodName = json['payment_method_name'];
+    clientName = json['client_name'];
+    companyName = json['company_name'];
+    mobile = json['mobile'];
     createdAt = json['created_at'];
+    getAddress = json['get_address'] != null
+        ? GetAddress.fromJson(json['get_address'])
+        : null;
     if (json['items'] != null) {
       items = <Items>[];
       json['items'].forEach((v) {
@@ -80,10 +92,42 @@ class Data {
     data['total_qty_item'] = totalQtyItem;
     data['status_name'] = statusName;
     data['payment_method_name'] = paymentMethodName;
+    data['client_name'] = clientName;
+    data['company_name'] = companyName;
+    data['mobile'] = mobile;
     data['created_at'] = createdAt;
+    if (getAddress != null) {
+      data['get_address'] = getAddress!.toJson();
+    }
     if (items != null) {
       data['items'] = items!.map((v) => v.toJson()).toList();
     }
+    return data;
+  }
+}
+
+class GetAddress {
+  String? address;
+  String? street;
+  String? buildingNumber;
+  String? fullAddress;
+
+  GetAddress(
+      {this.address, this.street, this.buildingNumber, this.fullAddress});
+
+  GetAddress.fromJson(Map<String, dynamic> json) {
+    address = json['address'];
+    street = json['street'];
+    buildingNumber = json['building_number'];
+    fullAddress = json['full_address'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['address'] = address;
+    data['street'] = street;
+    data['building_number'] = buildingNumber;
+    data['full_address'] = fullAddress;
     return data;
   }
 }
@@ -99,12 +143,12 @@ class Items {
 
   Items(
       {this.id,
-      this.sku,
-      this.qty,
-      this.price,
-      this.totalPrice,
-      this.name,
-      this.imageUrl});
+        this.sku,
+        this.qty,
+        this.price,
+        this.totalPrice,
+        this.name,
+        this.imageUrl});
 
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -113,8 +157,9 @@ class Items {
     price = json['price'];
     totalPrice = json['total_price'];
     name = json['name'];
-    imageUrl =
-        json['image_url'] != null ? ImageUrl.fromJson(json['image_url']) : null;
+    imageUrl = json['image_url'] != null
+        ? ImageUrl.fromJson(json['image_url'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

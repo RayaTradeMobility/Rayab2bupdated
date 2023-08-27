@@ -257,8 +257,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   stackTrace) {
                                                             return Image.asset(
                                                                 'assets/no-img.jpg',
-                                                                height: 50.0,
-                                                                width: 120.0,
+                                                                width: MediaQuery.of(context).size.width/7,
+                                                                height: MediaQuery.of(context).size.width/12,
                                                                 fit: BoxFit
                                                                     .fitWidth);
                                                           },

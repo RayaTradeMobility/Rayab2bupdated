@@ -10,6 +10,7 @@ import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/LoginResponseModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'BottomNavMenu.dart';
+import 'ForgotPasswordScreen.dart';
 import 'RegisterScreen.dart';
 import 'package:http/http.dart' as http;
 
@@ -150,10 +151,10 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.only(left: 170.0),
             child: TextButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context, MaterialPageRoute(builder: (context) {
-                  //   return ResetPassword();
-                  // }),);
+                  Navigator.push(
+                    context, MaterialPageRoute(builder: (context) {
+                    return  ResetPasswordPage();
+                  }),);
                 },
                 child: const Text('نسيت الباسورد؟')),
           ),
@@ -193,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       _isLoading = false;
                     });
+
                     Fluttertoast.showToast(
                         msg: loginUser.message!,
                         toastLength: Toast.LENGTH_SHORT,
@@ -202,7 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         textColor: Colors.white,
                         fontSize: 16.0);
                   }
-                } else {
+                }
+                else {
                   setState(() {
                     _isLoading = false;
                   });
@@ -295,7 +298,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _loadUserEmailPassword() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      var mobile1 = prefs.getString("mobile") ?? "";
+      var mobile1 = prefs.getString("email") ?? "";
       var passWord = prefs.getString("password") ?? "";
 
       mobileController.text = mobile1;

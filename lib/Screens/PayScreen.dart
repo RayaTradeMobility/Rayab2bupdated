@@ -118,115 +118,120 @@ class PayScreenState extends State<PayScreen> {
                           elevation: 10.0,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: snapshot.data?.data!.length ?? 0,
-                                  itemBuilder: (context, index) {
-                                    var item = snapshot.data?.data![index];
-                                    return ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(item!.street!),
-                                          InkWell(
-                                              onTap: () {
-                                                showDialog(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GetAddressAlert(
-                                                        token: widget.token,
-                                                        address: snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .address!,
-                                                        street: snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .street!,
-                                                        building: snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .buildingNumber!,
-                                                      );
-                                                    });
-                                              },
-                                              child: const Icon(
-                                                  Icons.info_rounded)),
-                                        ],
-                                      ),
-                                      leading: Radio<int>(
-                                        value: item.id!,
-                                        groupValue: radioSelectedAddress,
-                                        activeColor: Colors.blue,
-                                        onChanged: (int? value) {
-                                          setState(() {
-                                            radioSelectedAddress = value;
-                                          });
-                                        },
-                                      ),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(
-                                  height: 7,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height/4,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    InkWell(
-                                        onTap: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialogPage(
-                                                  token: widget.token,
-                                                  email: widget.email,
-                                                  firstname: widget.firstname,
-                                                  lastname: widget.lastname,
-                                                  customerId: widget.customerId,
-                                                  totalPrice: widget.totalPrice,
-                                                  totalQty: widget.totalQty,
-                                                );
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: snapshot.data?.data!.length ?? 0,
+                                      itemBuilder: (context, index) {
+                                        var item = snapshot.data?.data![index];
+                                        return ListTile(
+                                          title: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(item!.street!),
+                                              InkWell(
+                                                  onTap: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return GetAddressAlert(
+                                                            token: widget.token,
+                                                            address: snapshot
+                                                                .data!
+                                                                .data![index]
+                                                                .address!,
+                                                            street: snapshot
+                                                                .data!
+                                                                .data![index]
+                                                                .street!,
+                                                            building: snapshot
+                                                                .data!
+                                                                .data![index]
+                                                                .buildingNumber!,
+                                                          );
+                                                        });
+                                                  },
+                                                  child: const Icon(
+                                                      Icons.info_rounded)),
+                                            ],
+                                          ),
+                                          leading: Radio<int>(
+                                            value: item.id!,
+                                            groupValue: radioSelectedAddress,
+                                            activeColor: Colors.blue,
+                                            onChanged: (int? value) {
+                                              setState(() {
+                                                radioSelectedAddress = value;
                                               });
-                                        },
-                                        child: const Row(
-                                          children: [
-                                            Icon(Icons.add),
-                                            Text("اضافه عنوان جديد"),
-                                          ],
-                                        ))
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialogPage(
+                                                      token: widget.token,
+                                                      email: widget.email,
+                                                      firstname: widget.firstname,
+                                                      lastname: widget.lastname,
+                                                      customerId: widget.customerId,
+                                                      totalPrice: widget.totalPrice,
+                                                      totalQty: widget.totalQty,
+                                                    );
+                                                  });
+                                            },
+                                            child: const Row(
+                                              children: [
+                                                Icon(Icons.add),
+                                                Text("اضافه عنوان جديد"),
+                                              ],
+                                            ))
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              _futureData =
+                                                  api.getAddress(widget.token);
+                                              _refreshData();
+                                            },
+                                            child: const Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.refresh,
+                                                  color: Colors.blue,
+                                                ),
+                                                // Text("اضافه عنوان جديد"),
+                                              ],
+                                            ))
+                                      ],
+                                    ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                        onTap: () {
-                                          _futureData =
-                                              api.getAddress(widget.token);
-                                          _refreshData();
-                                        },
-                                        child: const Row(
-                                          children: [
-                                            Icon(
-                                              Icons.refresh,
-                                              color: Colors.blue,
-                                            ),
-                                            // Text("اضافه عنوان جديد"),
-                                          ],
-                                        ))
-                                  ],
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
@@ -585,18 +590,7 @@ class AlertDialogPageState extends State<AlertDialogPage> {
                                   MyColorsSample.primary.withOpacity(0.8),
                             ),
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return PayScreen(
-                                  token: widget.token,
-                                  email: widget.email,
-                                  firstname: widget.firstname,
-                                  lastname: widget.lastname,
-                                  customerId: widget.customerId,
-                                  totalPrice: widget.totalPrice,
-                                  totalQty: widget.totalQty,
-                                );
-                              }));
+                              Navigator.pop(context);
                             },
                             child: const Center(child: Text('حسنًا')),
                           ),
@@ -611,8 +605,18 @@ class AlertDialogPageState extends State<AlertDialogPage> {
                       streetController.text,
                       int.parse(buildingController.text));
 
-                  Navigator.pop(context);
-                }
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return PayScreen(
+                          token: widget.token,
+                          email: widget.email,
+                          firstname: widget.firstname,
+                          lastname: widget.lastname,
+                          customerId: widget.customerId,
+                          totalPrice: widget.totalPrice,
+                          totalQty: widget.totalQty,
+                        );
+                      }));                }
               },
               child: const Text('طلب'),
             ),
