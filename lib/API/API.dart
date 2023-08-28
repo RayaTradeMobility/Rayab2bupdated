@@ -179,10 +179,8 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
 
     if (response.statusCode == 200) {
-      print(response.body);
       return OtpCheckModel.fromJson(jsonDecode(response.body));
     } else {
-      print(response.body);
       return OtpCheckModel.fromJson(jsonDecode(response.body));
     }
   }
