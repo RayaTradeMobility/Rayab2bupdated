@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rayab2bupdated/Screens/LoginScreen.dart';
 import '../API/API.dart';
 import 'package:pinput/pinput.dart';
 import '../Constants/Constants.dart';
@@ -155,9 +156,39 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                 onPressed: () async {
 
 
-                  await  api.resetPassword(
+                    OtpCheckModel? user = await api.resetPassword(
                         phoneNumberController.text, otpController.text,
                         passwordController.text);
+                    if (user!.success == true) {
+                      Fluttertoast.showToast(
+                          msg: "Password reset Successfully",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const LoginScreen();
+                        }),
+
+                      );
+                    }
+                    else {
+                      Fluttertoast.showToast(
+                          msg: user.message!,
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    }
+
+
 
                 },
                 style: ElevatedButton.styleFrom(

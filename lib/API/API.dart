@@ -159,13 +159,17 @@ class API {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      if (kDebugMode) {
+        print(await response.stream.bytesToString());
+      }
     }
     else {
-      print(response.reasonPhrase);
+      if (kDebugMode) {
+        print(response.reasonPhrase);
+      }
     }
   }
-  resetPassword(String mobile , String otp , String password)async{
+  Future<OtpCheckModel?>resetPassword(String mobile , String otp , String password)async{
     var headers = {
       'lang': 'en',
       'Accept': 'application/json'
@@ -177,15 +181,21 @@ class API {
       'password': password
     });
 
+
     request.headers.addAll(headers);
 
-    http.StreamedResponse response = await request.send();
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print(response.body);
+      return OtpCheckModel.fromJson(jsonDecode(response.body));
     }
-    else {
-      print(response.reasonPhrase);
+    else{
+      print(response.body);
+      return OtpCheckModel.fromJson(jsonDecode(response.body));
+
     }
   }
 
@@ -212,7 +222,6 @@ class API {
 
     }
 
-    return null;
   }
 
   logOut(String token) async {
@@ -293,6 +302,9 @@ class API {
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     AddtoCartResponseModel mod = AddtoCartResponseModel();
+    if (kDebugMode) {
+      print (response.body);
+    }
     if (response.statusCode == 200) {
       mod = AddtoCartResponseModel.fromJson(jsonDecode(response.body));
 
@@ -305,6 +317,7 @@ class API {
       mod.success = false;
       return mod;
     }
+
   }
 
   Future<GetCartResponseModel> getCart(String token) async {

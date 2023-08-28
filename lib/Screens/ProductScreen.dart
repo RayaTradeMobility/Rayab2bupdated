@@ -3,6 +3,7 @@
 import 'package:collapsible/collapsible.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rayab2bupdated/Models/ProductbySkuResponseModel.dart';
 import 'package:rayab2bupdated/Screens/ShoppingCardScreen.dart';
@@ -37,6 +38,7 @@ class _ProductScreenState extends State<ProductScreen> {
   late Future<ProductbySkuResponseModel> _product;
   final int _fontcolor = 0xFF031639;
   double total = 0;
+  final _formKey = GlobalKey<FormState>();
 
   TextEditingController quantityController = TextEditingController();
   double? result;
@@ -94,14 +96,15 @@ class _ProductScreenState extends State<ProductScreen> {
                                 for (var i in snapshot.data!.data!.images!)
                                   FadeInImage(
                                     image: NetworkImage(i.imageLink!),
-                                    width: 250.0,
-                                    height: 250.0,
+                                    width: MediaQuery.of(context).size.width / 1.6,
+                                    height: MediaQuery.of(context).size.height / 2.8,
                                     placeholder:
                                         const AssetImage("assets/no-img.jpg"),
                                     imageErrorBuilder:
                                         (context, error, stackTrace) {
                                       return Image.asset('assets/no-img.jpg',
-                                          fit: BoxFit.fitWidth);
+                                          fit: BoxFit.fitWidth ,
+                                      width: MediaQuery.of(context).size.width / 1.6 , height: MediaQuery.of(context).size.height / 2.8,);
                                     },
                                     fit: BoxFit.fitWidth,
                                   ),
@@ -155,26 +158,39 @@ class _ProductScreenState extends State<ProductScreen> {
                                   width: MediaQuery.of(context).size.width / 10,
                                   height:
                                       MediaQuery.of(context).size.height / 20,
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    controller: quantityController,
-                                    decoration: InputDecoration(
-                                      hintText: '$quantity',
-                                    ),
-                                    onChanged: (val) {
-                                      setState(() {
-                                        if (quantity != 0) {
-                                          double sale = double.parse(snapshot.data!.data!.price!);
-                                          double price = sale;
-                                          total = quantity * price;
-                                          result = total;
-                                        }
-                                      });
+                                  child: Form(
+                                    key: _formKey,
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      controller: quantityController,
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(4),//
+                                      ],
+                                       validator: (quantittes) {
+                                            if (isQuantityValid(quantittes!)) {
+                                            return null;
+                                            }
+                                            return  'لا يمكن اختيار اكثر من 5000'; },
+                                      decoration: InputDecoration(
+                                        hintText: '$quantity',
+                                      ),
+                                      onChanged: (val) {
+                                        setState(() {
+                                          if (quantity != 0) {
+                                            double sale = double.parse(snapshot.data!.data!.price!);
+                                            double price = sale;
+                                            total = quantity * price;
+                                            result = total;
+                                          }
+                                        });
 
-                                      if (double.tryParse(val) != null && double.parse(val) < 0) {
-                                        quantityController.text = '0'; // Reset the value to 0 if a negative value is entered
-                                      }
-                                    },
+                                        if (quantityController.text.isEmpty) {
+                                          quantity=0;
+                                          result=0;
+                                          // Reset the value to 0 if a negative value is entered
+                                        }
+                                      },
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
@@ -204,6 +220,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         if (result != null && result! >0)
                           Row(
                             children: [
+
                               const Text(
                                 'الاجمالي : ',
                                 style: TextStyle(
@@ -323,44 +340,64 @@ class _ProductScreenState extends State<ProductScreen> {
           setState(() {
             _isloading = true;
           });
-          if (widget.token.isNotEmpty) {
-            AddtoCartResponseModel msg = await api.addToCart(
-                widget.token, widget.productId, widget.sku, quantity);
-            if (msg.success == true) {
-              setState(() {
-                _isloading = false;
-              });
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ShoppingCardScreen(
-                  token: widget.token,
-                  mobile: widget.mobile,
-                  lastname: widget.lastname,
-                  firstname: widget.firstname,
-                  email: widget.email,
-                  street: '',
-                  city: '',
-                  customerId: widget.customerId,
-                );
-              }));
+          if (_formKey.currentState!.validate()) {
+            if (widget.token.isNotEmpty) {
+              AddtoCartResponseModel msg = await api.addToCart(
+                  widget.token, widget.productId, widget.sku, quantity);
+              if (msg.success == true) {
+                setState(() {
+                  _isloading = false;
+                });
+                if (quantity != 0) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ShoppingCardScreen(
+                      token: widget.token,
+                      mobile: widget.mobile,
+                      lastname: widget.lastname,
+                      firstname: widget.firstname,
+                      email: widget.email,
+                      street: '',
+                      city: '',
+                      customerId: widget.customerId,
+                    );
+                  }));
+                }
+                else {
+                  Fluttertoast.showToast(
+                      msg: 'please select quantity',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
+              } else {
+                setState(() {
+                  _isloading = false;
+                });
+                Fluttertoast.showToast(
+                    msg: msg.message!,
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              }
             } else {
-              setState(() {
-                _isloading = false;
-              });
-              Fluttertoast.showToast(
-                  msg: msg.message!,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              _isloading = false;
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const LoginScreen();
+              }));
             }
-          } else {
-            _isloading = false;
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const LoginScreen();
-            }));
           }
+          else{
+            setState(() {
+              _isloading=false;
+            });
+          }
+
         },
         icon: const Icon(Icons.shopping_cart),
         label: _isloading
@@ -376,3 +413,4 @@ class _ProductScreenState extends State<ProductScreen> {
   RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
   String Function(Match) mathFunc = (Match match) => '${match[1]},';
 }
+bool isQuantityValid(String quantities) => int.parse(quantities)<= 5000;

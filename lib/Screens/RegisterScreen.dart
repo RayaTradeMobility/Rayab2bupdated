@@ -64,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               api.checkNetwork();
 
               RegisterResponseModel res = await api.register(
-                  firstName.text.trim() + lastName.text.trim(),
+                  "${firstName.text.trim()} ${lastName.text.trim()}",
                   mobileNumber.text,
                   companyName.text,
                   email.text,
