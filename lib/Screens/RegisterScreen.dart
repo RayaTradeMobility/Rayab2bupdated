@@ -361,11 +361,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   bool isPasswordValid(String password) => password.length >= 6;
+
   bool isMobileValid(String mobile) => mobile.length == 11;
+
   bool isCompanyValid(String company) => company.isNotEmpty;
+
   bool isNameValid(String name) => name.isNotEmpty;
-
-
 
   bool isEmailValid(String email) {
     bool emailValid = RegExp(

@@ -96,15 +96,24 @@ class _ProductScreenState extends State<ProductScreen> {
                                 for (var i in snapshot.data!.data!.images!)
                                   FadeInImage(
                                     image: NetworkImage(i.imageLink!),
-                                    width: MediaQuery.of(context).size.width / 1.6,
-                                    height: MediaQuery.of(context).size.height / 2.8,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.6,
+                                    height: MediaQuery.of(context).size.height /
+                                        2.8,
                                     placeholder:
                                         const AssetImage("assets/no-img.jpg"),
                                     imageErrorBuilder:
                                         (context, error, stackTrace) {
-                                      return Image.asset('assets/no-img.jpg',
-                                          fit: BoxFit.fitWidth ,
-                                      width: MediaQuery.of(context).size.width / 1.6 , height: MediaQuery.of(context).size.height / 2.8,);
+                                      return Image.asset(
+                                        'assets/no-img.jpg',
+                                        fit: BoxFit.fitWidth,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.6,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                2.8,
+                                      );
                                     },
                                     fit: BoxFit.fitWidth,
                                   ),
@@ -147,7 +156,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                       double price = sale;
                                       total = quantity * price;
                                       result = total;
-                                      quantityController.value = TextEditingValue(text: quantity.toString());
+                                      quantityController.value =
+                                          TextEditingValue(
+                                              text: quantity.toString());
                                     });
                                   },
                                   icon: const Icon(Icons.add),
@@ -164,20 +175,22 @@ class _ProductScreenState extends State<ProductScreen> {
                                       keyboardType: TextInputType.number,
                                       controller: quantityController,
                                       inputFormatters: [
-                                        LengthLimitingTextInputFormatter(4),//
+                                        LengthLimitingTextInputFormatter(4), //
                                       ],
-                                       validator: (quantittes) {
-                                            if (isQuantityValid(quantittes!)) {
-                                            return null;
-                                            }
-                                            return  'لا يمكن اختيار اكثر من 5000'; },
+                                      validator: (quantittes) {
+                                        if (isQuantityValid(quantittes!)) {
+                                          return null;
+                                        }
+                                        return 'لا يمكن اختيار اكثر من 5000';
+                                      },
                                       decoration: InputDecoration(
                                         hintText: '$quantity',
                                       ),
                                       onChanged: (val) {
                                         setState(() {
                                           if (quantity != 0) {
-                                            double sale = double.parse(snapshot.data!.data!.price!);
+                                            double sale = double.parse(
+                                                snapshot.data!.data!.price!);
                                             double price = sale;
                                             total = quantity * price;
                                             result = total;
@@ -185,8 +198,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                         });
 
                                         if (quantityController.text.isEmpty) {
-                                          quantity=0;
-                                          result=0;
+                                          quantity = 0;
+                                          result = 0;
                                           // Reset the value to 0 if a negative value is entered
                                         }
                                       },
@@ -206,7 +219,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                         quantity -= 1;
                                         total = quantity * price;
                                         result = total;
-                                        quantityController.value = TextEditingValue(text: quantity.toString());
+                                        quantityController.value =
+                                            TextEditingValue(
+                                                text: quantity.toString());
                                       }
                                     });
                                   },
@@ -217,10 +232,9 @@ class _ProductScreenState extends State<ProductScreen> {
                             )
                           ],
                         ),
-                        if (result != null && result! >0)
+                        if (result != null && result! > 0)
                           Row(
                             children: [
-
                               const Text(
                                 'الاجمالي : ',
                                 style: TextStyle(
@@ -228,7 +242,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     fontSize: 18.0,
                                     color: Colors.lightBlue),
                               ),
-                                Text(
+                              Text(
                                 "$result جنيه مصري ",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -361,8 +375,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       customerId: widget.customerId,
                     );
                   }));
-                }
-                else {
+                } else {
                   Fluttertoast.showToast(
                       msg: 'please select quantity',
                       toastLength: Toast.LENGTH_SHORT,
@@ -391,13 +404,11 @@ class _ProductScreenState extends State<ProductScreen> {
                 return const LoginScreen();
               }));
             }
-          }
-          else{
+          } else {
             setState(() {
-              _isloading=false;
+              _isloading = false;
             });
           }
-
         },
         icon: const Icon(Icons.shopping_cart),
         label: _isloading
@@ -413,4 +424,5 @@ class _ProductScreenState extends State<ProductScreen> {
   RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
   String Function(Match) mathFunc = (Match match) => '${match[1]},';
 }
-bool isQuantityValid(String quantities) => int.parse(quantities)<= 5000;
+
+bool isQuantityValid(String quantities) => int.parse(quantities) <= 5000;

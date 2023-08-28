@@ -58,7 +58,7 @@ class ContactUsScreen extends StatelessWidget {
                       width: 150,
 
                       //color: Colors.white,
-                      child:  const Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
@@ -86,7 +86,7 @@ class ContactUsScreen extends StatelessWidget {
                     height: 100,
                     width: 150,
                     // color: Colors.white,
-                    child:  const Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
@@ -117,7 +117,7 @@ class ContactUsScreen extends StatelessWidget {
                     height: 100,
                     width: 150,
                     // color: Colors.white,
-                    child:  const Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
@@ -143,7 +143,7 @@ class ContactUsScreen extends StatelessWidget {
                       )
                     ]),
                     //color: Colors.white,
-                    child:  const Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(

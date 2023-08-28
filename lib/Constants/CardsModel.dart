@@ -157,7 +157,6 @@ class _CardScreenModelState extends State<CardScreenModel> {
                 imageErrorBuilder: (context, error, stackTrace) {
                   return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth , width: MediaQuery.of(context).size.width/3.3,
                   height: MediaQuery.of(context).size.width/3.3,
-
                   );
                 },
                 fit: BoxFit.fitWidth,

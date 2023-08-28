@@ -52,7 +52,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor:MyColorsSample.fontColor,
+          backgroundColor: MyColorsSample.fontColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(10),

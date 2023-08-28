@@ -10,22 +10,22 @@ import '../Screens/ShoppingCardScreen.dart';
 class ShoppingCards extends StatefulWidget {
   const ShoppingCards(
       {super.key,
-        required this.token,
-        required this.image,
-        required this.cardID,
-        required this.countProducts,
-        required this.totalPrice,
-        required this.postTitle,
-        required this.totalPriceProduct,
-        required this.productId,
-        required this.sku,
-        required this.price,
-        required this.quantity,
-        required this.email,
-        required this.mobile,
-        required this.firstname,
-        required this.lastname,
-        required this.customerId});
+      required this.token,
+      required this.image,
+      required this.cardID,
+      required this.countProducts,
+      required this.totalPrice,
+      required this.postTitle,
+      required this.totalPriceProduct,
+      required this.productId,
+      required this.sku,
+      required this.price,
+      required this.quantity,
+      required this.email,
+      required this.mobile,
+      required this.firstname,
+      required this.lastname,
+      required this.customerId});
 
   final int quantity;
   final String price;
@@ -66,13 +66,16 @@ class ShoppingCardsState extends State<ShoppingCards> {
                 children: [
                   FadeInImage(
                     image: NetworkImage(widget.image),
-                    width: MediaQuery.of(context).size.width/7  ,
-                    height: MediaQuery.of(context).size.height/7  ,
+                    width: MediaQuery.of(context).size.width / 7,
+                    height: MediaQuery.of(context).size.height / 7,
                     placeholder: const AssetImage("assets/no-img.jpg"),
                     imageErrorBuilder: (context, error, stackTrace) {
-                      return Image.asset('assets/no-img.jpg',
-                          fit: BoxFit.fitWidth, width: MediaQuery.of(context).size.width/7  ,
-                        height: MediaQuery.of(context).size.height/7  ,);
+                      return Image.asset(
+                        'assets/no-img.jpg',
+                        fit: BoxFit.fitWidth,
+                        width: MediaQuery.of(context).size.width / 7,
+                        height: MediaQuery.of(context).size.height / 7,
+                      );
                     },
                     fit: BoxFit.fitWidth,
                   ),
@@ -109,8 +112,8 @@ class ShoppingCardsState extends State<ShoppingCards> {
                                     if (kDebugMode) {
                                       print(widget.productId);
                                     }
-                                    await api.deleteProducts(
-                                        widget.token, widget.productId , widget.sku);
+                                    await api.deleteProducts(widget.token,
+                                        widget.productId, widget.sku);
                                     // ignore: use_build_context_synchronously
                                     Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder: (context) {

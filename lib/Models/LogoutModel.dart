@@ -1,4 +1,3 @@
-
 // ignore_for_file: file_names
 
 class LogoutModel {
@@ -26,19 +25,12 @@ class LogoutModel {
 }
 
 class Data {
+  Data({isNull});
 
+  Data.fromJson(Map<String, dynamic> json);
 
-  Data(
-  {
-     isNull
-}
-
-);
-
-Data.fromJson(Map<String, dynamic> json);
-
-Map<String, dynamic> toJson() {
-final Map<String, dynamic> data = <String, dynamic>{};
-return data;
-}
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    return data;
+  }
 }

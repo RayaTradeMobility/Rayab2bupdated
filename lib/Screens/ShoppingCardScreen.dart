@@ -39,6 +39,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
   final int _fontcolor = 0xFF4C53A5;
   late Future<GetCartResponseModel> card;
   API api = API();
+
   @override
   void initState() {
     card = api.getCart(widget.token);
@@ -78,7 +79,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                 future: card,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    String totalPrice = snapshot.data!.data!.totalPrice! ;
+                    String totalPrice = snapshot.data!.data!.totalPrice!;
                     int totalQty = snapshot.data!.data!.totalQtyItems!;
 
                     return Column(
@@ -126,7 +127,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                   },
                                   label: const Text("تسوق الان"),
                                   backgroundColor: Color(_fontcolor))
-
                             ],
                           )
                         else if (snapshot.data!.success! == true &&
@@ -181,7 +181,9 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                     email: widget.email,
                                     lastname: widget.lastname,
                                     firstname: widget.firstname,
-                                    customerId: widget.customerId, totalPrice: totalPrice, totalQty:totalQty,
+                                    customerId: widget.customerId,
+                                    totalPrice: totalPrice,
+                                    totalQty: totalQty,
                                   );
                                 }),
                               );
@@ -190,11 +192,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                             backgroundColor: Color(_fontcolor),
                             elevation: 5,
                           ),
-
-
-
-
-
                       ],
                     );
                   } else if (snapshot.hasError) {

@@ -119,7 +119,7 @@ class PayScreenState extends State<PayScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
-                              height: MediaQuery.of(context).size.height/4,
+                              height: MediaQuery.of(context).size.height / 4,
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -127,8 +127,10 @@ class PayScreenState extends State<PayScreen> {
                                   children: [
                                     ListView.builder(
                                       shrinkWrap: true,
-                                      physics: const NeverScrollableScrollPhysics(),
-                                      itemCount: snapshot.data?.data!.length ?? 0,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount:
+                                          snapshot.data?.data!.length ?? 0,
                                       itemBuilder: (context, index) {
                                         var item = snapshot.data?.data![index];
                                         return ListTile(
@@ -180,7 +182,8 @@ class PayScreenState extends State<PayScreen> {
                                       height: 7,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         InkWell(
                                             onTap: () {
@@ -190,10 +193,13 @@ class PayScreenState extends State<PayScreen> {
                                                     return AlertDialogPage(
                                                       token: widget.token,
                                                       email: widget.email,
-                                                      firstname: widget.firstname,
+                                                      firstname:
+                                                          widget.firstname,
                                                       lastname: widget.lastname,
-                                                      customerId: widget.customerId,
-                                                      totalPrice: widget.totalPrice,
+                                                      customerId:
+                                                          widget.customerId,
+                                                      totalPrice:
+                                                          widget.totalPrice,
                                                       totalQty: widget.totalQty,
                                                     );
                                                   });
@@ -210,7 +216,8 @@ class PayScreenState extends State<PayScreen> {
                                       height: 12,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         InkWell(
                                             onTap: () {
@@ -605,18 +612,18 @@ class AlertDialogPageState extends State<AlertDialogPage> {
                       streetController.text,
                       int.parse(buildingController.text));
 
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                        return PayScreen(
-                          token: widget.token,
-                          email: widget.email,
-                          firstname: widget.firstname,
-                          lastname: widget.lastname,
-                          customerId: widget.customerId,
-                          totalPrice: widget.totalPrice,
-                          totalQty: widget.totalQty,
-                        );
-                      }));                }
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return PayScreen(
+                      token: widget.token,
+                      email: widget.email,
+                      firstname: widget.firstname,
+                      lastname: widget.lastname,
+                      customerId: widget.customerId,
+                      totalPrice: widget.totalPrice,
+                      totalQty: widget.totalQty,
+                    );
+                  }));
+                }
               },
               child: const Text('طلب'),
             ),

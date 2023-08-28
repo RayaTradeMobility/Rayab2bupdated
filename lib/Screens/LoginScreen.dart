@@ -151,9 +151,11 @@ class _LoginScreenState extends State<LoginScreen> {
             child: TextButton(
                 onPressed: () {
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context) {
-                    return  const ResetPasswordPage();
-                  }),);
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return const ResetPasswordPage();
+                    }),
+                  );
                 },
                 child: const Text('نسيت الباسورد؟')),
           ),
@@ -203,8 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         textColor: Colors.white,
                         fontSize: 16.0);
                   }
-                }
-                else {
+                } else {
                   setState(() {
                     _isLoading = false;
                   });
@@ -235,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
               borderRadius: BorderRadius.circular(10),
               alignment: AlignmentDirectional.center,
               icon: const Icon(Icons.arrow_drop_down_sharp),
-              elevation: 1  ,
+              elevation: 1,
               style: const TextStyle(color: Colors.black),
               onChanged: (String? newValue) {
                 setState(() {
@@ -283,6 +284,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
   bool isMobileValid(String mobile) => mobile.length >= 10;
 
   bool isPasswordValid(String password) => password.length >= 6;

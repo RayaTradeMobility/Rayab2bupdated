@@ -17,18 +17,28 @@ class _AdsScreenState extends State<AdsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Image.asset('assets/logo-raya.png',width: 70.0,height: 70.0,),
+        title: Image.asset(
+          'assets/logo-raya.png',
+          width: 70.0,
+          height: 70.0,
+        ),
         centerTitle: true,
-        leading: TextButton(onPressed: (){},child: const Text("تخطي"),),
+        leading: TextButton(
+          onPressed: () {},
+          child: const Text("تخطي"),
+        ),
       ),
-      body: Column(
-          children:[ Image.asset("assets/imgoffer.png"),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(" العرض ",style: TextStyle(fontWeight: FontWeight.bold,color: Color(_fontColor)),)
-          ]
-      ),
+      body: Column(children: [
+        Image.asset("assets/imgoffer.png"),
+        const SizedBox(
+          height: 30,
+        ),
+        Text(
+          " العرض ",
+          style:
+              TextStyle(fontWeight: FontWeight.bold, color: Color(_fontColor)),
+        )
+      ]),
     );
   }
 }

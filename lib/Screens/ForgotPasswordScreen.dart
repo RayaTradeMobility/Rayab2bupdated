@@ -102,30 +102,23 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
             if (_showOtpField)
               ElevatedButton(
                 onPressed: () async {
-
-
-              OtpCheckModel? user = await api.checkOTP(
-              phoneNumberController.text, otpController.text);
-              if(user!.success == true){
-              setState(() {
-              _showPasswordField = true;
-
-              });
-              }
-              else{
-              Fluttertoast.showToast(
-              msg: user.message!,
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
-              }
-
-              },
-
-
+                  OtpCheckModel? user = await api.checkOTP(
+                      phoneNumberController.text, otpController.text);
+                  if (user!.success == true) {
+                    setState(() {
+                      _showPasswordField = true;
+                    });
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: user.message!,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: MyColorsSample.fontColor,
@@ -135,61 +128,57 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                 ),
                 child: const Text('Check OTP'),
               ),
-            const SizedBox(height: 50,),
+            const SizedBox(
+              height: 50,
+            ),
             if (_showPasswordField)
               TextFormField(
-                key: _formKey,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'ادخل كلمه السر الجديده',
-                ),
-              validator: (password) {
-              if (isPasswordValid(password!)) {
-              return null;
-              } else {
-              return 'الرقم السري يجب ان يكون اكبر من 6 حروف';
-              }}
-              ),
+                  key: _formKey,
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                    labelText: 'ادخل كلمه السر الجديده',
+                  ),
+                  validator: (password) {
+                    if (isPasswordValid(password!)) {
+                      return null;
+                    } else {
+                      return 'الرقم السري يجب ان يكون اكبر من 6 حروف';
+                    }
+                  }),
             const SizedBox(height: 16.0),
             if (_showPasswordField)
               ElevatedButton(
                 onPressed: () async {
-
-
-                    OtpCheckModel? user = await api.resetPassword(
-                        phoneNumberController.text, otpController.text,
-                        passwordController.text);
-                    if (user!.success == true) {
-                      Fluttertoast.showToast(
-                          msg: "Password reset Successfully",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return const LoginScreen();
-                        }),
-
-                      );
-                    }
-                    else {
-                      Fluttertoast.showToast(
-                          msg: user.message!,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                    }
-
-
-
+                  OtpCheckModel? user = await api.resetPassword(
+                      phoneNumberController.text,
+                      otpController.text,
+                      passwordController.text);
+                  if (user!.success == true) {
+                    Fluttertoast.showToast(
+                        msg: "Password reset Successfully",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return const LoginScreen();
+                      }),
+                    );
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: user.message!,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -200,15 +189,11 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                 ),
                 child: const Text('Reset Password'),
               ),
-
-
-
-
-
           ],
         ),
       ),
     );
   }
 }
+
 bool isPasswordValid(String password) => password.length >= 6;

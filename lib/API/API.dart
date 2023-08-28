@@ -92,7 +92,7 @@ class API {
         print(response.body);
       }
     }
-    return res ;
+    return res;
   }
 
   Future<LoginResponseModel?> login(String mobile, String password,
@@ -145,14 +145,11 @@ class API {
     }
   }
 
-  mobileOTP(String mobile)async{
-    var headers = {
-      'Accept': 'application/json'
-    };
-    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/SendOTPSMS'));
-    request.fields.addAll({
-      'mobile': mobile
-    });
+  mobileOTP(String mobile) async {
+    var headers = {'Accept': 'application/json'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/SendOTPSMS'));
+    request.fields.addAll({'mobile': mobile});
 
     request.headers.addAll(headers);
 
@@ -162,52 +159,39 @@ class API {
       if (kDebugMode) {
         print(await response.stream.bytesToString());
       }
-    }
-    else {
+    } else {
       if (kDebugMode) {
         print(response.reasonPhrase);
       }
     }
   }
-  Future<OtpCheckModel?>resetPassword(String mobile , String otp , String password)async{
-    var headers = {
-      'lang': 'en',
-      'Accept': 'application/json'
-    };
-    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/reset-password'));
-    request.fields.addAll({
-      'otp': otp,
-      'mobile': mobile,
-      'password': password
-    });
 
+  Future<OtpCheckModel?> resetPassword(
+      String mobile, String otp, String password) async {
+    var headers = {'lang': 'en', 'Accept': 'application/json'};
+    var request = http.MultipartRequest('POST',
+        Uri.parse('http://41.78.23.95:8021/dist/api/v2/reset-password'));
+    request.fields.addAll({'otp': otp, 'mobile': mobile, 'password': password});
 
     request.headers.addAll(headers);
 
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
 
-
     if (response.statusCode == 200) {
       print(response.body);
       return OtpCheckModel.fromJson(jsonDecode(response.body));
-    }
-    else{
+    } else {
       print(response.body);
       return OtpCheckModel.fromJson(jsonDecode(response.body));
-
     }
   }
 
-  Future<OtpCheckModel?>checkOTP(String mobile , String otpPin)async{
-    var headers = {
-      'Accept': 'application/json'
-    };
-    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/checkOtp'));
-    request.fields.addAll({
-      'mobile': mobile,
-      'otp': otpPin
-    });
+  Future<OtpCheckModel?> checkOTP(String mobile, String otpPin) async {
+    var headers = {'Accept': 'application/json'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/checkOtp'));
+    request.fields.addAll({'mobile': mobile, 'otp': otpPin});
 
     request.headers.addAll(headers);
 
@@ -216,12 +200,9 @@ class API {
 
     if (response.statusCode == 200) {
       return OtpCheckModel.fromJson(jsonDecode(response.body));
-    }
-    else{
+    } else {
       return OtpCheckModel.fromJson(jsonDecode(response.body));
-
     }
-
   }
 
   logOut(String token) async {
@@ -246,8 +227,8 @@ class API {
       }
     }
   }
-  Future<LogoutModel?> logOutCustomer( String token) async {
 
+  Future<LogoutModel?> logOutCustomer(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.MultipartRequest(
         'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/logout'));
@@ -257,14 +238,12 @@ class API {
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
-      LogoutModel? user =
-      LogoutModel.fromJson(jsonDecode(response.body));
+      LogoutModel? user = LogoutModel.fromJson(jsonDecode(response.body));
 
       return user;
     }
     return null;
   }
-
 
   Future<String> openCart(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
@@ -303,7 +282,7 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     AddtoCartResponseModel mod = AddtoCartResponseModel();
     if (kDebugMode) {
-      print (response.body);
+      print(response.body);
     }
     if (response.statusCode == 200) {
       mod = AddtoCartResponseModel.fromJson(jsonDecode(response.body));
@@ -317,7 +296,6 @@ class API {
       mod.success = false;
       return mod;
     }
-
   }
 
   Future<GetCartResponseModel> getCart(String token) async {
@@ -659,7 +637,8 @@ class API {
   Future<NotificationModel> getNotification(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
 
-    var request = http.Request('GET', Uri.parse('http://41.78.23.95:8021/dist/api/v2/getNotifications'));
+    var request = http.Request('GET',
+        Uri.parse('http://41.78.23.95:8021/dist/api/v2/getNotifications'));
     request.body = '''''';
     request.headers.addAll(headers);
 
@@ -782,7 +761,6 @@ class API {
       if (kDebugMode) {
         print(response.body);
       }
-
 
       res.success = false;
       res.message = "Error";

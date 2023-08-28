@@ -132,7 +132,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 ),
                 elevation: 10,
                 color: Colors.white70,
-                child:  const Padding(
+                child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

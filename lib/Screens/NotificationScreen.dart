@@ -7,9 +7,10 @@ import '../API/API.dart';
 import '../Constants/Constants.dart';
 
 class NotificationScreen extends StatefulWidget {
-  final String token , customerId;
+  final String token, customerId;
 
-  const NotificationScreen({Key? key, required this.token, required this.customerId})
+  const NotificationScreen(
+      {Key? key, required this.token, required this.customerId})
       : super(key: key);
 
   @override
@@ -46,24 +47,20 @@ class NotificationScreenState extends State<NotificationScreen> {
               if (snapshot.hasData) {
                 final notification = snapshot.data;
                 return Expanded(
-                      child: ListView.builder(
-                        itemCount: notification!.data!.items!.length,
-                        itemBuilder: (context, index) {
-                          final order = notification.data!.items![index];
-                          return Card(
-                            child: CustomerCard(
-                              notificationMessage :order.message!,
-                              createdAt: order.createdAt!,
-                              token: widget.token,
-                              customerId: widget.customerId,
-
-                            ),
-                          );
-                        },
-                      ),
-
-
-
+                  child: ListView.builder(
+                    itemCount: notification!.data!.items!.length,
+                    itemBuilder: (context, index) {
+                      final order = notification.data!.items![index];
+                      return Card(
+                        child: CustomerCard(
+                          notificationMessage: order.message!,
+                          createdAt: order.createdAt!,
+                          token: widget.token,
+                          customerId: widget.customerId,
+                        ),
+                      );
+                    },
+                  ),
                 );
               } else if (snapshot.hasError) {
                 return const Center(
@@ -114,16 +111,21 @@ class NotificationScreenState extends State<NotificationScreen> {
 class CustomerCard extends StatefulWidget {
   final String notificationMessage;
   final String createdAt;
-  final String token  , customerId;
+  final String token, customerId;
+
   const CustomerCard({
     Key? key,
-    required this.token, required this.notificationMessage, required this.createdAt, required this.customerId,}) : super(key: key);
+    required this.token,
+    required this.notificationMessage,
+    required this.createdAt,
+    required this.customerId,
+  }) : super(key: key);
+
   @override
   CustomerCardState createState() => CustomerCardState();
 }
 
 class CustomerCardState extends State<CustomerCard> {
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -139,7 +141,6 @@ class CustomerCardState extends State<CustomerCard> {
       // },
       child: Card(
           elevation: 12,
-
           color: MyColorsSample.fontColor.withOpacity(0.5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -174,7 +175,6 @@ class CustomerCardState extends State<CustomerCard> {
                             style: MyTextSample.subhead(context)!
                                 .copyWith(color: Colors.white, fontSize: 12),
                           ),
-
                         ],
                       ),
                     ),

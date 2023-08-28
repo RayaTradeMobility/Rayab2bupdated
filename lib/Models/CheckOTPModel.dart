@@ -25,14 +25,12 @@ class OtpCheckModel {
 }
 
 class Data {
-
-
   Data({isNull});
 
-Data.fromJson(Map<String, dynamic> json);
+  Data.fromJson(Map<String, dynamic> json);
 
-Map<String, dynamic> toJson() {
-final Map<String, dynamic> data = <String, dynamic>{};
-return data;
-}
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    return data;
+  }
 }

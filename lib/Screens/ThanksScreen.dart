@@ -12,9 +12,16 @@ class ThanksScreen extends StatefulWidget {
       required this.firstname,
       required this.lastname,
       required this.customerId,
-      required this.orderId, required this.totalPrice});
+      required this.orderId,
+      required this.totalPrice});
 
-  final String token, email, firstname, lastname, customerId, orderId ,totalPrice;
+  final String token,
+      email,
+      firstname,
+      lastname,
+      customerId,
+      orderId,
+      totalPrice;
 
   @override
   ThanksScreenState createState() => ThanksScreenState();

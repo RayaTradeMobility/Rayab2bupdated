@@ -90,8 +90,9 @@ class ProfileScreenState extends State<ProfileScreen> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return NotificationScreen(token: widget.token , customerId : widget.customerId);
-                          }));
+                        return NotificationScreen(
+                            token: widget.token, customerId: widget.customerId);
+                      }));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -119,7 +120,6 @@ class ProfileScreenState extends State<ProfileScreen> {
                             ),
                           )),
                           const Icon(LineAwesomeIcons.angle_left),
-
                         ],
                       ),
                     ),
@@ -296,17 +296,17 @@ class ProfileScreenState extends State<ProfileScreen> {
                             LineAwesomeIcons.alternate_sign_out,
                           )),
                       TextButton(
-                        onPressed: ()async {
-                          LogoutModel? User= await api.logOutCustomer(widget.token);
+                        onPressed: () async {
+                          LogoutModel? User =
+                              await api.logOutCustomer(widget.token);
 
-                          if(User!.success==true) {
+                          if (User!.success == true) {
                             // ignore: use_build_context_synchronously
                             Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const NavScreen();
-                          }));
+                                MaterialPageRoute(builder: (context) {
+                              return const NavScreen();
+                            }));
                           }
-
                         },
                         child: const Text(
                           "تسجيل الخروج",

@@ -324,7 +324,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                           Text(
+                          Text(
                             order!.data!.companyName!,
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
@@ -345,7 +345,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                           Text(
+                          Text(
                             order!.data!.mobile!,
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
@@ -366,7 +366,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                           Text(
+                          Text(
                             '${order!.data!.getAddress!.fullAddress!} ',
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
