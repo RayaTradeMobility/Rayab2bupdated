@@ -7,7 +7,7 @@ import 'Screens/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   if (kDebugMode) {
@@ -55,12 +55,11 @@ Future<void> main() async {
     await _handleMessage(message);
   });
 
-
   // Initialize the notification plugin
   const AndroidInitializationSettings androidInitializationSettings =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
   const InitializationSettings initializationSettings =
-  InitializationSettings(android: androidInitializationSettings);
+      InitializationSettings(android: androidInitializationSettings);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   runApp(
