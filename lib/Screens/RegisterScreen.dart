@@ -55,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Fluttertoast.showToast(
                   msg: "Please Accept Terms And Policy",
                   toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
+                  gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 1,
                   backgroundColor: Colors.red,
                   textColor: Colors.white,
@@ -88,7 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Fluttertoast.showToast(
                     msg: res.message!.isEmpty ? 'Error' : res.message!,
                     toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
+                    gravity: ToastGravity.BOTTOM,
                     timeInSecForIosWeb: 1,
                     backgroundColor: Colors.red,
                     textColor: Colors.white,

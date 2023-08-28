@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rayab2bupdated/API/API.dart';
+import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/LoginResponseModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'BottomNavMenu.dart';
@@ -199,9 +200,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     Fluttertoast.showToast(
                         msg: loginUser.message!,
                         toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
+                        gravity: ToastGravity.BOTTOM,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
+                        backgroundColor: MyColorsSample.fontColor,
                         textColor: Colors.white,
                         fontSize: 16.0);
                   }

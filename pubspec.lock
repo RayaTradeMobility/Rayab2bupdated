@@ -33,14 +33,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  badges:
-    dependency: "direct main"
-    description:
-      name: badges
-      sha256: "727580d938b7a1ff47ea42df730d581415606b4224cfa708671c10287f8d3fe6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -81,14 +73,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   curved_navigation_bar:
     dependency: "direct main"
     description:
@@ -242,10 +226,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
-      sha256: "3cc40fe8c50ab8383f3e053a499f00f975636622ecdc8e20a77418ece3b1e975"
+      sha256: "3002092e5b8ce2f86c3361422e52e6db6776c23ee21e0b2f71b892bf4259ef04"
       url: "https://pub.dev"
     source: hosted
-    version: "15.1.0+1"
+    version: "15.1.1"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
@@ -262,14 +246,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0+1"
-  flutter_slidable:
-    dependency: "direct main"
-    description:
-      name: flutter_slidable
-      sha256: cc4231579e3eae41ae166660df717f4bad1359c87f4a4322ad8ba1befeb3d2be
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter

@@ -41,7 +41,7 @@ class API {
         Fluttertoast.showToast(
             msg: "Loading",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
+            gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
             textColor: Colors.white,
@@ -51,7 +51,7 @@ class API {
       Fluttertoast.showToast(
           msg: "No Internet",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
+          gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
