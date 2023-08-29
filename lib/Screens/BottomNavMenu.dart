@@ -21,7 +21,7 @@ class BottomNavMenu extends StatefulWidget {
       required this.firstname,
       required this.customerId})
       : super(key: key);
-  final String token, email, mobile, firstname,  customerId;
+  final String token, email, mobile, firstname, customerId;
 
   @override
   State<BottomNavMenu> createState() => _BottomNavMenuState();
@@ -46,10 +46,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
         items: [
           Icon(LineAwesomeIcons.home, size: 30.0, color: _iconColor),
           Icon(
-            LineAwesomeIcons.shopping_cart,
-            size: 30.0,
-            color: _iconColor2,
-          ),
+            LineAwesomeIcons.shopping_cart, size: 30.0, color: _iconColor2,),
           Icon(LineAwesomeIcons.archive, size: 30.0, color: _iconColor4),
           Icon(LineAwesomeIcons.table, size: 30.0, color: _iconColor3),
           Icon(LineAwesomeIcons.user, size: 30.0, color: _iconColor5),
@@ -88,7 +85,6 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
           CategoriesScreen(
             token: widget.token,
             mobile: widget.mobile,
-
             firstname: widget.firstname,
             email: widget.email,
             customerId: widget.customerId,
@@ -96,7 +92,6 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
           OrdersScreen(
             token: widget.token,
             mobile: widget.mobile,
-
             firstname: widget.firstname,
             email: widget.email,
             customerId: widget.customerId,
@@ -106,7 +101,6 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             token: widget.token,
             email: widget.email,
             mobile: widget.mobile,
-
             firstname: widget.firstname,
             customerId: widget.customerId,
           )

@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
       required this.firstname,
       required this.customerId})
       : super(key: key);
-  final String token, email, mobile, firstname,  customerId;
+  final String token, email, mobile, firstname, customerId;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -195,12 +195,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return SizedBox(
                                     width: MediaQuery.of(context).size.width,
                                     child: Container(
-                                      decoration:BoxDecoration(
-                                    color: Colors.white,
-                                        border: Border.all(
-                                            color: Colors.black, style: BorderStyle.none),
-                                        borderRadius:
-                                        const BorderRadius.all(Radius.circular(15))),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: Colors.black,
+                                              style: BorderStyle.none),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(15))),
                                       child: Image.asset(
                                         imagePath,
                                         width: 400,
@@ -330,7 +331,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               catID: i.id!,
                                                               mobile:
                                                                   widget.mobile,
-
                                                               firstname: widget
                                                                   .firstname,
                                                               email:
@@ -410,14 +410,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                           id: t.id!,
                                           token: widget.token,
                                           isfavouriteApi: false,
-                                          stockStatus: 'new',
+                                          stockStatus: '',
                                           isBundle: false,
                                           percentagePrice: 0,
                                           fav: 'false',
                                           sku: t.sku!,
                                           email: widget.email,
                                           mobile: widget.mobile,
-                                              firstname: widget.firstname,
+                                          firstname: widget.firstname,
                                           customerId: widget.customerId,
                                         ),
                                     ],

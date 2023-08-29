@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/Screens/ProductScreen.dart';
 
 class CardScreenModel extends StatefulWidget {
@@ -46,7 +47,7 @@ class CardScreenModel extends StatefulWidget {
 }
 
 class _CardScreenModelState extends State<CardScreenModel> {
-  Icon icon1 = const Icon(CupertinoIcons.heart);
+  Icon icon1 = const Icon(LineAwesomeIcons.heart);
 
   @override
   void initState() {
@@ -59,7 +60,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
       );
     } else {
       icon1 = const Icon(
-        CupertinoIcons.heart,
+        LineAwesomeIcons.heart,
         color: Colors.pinkAccent,
       );
     }
@@ -131,13 +132,13 @@ class _CardScreenModelState extends State<CardScreenModel> {
                     margin: const EdgeInsets.all(10),
                     alignment: Alignment.centerLeft,
                     height: 20.0,
-                    width: 70.0,
+                    width: 60.0,
                   ),
                 TextButton(
                   onPressed: () async {},
                   child: Container(
-                    width: 20,
-                    height: 20,
+                    width: 40,
+                    height: 30,
                     alignment: Alignment.topLeft,
                     child: icon1,
                   ),
@@ -149,12 +150,15 @@ class _CardScreenModelState extends State<CardScreenModel> {
               margin: const EdgeInsets.all(5),
               child: FadeInImage(
                 image: NetworkImage(widget.image),
-                width: MediaQuery.of(context).size.width/3.3,
-                height: MediaQuery.of(context).size.width/3.3,
+                width: MediaQuery.of(context).size.width / 3.3,
+                height: MediaQuery.of(context).size.width / 2.5,
                 placeholder: const AssetImage("assets/no-img.jpg"),
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth , width: MediaQuery.of(context).size.width/3.3,
-                  height: MediaQuery.of(context).size.width/3.3,
+                  return Image.asset(
+                    'assets/no-img.jpg',
+                    fit: BoxFit.fitWidth,
+                    width: MediaQuery.of(context).size.width / 3.3,
+                    height: MediaQuery.of(context).size.width / 3.3,
                   );
                 },
                 fit: BoxFit.fitWidth,
@@ -209,22 +213,24 @@ class _CardScreenModelState extends State<CardScreenModel> {
                         fontSize: 10.0, fontWeight: FontWeight.bold)),
               ),
 
-            Container(
-              width: 50,
-              height: 20,
-              decoration: BoxDecoration(
-                  color: const Color(0xFF4C53A5),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Center(
-                child: Text(
-                  widget.stockStatus,
-                  style: const TextStyle(
-                      fontSize: 10.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ),
-            )
+            widget.stockStatus != ''
+                ? Container(
+                    width: 50,
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF4C53A5),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                      child: Text(
+                        widget.stockStatus,
+                        style: const TextStyle(
+                            fontSize: 10.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                  )
+                : Container()
           ],
         ),
       ),
