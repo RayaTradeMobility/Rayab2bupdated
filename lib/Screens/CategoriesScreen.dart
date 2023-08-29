@@ -14,10 +14,9 @@ class CategoriesScreen extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
       required this.customerId})
       : super(key: key);
-  final String token, email, mobile, firstname, lastname, customerId;
+  final String token, email, mobile, firstname, customerId;
 
   @override
   State<CategoriesScreen> createState() => _CategoriesScreenState();
@@ -43,7 +42,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             token: widget.token,
             email: widget.email,
             firstname: widget.firstname,
-            lastname: widget.lastname,
             mobile: widget.mobile,
             customerId: widget.customerId,
           );
@@ -94,7 +92,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                       child: TextButton(
                                         onPressed:(){
                                           Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                            return ModelScreen(token: widget.token,catID: snapshot.data!.data!.items![index].id!, categoryName: snapshot.data!.data!.items![index].name!, email: widget.email,mobile: widget.mobile,lastname: widget.lastname,firstname: widget.firstname,customerId: widget.customerId,);
+                                            return ModelScreen(token: widget.token,catID: snapshot.data!.data!.items![index].id!, categoryName: snapshot.data!.data!.items![index].name!, email: widget.email,mobile: widget.mobile,firstname: widget.firstname,customerId: widget.customerId,);
                                           }));
                                         },
                                         child: Center(

@@ -17,18 +17,14 @@ class ShoppingCardScreen extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
-      required this.city,
-      required this.street,
+
       required this.customerId})
       : super(key: key);
   final String token,
       email,
       mobile,
       firstname,
-      lastname,
-      city,
-      street,
+
       customerId;
 
   @override
@@ -55,7 +51,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
             token: widget.token,
             email: widget.email,
             firstname: widget.firstname,
-            lastname: widget.lastname,
             mobile: widget.mobile,
             customerId: widget.customerId,
           );
@@ -119,7 +114,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                         token: widget.token,
                                         email: widget.email,
                                         firstname: widget.firstname,
-                                        lastname: widget.lastname,
                                         mobile: widget.mobile,
                                         customerId: widget.customerId,
                                       );
@@ -149,7 +143,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                 totalPrice: double.parse(i.price!) * i.qty!,
                                 email: widget.email,
                                 firstname: widget.firstname,
-                                lastname: widget.lastname,
                                 mobile: widget.mobile,
                                 customerId: widget.customerId,
                               ),
@@ -162,7 +155,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                     token: widget.token,
                                     email: widget.email,
                                     firstname: widget.firstname,
-                                    lastname: widget.lastname,
                                     mobile: widget.mobile,
                                     customerId: widget.customerId,
                                   );
@@ -179,11 +171,11 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                   return PayScreen(
                                     token: widget.token,
                                     email: widget.email,
-                                    lastname: widget.lastname,
                                     firstname: widget.firstname,
                                     customerId: widget.customerId,
                                     totalPrice: totalPrice,
                                     totalQty: totalQty,
+                                    mobile: widget.mobile,
                                   );
                                 }),
                               );

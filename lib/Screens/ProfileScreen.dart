@@ -20,10 +20,9 @@ class ProfileScreen extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
       required this.customerId});
 
-  final String token, email, mobile, firstname, lastname, customerId;
+  final String token, email, mobile,  firstname, customerId;
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
@@ -48,7 +47,6 @@ class ProfileScreenState extends State<ProfileScreen> {
               email: widget.email,
               mobile: widget.mobile,
               firstname: widget.firstname,
-              lastname: widget.lastname,
               customerId: widget.customerId,
             );
           }));
@@ -247,7 +245,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return SettingsScreen(token: widget.token);
+                        return SettingsScreen(token: widget.token , mobile: widget.mobile, name: widget.firstname);
                       }));
                     },
                     child: Padding(

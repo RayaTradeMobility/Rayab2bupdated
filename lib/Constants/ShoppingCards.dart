@@ -24,7 +24,6 @@ class ShoppingCards extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
       required this.customerId});
 
   final int quantity;
@@ -37,7 +36,7 @@ class ShoppingCards extends StatefulWidget {
   final int countProducts;
   final String cardID;
   final String image;
-  final String token, email, mobile, firstname, lastname, customerId;
+  final String token, email, mobile, firstname, customerId;
 
   @override
   ShoppingCardsState createState() => ShoppingCardsState();
@@ -121,10 +120,8 @@ class ShoppingCardsState extends State<ShoppingCards> {
                                         token: widget.token,
                                         email: widget.email,
                                         mobile: widget.mobile,
-                                        lastname: widget.lastname,
                                         firstname: widget.firstname,
-                                        street: '',
-                                        city: '',
+
                                         customerId: widget.customerId,
                                       );
                                     }));

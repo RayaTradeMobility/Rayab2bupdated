@@ -19,10 +19,9 @@ class BottomNavMenu extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
       required this.customerId})
       : super(key: key);
-  final String token, email, mobile, firstname, lastname, customerId;
+  final String token, email, mobile, firstname,  customerId;
 
   @override
   State<BottomNavMenu> createState() => _BottomNavMenuState();
@@ -75,7 +74,6 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
           HomeScreen(
             token: widget.token,
             mobile: widget.mobile,
-            lastname: widget.lastname,
             firstname: widget.firstname,
             email: widget.email,
             customerId: widget.customerId,
@@ -84,16 +82,13 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             token: widget.token,
             email: widget.email,
             firstname: widget.firstname,
-            lastname: widget.lastname,
             mobile: widget.mobile,
-            street: '',
-            city: '',
             customerId: widget.customerId,
           ),
           CategoriesScreen(
             token: widget.token,
             mobile: widget.mobile,
-            lastname: widget.lastname,
+
             firstname: widget.firstname,
             email: widget.email,
             customerId: widget.customerId,
@@ -101,7 +96,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
           OrdersScreen(
             token: widget.token,
             mobile: widget.mobile,
-            lastname: widget.lastname,
+
             firstname: widget.firstname,
             email: widget.email,
             customerId: widget.customerId,
@@ -111,7 +106,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             token: widget.token,
             email: widget.email,
             mobile: widget.mobile,
-            lastname: widget.lastname,
+
             firstname: widget.firstname,
             customerId: widget.customerId,
           )

@@ -79,7 +79,6 @@ class _CardScreenState extends State<CardScreen> {
               productId: widget.id,
               token: widget.token,
               mobile: widget.mobile,
-              lastname: widget.lastname,
               firstname: widget.firstname,
               email: widget.email,
               customerId: widget.customerId,

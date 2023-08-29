@@ -23,7 +23,6 @@ class CardScreenModel extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
       required this.customerId});
 
   final String name;
@@ -40,7 +39,7 @@ class CardScreenModel extends StatefulWidget {
   final int percentagePrice;
   final bool isBundle;
   final String sku;
-  final String email, mobile, firstname, lastname, customerId;
+  final String email, mobile, firstname, customerId;
 
   @override
   State<CardScreenModel> createState() => _CardScreenModelState();
@@ -81,7 +80,6 @@ class _CardScreenModelState extends State<CardScreenModel> {
               productId: widget.id,
               token: widget.token,
               mobile: widget.mobile,
-              lastname: widget.lastname,
               firstname: widget.firstname,
               email: widget.email,
               customerId: widget.customerId,

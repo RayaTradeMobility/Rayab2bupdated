@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:rayab2bupdated/API/API.dart';
@@ -18,10 +19,9 @@ class HomeScreen extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
       required this.customerId})
       : super(key: key);
-  final String token, email, mobile, firstname, lastname, customerId;
+  final String token, email, mobile, firstname,  customerId;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -138,7 +138,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     token: widget.token,
                                     email: widget.email,
                                     firstname: widget.firstname,
-                                    lastname: widget.lastname,
                                     mobile: widget.mobile,
                                     customerId: widget.customerId,
                                   ),
@@ -169,13 +168,51 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (snapshot.hasData) {
                       return Column(
                         children: [
-                          Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Image.asset(
-                                "assets/About_Img.jpeg",
-                                width: 500,
-                                height: 200,
-                              )),
+                          CarouselSlider(
+                            options: CarouselOptions(
+                              height: 230,
+                              aspectRatio: 16 / 9,
+                              viewportFraction: 0.8,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: true,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 800),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              enlargeFactor: 0.3,
+                              scrollDirection: Axis.horizontal,
+                            ),
+                            items: [
+                              "assets/About_Img.jpeg",
+                              "assets/aboutimg.jpg",
+                              "assets/aboutimg3.jpg",
+                            ].map((imagePath) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Container(
+                                      decoration:BoxDecoration(
+                                    color: Colors.white,
+                                        border: Border.all(
+                                            color: Colors.black, style: BorderStyle.none),
+                                        borderRadius:
+                                        const BorderRadius.all(Radius.circular(15))),
+                                      child: Image.asset(
+                                        imagePath,
+                                        width: 400,
+                                        height: 200,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -202,7 +239,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       token: widget.token,
                                       email: widget.email,
                                       mobile: widget.mobile,
-                                      lastname: widget.lastname,
                                       firstname: widget.firstname,
                                       customerId: widget.customerId,
                                     );
@@ -216,91 +252,114 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    for (var i
-                                        in snapshot.data!.data![0].categories!)
-                                      Column(
+                                child: snapshot
+                                        .data!.data![0].categories!.isNotEmpty
+                                    ? Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          SizedBox(
-                                              height: 80.0,
-                                              width: 150.0,
-                                              child: TextButton(
-                                                  child: Card(
-                                                    shape:
-                                                        const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
-                                                    ),
-                                                    elevation: 5.0,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        FadeInImage(
-                                                          image: NetworkImage(
-                                                              i.imageLink!),
-                                                          placeholder:
-                                                              const AssetImage(
-                                                                  "assets/no-img.jpg"),
-                                                          imageErrorBuilder:
-                                                              (context, error,
-                                                                  stackTrace) {
-                                                            return Image.asset(
-                                                                'assets/no-img.jpg',
-                                                                width: MediaQuery.of(context).size.width/7,
-                                                                height: MediaQuery.of(context).size.width/12,
+                                          for (var i in snapshot
+                                              .data!.data![0].categories!)
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                    height: 80.0,
+                                                    width: 150.0,
+                                                    child: TextButton(
+                                                        child: Card(
+                                                          shape:
+                                                              const RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        10.0)),
+                                                          ),
+                                                          elevation: 5.0,
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              FadeInImage(
+                                                                image: NetworkImage(
+                                                                    i.imageLink!),
+                                                                placeholder:
+                                                                    const AssetImage(
+                                                                        "assets/no-img.jpg"),
+                                                                imageErrorBuilder:
+                                                                    (context,
+                                                                        error,
+                                                                        stackTrace) {
+                                                                  return Image.asset(
+                                                                      'assets/no-img.jpg',
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          7,
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          12,
+                                                                      fit: BoxFit
+                                                                          .fitWidth);
+                                                                },
                                                                 fit: BoxFit
-                                                                    .fitWidth);
-                                                          },
-                                                          fit: BoxFit.fitWidth,
-                                                          height: 50.0,
-                                                          width: 130.0,
+                                                                    .fitWidth,
+                                                                height: 50.0,
+                                                                width: 130.0,
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.push(context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) {
-                                                      return ModelScreen(
-                                                        token: widget.token,
-                                                        categoryName: i.name!,
-                                                        catID: i.id!,
-                                                        mobile: widget.mobile,
-                                                        lastname:
-                                                            widget.lastname,
-                                                        firstname:
-                                                            widget.firstname,
-                                                        email: widget.email,
-                                                        customerId:
-                                                            widget.customerId,
-                                                      );
-                                                    }));
-                                                  })),
-                                          Center(
-                                              child: Text(
-                                            i.name!,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ))
+                                                        onPressed: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) {
+                                                            return ModelScreen(
+                                                              token:
+                                                                  widget.token,
+                                                              categoryName:
+                                                                  i.name!,
+                                                              catID: i.id!,
+                                                              mobile:
+                                                                  widget.mobile,
+
+                                                              firstname: widget
+                                                                  .firstname,
+                                                              email:
+                                                                  widget.email,
+                                                              customerId: widget
+                                                                  .customerId,
+                                                            );
+                                                          }));
+                                                        })),
+                                                Center(
+                                                    child: Text(
+                                                  i.name!,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ))
+                                              ],
+                                            ),
+                                          const SizedBox(
+                                            width: 30.0,
+                                          ),
                                         ],
+                                      )
+                                    : const Text(
+                                        "لا توجد اقسام في الوقت الحالي",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    const SizedBox(
-                                      width: 30.0,
-                                    ),
-                                  ],
-                                ),
                               ),
                             ),
                           ),
@@ -334,33 +393,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: Row( 
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                for (var t in snapshot.data!.data![0].products!)
-                                  CardScreenModel(
-                                    name: t.name!,
-                                    salePrice: t.price!,
-                                    image: t.images!.imageLink!,
-                                    price: t.price!,
-                                    regularPrice: t.price!,
-                                    id: t.id!,
-                                    token: widget.token,
-                                    isfavouriteApi: false,
-                                    stockStatus: 'new',
-                                    isBundle: false,
-                                    percentagePrice: 0,
-                                    fav: 'false',
-                                    sku: t.sku!,
-                                    email: widget.email,
-                                    mobile: widget.mobile,
-                                    lastname: widget.lastname,
-                                    firstname: widget.firstname,
-                                    customerId: widget.customerId,
-                                  ),
-                              ],
-                            ),
+                            child: snapshot.data!.data![0].products!.isNotEmpty
+                                ? Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      for (var t
+                                          in snapshot.data!.data![0].products!)
+                                        CardScreenModel(
+                                          name: t.name!,
+                                          salePrice: t.price!,
+                                          image: t.images!.imageLink!,
+                                          price: t.price!,
+                                          regularPrice: t.price!,
+                                          id: t.id!,
+                                          token: widget.token,
+                                          isfavouriteApi: false,
+                                          stockStatus: 'new',
+                                          isBundle: false,
+                                          percentagePrice: 0,
+                                          fav: 'false',
+                                          sku: t.sku!,
+                                          email: widget.email,
+                                          mobile: widget.mobile,
+                                              firstname: widget.firstname,
+                                          customerId: widget.customerId,
+                                        ),
+                                    ],
+                                  )
+                                : const Text("لا توجد عروض في الوقت الحالي"),
                           ),
                         ],
                       );

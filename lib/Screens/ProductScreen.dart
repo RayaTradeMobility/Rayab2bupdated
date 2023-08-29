@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/Models/ProductbySkuResponseModel.dart';
 import 'package:rayab2bupdated/Screens/ShoppingCardScreen.dart';
 
@@ -22,10 +23,9 @@ class ProductScreen extends StatefulWidget {
     required this.email,
     required this.mobile,
     required this.firstname,
-    required this.lastname,
     required this.customerId,
   }) : super(key: key);
-  final String sku, token, email, mobile, firstname, lastname, customerId;
+  final String sku, token, email, mobile, firstname, customerId;
 
   final int productId;
 
@@ -225,7 +225,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       }
                                     });
                                   },
-                                  icon: const Icon(CupertinoIcons.minus),
+                                  icon: const Icon(LineAwesomeIcons.minus),
                                   iconSize: 15.0,
                                 ),
                               ],
@@ -323,7 +323,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                         Expanded(
                                             child:
                                                 Text(i.nameAttribute!.name!)),
-                                        const Expanded(child: Icon(Icons.add)),
+                                        const Expanded(child: Icon(LineAwesomeIcons.add_to_shopping_cart)),
                                       ],
                                     ),
                                   ),
@@ -367,11 +367,8 @@ class _ProductScreenState extends State<ProductScreen> {
                     return ShoppingCardScreen(
                       token: widget.token,
                       mobile: widget.mobile,
-                      lastname: widget.lastname,
                       firstname: widget.firstname,
                       email: widget.email,
-                      street: '',
-                      city: '',
                       customerId: widget.customerId,
                     );
                   }));

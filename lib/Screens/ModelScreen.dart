@@ -15,7 +15,6 @@ class ModelScreen extends StatefulWidget {
       email,
       mobile,
       firstname,
-      lastname,
       customerId;
 
   const ModelScreen({
@@ -26,7 +25,6 @@ class ModelScreen extends StatefulWidget {
     required this.email,
     required this.mobile,
     required this.firstname,
-    required this.lastname,
     required this.customerId,
   });
 
@@ -159,7 +157,6 @@ class ModelScreenState extends State<ModelScreen> {
                           token: widget.token,
                           email: widget.email,
                           firstname: widget.firstname,
-                          lastname: widget.lastname,
                           mobile: widget.mobile,
                           customerId: widget.customerId,
                         ),
@@ -203,8 +200,7 @@ class ModelScreenState extends State<ModelScreen> {
                               sku: t.sku!,
                               email: widget.email,
                               firstname: widget.firstname,
-                              lastname: widget.lastname,
-                              mobile: widget.mobile,
+                                  mobile: widget.mobile,
                               customerId: widget.customerId,
                             );
                           },

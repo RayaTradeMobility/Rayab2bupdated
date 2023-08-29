@@ -10,18 +10,16 @@ class ThanksScreen extends StatefulWidget {
       required this.token,
       required this.email,
       required this.firstname,
-      required this.lastname,
       required this.customerId,
       required this.orderId,
-      required this.totalPrice});
+      required this.totalPrice, required this.mobile});
 
   final String token,
       email,
       firstname,
-      lastname,
       customerId,
       orderId,
-      totalPrice;
+      totalPrice , mobile;
 
   @override
   ThanksScreenState createState() => ThanksScreenState();
@@ -55,8 +53,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                             token: widget.token,
                             email: widget.email,
                             firstname: widget.firstname,
-                            lastname: widget.lastname,
-                            mobile: "",
+                            mobile: widget.mobile,
                             customerId: widget.customerId,
                           );
                         }));
@@ -94,7 +91,6 @@ class ThanksScreenState extends State<ThanksScreen> {
                         token: widget.token,
                         email: widget.email,
                         firstname: widget.firstname,
-                        lastname: widget.lastname,
                         mobile: "",
                         customerId: widget.customerId,
                         orderId: widget.orderId,
@@ -116,7 +112,6 @@ class ThanksScreenState extends State<ThanksScreen> {
                         token: widget.token,
                         email: widget.email,
                         firstname: widget.firstname,
-                        lastname: widget.lastname,
                         mobile: "",
                         customerId: widget.customerId,
                       );

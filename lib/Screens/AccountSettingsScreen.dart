@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-class AccountSettingScreen extends StatefulWidget {
-  const AccountSettingScreen({super.key, required this.token});
+import 'ForgotPasswordScreen.dart';
 
-  final String token;
+class AccountSettingScreen extends StatefulWidget {
+  const AccountSettingScreen({super.key, required this.token, required this.name, required this.mobile});
+
+  final String token, name , mobile;
 
   @override
   State<AccountSettingScreen> createState() => _AccountSettingScreenState();
@@ -53,15 +55,17 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                   style: TextStyle(color: Color(_fontcolor)),
                 ),
                 Text(
-                  'الاسم',
+                  widget.name,
                   style: TextStyle(color: Color(_fontcolor)),
                 )
               ],
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('تعديل'),
-            ),
+            const SizedBox(height: 10,),
+
+            // TextButton(
+            //   onPressed: () {},
+            //   child: const Text('تعديل'),
+            // ),
             const Divider(
               thickness: 2.0,
             ),
@@ -73,12 +77,13 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                   'رقم التليفون',
                   style: TextStyle(color: Color(_fontcolor)),
                 ),
-                Text('الرقم',
+                Text(widget.mobile,
                     style: TextStyle(
                       color: Color(_fontcolor),
                     ))
               ],
             ),
+            const SizedBox(height: 14,),
             Row(
               children: [
                 const Icon(
@@ -95,36 +100,36 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             const Divider(
               thickness: 2.0,
             ),
-            TextButton(
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                elevation: 10,
-                color: Colors.white70,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Icon(Icons.email),
-                      const Text(
-                        "غير البريد الشخصي",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text('البريد',
-                          style: TextStyle(
-                              color: Color(_fontcolor), fontSize: 8.0)),
-                      const Icon(Icons.arrow_right),
-                    ],
-                  ),
-                ),
-              ),
-              onPressed: () {},
-            ),
+            // TextButton(
+            //   child: Card(
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(15.0),
+            //     ),
+            //     elevation: 10,
+            //     color: Colors.white70,
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: Row(
+            //         crossAxisAlignment: CrossAxisAlignment.center,
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           const Icon(Icons.email),
+            //           const Text(
+            //             "غير البريد الشخصي",
+            //             style: TextStyle(
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //           Text('البريد',
+            //               style: TextStyle(
+            //                   color: Color(_fontcolor), fontSize: 8.0)),
+            //           const Icon(Icons.arrow_right),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            //   onPressed: () {},
+            // ),
             TextButton(
               child: Card(
                 shape: RoundedRectangleBorder(
@@ -151,7 +156,12 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return const ResetPasswordPage();
+                    }));
+              },
             ),
           ],
         ),

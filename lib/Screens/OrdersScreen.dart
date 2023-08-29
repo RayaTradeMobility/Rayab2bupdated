@@ -16,11 +16,10 @@ class OrdersScreen extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-      required this.lastname,
       required this.customerId,
       required this.orderId});
 
-  final String token, email, mobile, firstname, lastname, customerId, orderId;
+  final String token, email, mobile, firstname, customerId, orderId;
 
   @override
   OrdersScreenState createState() => OrdersScreenState();
@@ -65,7 +64,6 @@ class OrdersScreenState extends State<OrdersScreen>
           return BottomNavMenu(
             token: widget.token,
             mobile: widget.mobile,
-            lastname: widget.lastname,
             firstname: widget.firstname,
             email: widget.email,
             customerId: widget.customerId,
@@ -165,7 +163,6 @@ class OrdersScreenState extends State<OrdersScreen>
                                               email: widget.email,
                                               customerId: widget.customerId,
                                               firstname: widget.firstname,
-                                              lastname: widget.lastname,
                                               mobile: widget.mobile);
                                         }));
                                       },
@@ -241,7 +238,6 @@ class OrdersScreenState extends State<OrdersScreen>
                                             email: widget.email,
                                             customerId: widget.customerId,
                                             firstname: widget.firstname,
-                                            lastname: widget.lastname,
                                             mobile: widget.mobile);
                                       }));
                                     },

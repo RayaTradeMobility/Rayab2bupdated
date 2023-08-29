@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'AccountSettingsScreen.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key, required this.token});
+  const SettingsScreen({super.key, required this.token, required this.mobile, required this.name});
 
-  final String token;
+  final String token , mobile, name;
+
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -73,7 +74,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AccountSettingScreen(token: widget.token);
+                  return AccountSettingScreen(token: widget.token , name: widget.name, mobile: widget.mobile,);
                 }));
               },
             ),

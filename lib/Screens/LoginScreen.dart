@@ -187,7 +187,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         token: loginUser.data!.token!,
                         email: loginUser.data!.email!,
                         firstname: loginUser.data!.name!,
-                        lastname: loginUser.data!.name!,
                         mobile: loginUser.data!.mobile!,
                         customerId: loginUser.data!.id!.toString(),
                       );
