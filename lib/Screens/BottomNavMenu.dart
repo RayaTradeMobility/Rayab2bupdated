@@ -42,26 +42,22 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        height:50 ,
+        height: 50,
         color: MyColorsSample.fontColor,
-
-
         items: [
           Icon(LineAwesomeIcons.home, size: 30.0, color: _iconColor),
-          Icon(LineAwesomeIcons.shopping_cart, size: 30.0, color: _iconColor2,),
-          Icon(LineAwesomeIcons.archive,
-              size: 30.0, color: _iconColor4),
-          Icon(LineAwesomeIcons.table,
-              size: 30.0, color: _iconColor3),
-          Icon(LineAwesomeIcons.user,
-              size: 30.0, color: _iconColor5),
+          Icon(
+            LineAwesomeIcons.shopping_cart,
+            size: 30.0,
+            color: _iconColor2,
+          ),
+          Icon(LineAwesomeIcons.archive, size: 30.0, color: _iconColor4),
+          Icon(LineAwesomeIcons.table, size: 30.0, color: _iconColor3),
+          Icon(LineAwesomeIcons.user, size: 30.0, color: _iconColor5),
         ],
-        onTap: (index){
+        onTap: (index) {
           _myPage.jumpToPage(index);
-
         },
-
-
       ),
       body: PageView(
         allowImplicitScrolling: false,

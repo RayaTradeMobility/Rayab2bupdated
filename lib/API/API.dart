@@ -23,6 +23,7 @@ import 'package:rayab2bupdated/Models/OrderResponseModel.dart';
 import 'package:rayab2bupdated/Models/ProductbySkuResponseModel.dart';
 import 'package:rayab2bupdated/Models/RegisterResponseModel.dart';
 import 'package:rayab2bupdated/Models/ShippingInformationResponseModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/CheckOTPModel.dart';
 import '../Models/CreateAddressModel.dart';
 import '../Models/EstimateShippingMethodResponse.dart';
@@ -97,7 +98,7 @@ class API {
 
   Future<LoginResponseModel?> login(String mobile, String password,
       String deviceToken, String businessUnitID) async {
-    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse('$url/v2/login'));
@@ -117,6 +118,8 @@ class API {
       if (kDebugMode) {
         print(user.data!.token);
       }
+      sharedPreferences.setString('mobile', mobile);
+      sharedPreferences.setString('password', password);
       return user;
     } else {
       LoginResponseModel? user =

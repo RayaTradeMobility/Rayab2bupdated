@@ -228,38 +228,40 @@ class _LoginScreenState extends State<LoginScreen> {
             height: MediaQuery.of(context).size.height / 15,
           ),
           Container(
-            color: Colors.white,
-            child: DropdownButton<String>(
-              value: businessUnitValue,
-              dropdownColor: Colors.white,
-              itemHeight: null,
-              menuMaxHeight: 292,
-              borderRadius: BorderRadius.circular(10),
-              alignment: AlignmentDirectional.center,
-              icon: const Icon(Icons.arrow_drop_down_sharp),
-              elevation: 1,
-              style: const TextStyle(color: Colors.black),
-              onChanged: (String? newValue) {
-                setState(() {
-                  businessUnitValue = newValue!;
-                });
-              },
-              items: businessUnit.map<DropdownMenuItem<String>>(
-                (String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: SizedBox(
-                      width: 325,
-                      child: Center(child: Text(value)),
-                    ),
-                  );
-                },
-              ).toList(),
-            ),
+            color: Colors.white24,
+            child: businessUnitValue.isEmpty
+                ? const CircularProgressIndicator()
+                : DropdownButton<String>(
+                    value: businessUnitValue,
+                    dropdownColor: Colors.white24,
+                    itemHeight: null,
+                    menuMaxHeight: 292,
+                    borderRadius: BorderRadius.circular(10),
+                    alignment: AlignmentDirectional.center,
+                    icon: const Icon(Icons.arrow_drop_down_sharp),
+                    elevation: 0,
+                    style: const TextStyle(color: Colors.black),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        businessUnitValue = newValue!;
+                      });
+                    },
+                    items: businessUnit.map<DropdownMenuItem<String>>(
+                      (String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: SizedBox(
+                            width: 325,
+                            child: Center(child: Text(value)),
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  ),
           ),
           if (businessUnitValue.isEmpty)
             const Text(
-              'Please select a business unit',
+              'Select a business unit',
               style: TextStyle(color: Colors.red),
             ),
           SizedBox(
@@ -300,10 +302,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void _loadUserEmailPassword() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      var mobile1 = prefs.getString("email") ?? "";
+      var mobile = prefs.getString("mobile") ?? "";
       var passWord = prefs.getString("password") ?? "";
 
-      mobileController.text = mobile1;
+      mobileController.text = mobile;
       password.text = passWord;
     } catch (e) {
       if (kDebugMode) {

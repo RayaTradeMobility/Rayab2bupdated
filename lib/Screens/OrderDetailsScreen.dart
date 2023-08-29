@@ -325,7 +325,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             ),
                           ),
                           Text(
-                            order!.data!.companyName!,
+                            order!.data!.companyName ?? "",
                             style: const TextStyle(
                                 color: MyColorsSample.primaryDark,
                                 fontSize: 12,
