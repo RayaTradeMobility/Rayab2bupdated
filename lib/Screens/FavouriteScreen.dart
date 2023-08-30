@@ -1,0 +1,150 @@
+// ignore_for_file: file_names
+
+import 'package:flutter/material.dart';
+import 'package:rayab2bupdated/API/API.dart';
+import 'package:rayab2bupdated/Constants/CardsModel.dart';
+import 'package:rayab2bupdated/Constants/Constants.dart';
+import 'package:rayab2bupdated/Models/FavouriteModel.dart';
+
+
+class FavouriteScreen extends StatefulWidget {
+  final String token;
+
+  const FavouriteScreen({
+    super.key, required this.token });
+
+  @override
+  FavouriteScreenState createState() => FavouriteScreenState();
+}
+
+class FavouriteScreenState extends State<FavouriteScreen> {
+  late Future<FavouriteModel> _futureData;
+  bool isLoadingMore = false;
+  int currentPage = 1;
+  API api = API();
+  FavouriteModel? favourite;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureData = api.getFavourite(widget.token , currentPage);
+    isLoadingMore = false;
+  }
+
+  void loadMore() {
+    setState(() {
+      isLoadingMore = true;
+      currentPage++;
+    });
+
+    api.getFavourite(  widget.token , currentPage).then((data) {
+      setState(() {
+        if (favourite != null && favourite!.data != null && data.data != null) {
+          favourite!.data!.items!.addAll(data.data!.items!);
+        }
+      });
+    }).whenComplete(() {
+      setState(() {
+        isLoadingMore = false;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: MyColorsSample.fontColor,
+        title: const Text("المنتجات المفضله"),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
+
+          ),
+
+        ),
+
+      ),
+      body: FutureBuilder<FavouriteModel>(
+        future: _futureData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            favourite = snapshot.data;
+            if (favourite!.data!.items!.isEmpty) {
+              return Center(
+                child: Column(children: [
+                  Image.asset(
+                    'assets/nodata.jpg',
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width - 1,
+                  ),
+                  Text(
+                    'لا توجد منتجات في الوقت الحالي',
+                    style: TextStyle(
+                        color: Colors.deepPurple.withOpacity(0.7),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22),
+                  )
+                ]),
+              );
+            }
+            return Column(
+              children: [
+                Expanded(
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (ScrollNotification scrollInfo) {
+                      if (!isLoadingMore &&
+                          scrollInfo.metrics.pixels ==
+                              scrollInfo.metrics.maxScrollExtent) {
+                        loadMore();
+                      }
+                      return false;
+                    },
+                    child: SingleChildScrollView(
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        shrinkWrap: true,
+                        childAspectRatio: 6/12,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: List.generate(
+                          favourite!.data!.items!.length,
+                              (index) {
+                            final t = favourite!.data!.items![index];
+                            return CardScreenModel(
+                              name: t.name!,
+                              salePrice: t.price!,
+                              image: t.images!.imageLink!,
+                              price: t.price!,
+                              regularPrice: t.price!,
+                              id: t.id!,
+                              token: widget.token,
+                              isfavouriteApi: true,
+                              stockStatus: '',
+                              isBundle: true,
+                              percentagePrice: 1,
+                              fav: 'liked',
+                              sku: t.sku!,
+                              email: '',
+                              firstname: '',
+                              mobile: '',
+                              customerId: '',
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                if (isLoadingMore)
+                  const Center(child: CircularProgressIndicator()),
+              ],
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
+  }
+}

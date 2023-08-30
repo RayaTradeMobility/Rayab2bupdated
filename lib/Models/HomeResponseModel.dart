@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 class HomeResponseModel {
   bool? success;
   String? message;
@@ -32,8 +30,9 @@ class HomeResponseModel {
 class Data {
   List<Categories>? categories;
   List<Products>? products;
+  List<Brands>? brands;
 
-  Data({this.categories, this.products});
+  Data({this.categories, this.products, this.brands});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['categories'] != null) {
@@ -48,6 +47,12 @@ class Data {
         products!.add(Products.fromJson(v));
       });
     }
+    if (json['brands'] != null) {
+      brands = <Brands>[];
+      json['brands'].forEach((v) {
+        brands!.add(Brands.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -57,6 +62,9 @@ class Data {
     }
     if (products != null) {
       data['products'] = products!.map((v) => v.toJson()).toList();
+    }
+    if (brands != null) {
+      data['brands'] = brands!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -95,12 +103,12 @@ class Products {
 
   Products(
       {this.id,
-      this.name,
-      this.sku,
-      this.price,
-      this.qty,
-      this.isStock,
-      this.images});
+        this.name,
+        this.sku,
+        this.price,
+        this.qty,
+        this.isStock,
+        this.images});
 
   Products.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -109,7 +117,8 @@ class Products {
     price = json['price'];
     qty = json['qty'];
     isStock = json['is_stock'];
-    images = json['images'] != null ? Images.fromJson(json['images']) : null;
+    images =
+    json['images'] != null ? Images.fromJson(json['images']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -126,6 +135,29 @@ class Products {
     return data;
   }
 }
+
+class Brands {
+  int? id;
+  String? name;
+  String? imageLink;
+
+  Brands({this.id, this.name, this.imageLink});
+
+  Brands.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    imageLink = json['image_link'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image_link'] = imageLink;
+    return data;
+  }
+}
+
 
 class Images {
   int? valueId;

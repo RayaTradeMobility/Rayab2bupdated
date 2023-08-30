@@ -7,6 +7,8 @@ import 'package:rayab2bupdated/Models/GetCategoriesNewResponseModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/ModelScreen.dart';
 
+import '../Models/BrandModel.dart';
+
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen(
       {Key? key,
@@ -24,12 +26,15 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   late Future<GetCategoriesNewResponseModel> cat;
+  late Future<BrandsModel> brands;
+
   API api = API();
 
   @override
   void initState() {
     // TODO: implement initState
     cat = api.getCategoriesNew(null);
+    brands = api.getBrands(widget.token);
     super.initState();
   }
 
@@ -66,8 +71,125 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               children: [
                 FutureBuilder<GetCategoriesNewResponseModel>(
                   future: cat,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.count(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          mainAxisSpacing: 0.0,
+                          crossAxisSpacing: 0.0,
+                          childAspectRatio: 1 / 1,
+                          crossAxisCount: 3,
+                          children: List.generate(
+                            snapshot.data!.data!.items!.length,
+                            (index) => Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  height:
+                                      MediaQuery.of(context).size.height / 7.7,
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return ModelScreen(
+                                            token: widget.token,
+                                            catID: snapshot
+                                                .data!.data!.items![index].id!,
+                                            categoryName: snapshot.data!.data!
+                                                .items![index].name!,
+                                            email: widget.email,
+                                            mobile: widget.mobile,
+                                            firstname: widget.firstname,
+                                            customerId: widget.customerId,
+                                          );
+                                        }));
+                                      },
+                                      child: Center(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            FadeInImage(
+                                              image: NetworkImage(snapshot
+                                                  .data!
+                                                  .data!
+                                                  .items![index]
+                                                  .imageLink!),
+                                              placeholder: const AssetImage(
+                                                  "assets/loading.png"),
+                                              imageErrorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                    'assets/loading.png',
+                                                    height: 50.0,
+                                                    width: 120.0,
+                                                    fit: BoxFit.fitWidth);
+                                              },
+                                              fit: BoxFit.fitWidth,
+                                              height: 50.0,
+                                              width: 130.0,
+                                            ),
+                                            // const SizedBox(height: 5.0),
+                                            Text(
+                                              snapshot.data!.data!.items![index]
+                                                  .name!,
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ));
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}'
+                          "You don't have data in this time");
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                const Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'جميع الماركات',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                FutureBuilder<BrandsModel>(
+                  future: brands,
                   builder: (context,snapshot){
-                    if(snapshot.hasData){
+                    if (snapshot.hasData){
                       return GridView.count(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -75,134 +197,83 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           crossAxisSpacing: 0.0,
                           childAspectRatio: 1/1,
                           crossAxisCount: 3,
-                          children:List.generate(snapshot.data!.data!.items!.length, (index) =>
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width:110.0,
-                                    height: 100.0,
-                                    child: Card(
-                                      elevation: 10,
+                          children: List.generate(snapshot.data!.data!.length, (index) => Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height:MediaQuery.of(context).size.height/9,
+                                width: MediaQuery.of(context).size.width /3.2,
+                                child: Card(
+                                  elevation: 10,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
 
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: TextButton(
+                                    onPressed:(){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                        return ModelScreen(token: widget.token,catID: snapshot.data!.data![index].id as int ,
+                                          categoryName : snapshot.data!.data![index].name! , email: widget.email,
+                                          mobile: widget.mobile,
+                                          firstname: widget.firstname,
+                                          customerId: widget.customerId,);
+                                      }));
+                                    },
+                                    child: Center(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
 
-                                      ),
-                                      child: TextButton(
-                                        onPressed:(){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                            return ModelScreen(token: widget.token,catID: snapshot.data!.data!.items![index].id!, categoryName: snapshot.data!.data!.items![index].name!, email: widget.email,mobile: widget.mobile,firstname: widget.firstname,customerId: widget.customerId,);
-                                          }));
-                                        },
-                                        child: Center(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              FadeInImage(
-                                                image: NetworkImage(
-                                                    snapshot.data!.data!.items![index].imageLink!),
-                                                placeholder:
-                                                const AssetImage(
-                                                    "assets/no-img.jpg"),
-                                                imageErrorBuilder:
-                                                    (context, error,
-                                                    stackTrace) {
-                                                  return Image.asset(
-                                                      'assets/no-img.jpg',
-                                                      height: 50.0,
-                                                      width: 120.0,
-                                                      fit: BoxFit
-                                                          .fitWidth);
-                                                },
-                                                fit: BoxFit.fitWidth,
-                                                height: 50.0,
-                                                width: 130.0,
-                                              ),
-                                              const SizedBox(height: 5.0),
-                                              Text(snapshot.data!.data!.items![index].name!,style: const TextStyle(color: Colors.black),),
-                                            ],
+                                          FadeInImage(
+                                            image: NetworkImage(snapshot
+                                                .data!
+                                                .data![index]
+                                                .imageLink!),
+                                            placeholder: const AssetImage(
+                                                "assets/loading.png"),
+                                            imageErrorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                  'assets/loading.png',
+                                                  height: 50.0,
+                                                  width: 120.0,
+                                                  fit: BoxFit.fitWidth);
+                                            },
+                                            fit: BoxFit.fitWidth,
+                                            height:MediaQuery.of(context).size.height/15,
+
                                           ),
-                                        ),
+                                          // const SizedBox(height: 5.0),
+                                          Text(
+                                            snapshot.data!.data![index]
+                                                .name!.trim(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-
-                                ],
+                                ),
                               ),
-                          )
+
+                            ],
+                          ),)
                       );
                     }
                     else if(snapshot.hasError){
-                      return Text('${snapshot.error}' "You don't have data in this time");
+                      return Text('${snapshot.error}' +
+                          "You don't have data in this time");
                     }
                     else{
                       return const Center(child: CircularProgressIndicator());
+
                     }
                   },
-
                 ),
-                const SizedBox(height: 10.0,),
-                const SizedBox(height: 20.0,),
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text('جميع الماركات',style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),),
-                  ],
-                ),
-                // FutureBuilder<BrandsModel>(
-                //   future: Brand,
-                //   builder: (context,snapshot){
-                //     if (snapshot.hasData){
-                //       return GridView.count(
-                //           shrinkWrap: true,
-                //           physics: NeverScrollableScrollPhysics(),
-                //           mainAxisSpacing: 0.0,
-                //           crossAxisSpacing: 0.0,
-                //           childAspectRatio: 1/1,
-                //           crossAxisCount: 3,
-                //           children: List.generate(snapshot.data.data.brands.length, (index) => Row(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Container(
-                //                 height:60,
-                //                 width: 80,
-                //                 child: Card(
-                //                   elevation: 10,
-                //                   shape: RoundedRectangleBorder(
-                //                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                //
-                //                   ),
-                //                   child: TextButton(
-                //                     onPressed:(){
-                //                       Navigator.push(context, MaterialPageRoute(builder: (context) {
-                //                         return ModelScreen(token: widget.token,brandId: snapshot.data.data.brands[index].iD,page: 1,appbarText: snapshot.data.data.brands[index].postTitle,);
-                //                       }));
-                //                     },
-                //                     child: Center(
-                //                       child: Image.network(snapshot.data.data.brands[index].guid,    errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
-                //                         return Text('No Image');
-                //                       },),
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //
-                //             ],
-                //           ),)
-                //       );
-                //     }
-                //     else if(snapshot.hasError){
-                //       return Text('${snapshot.error}' +
-                //           "You don't have data in this time");
-                //     }
-                //     else{
-                //       return Center(child: const CircularProgressIndicator());
-                //
-                //     }
-                //   },
-                // ),
               ],
             ),
           ),

@@ -133,9 +133,9 @@ class ModelScreenState extends State<ModelScreen> {
                         ),
                         child: FadeInImage(
                           image: NetworkImage(suggestion.images!.imageLink!),
-                          placeholder: const AssetImage("assets/no-img.jpg"),
+                          placeholder: const AssetImage("assets/loading.png"),
                           imageErrorBuilder: (context, error, stackTrace) {
-                            return Image.asset('assets/no-img.jpg',
+                            return Image.asset('assets/loading.png',
                                 height: 50.0,
                                 width: 120.0,
                                 fit: BoxFit.fitWidth);

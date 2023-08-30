@@ -164,9 +164,9 @@ class _CardScreenState extends State<CardScreen> {
               FadeInImage(
                 image: NetworkImage(widget.image),
                 height: 120,
-                placeholder: const AssetImage("assets/no-img.jpg"),
+                placeholder: const AssetImage("assets/loading.png"),
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/no-img.jpg', fit: BoxFit.fitWidth);
+                  return Image.asset('assets/loading.png', fit: BoxFit.fitWidth);
                 },
                 fit: BoxFit.fitWidth,
               ),

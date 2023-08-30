@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/Screens/ProductScreen.dart';
 
+import '../API/API.dart';
+
 class CardScreenModel extends StatefulWidget {
   const CardScreenModel(
       {super.key,
@@ -35,7 +37,6 @@ class CardScreenModel extends StatefulWidget {
   final String token;
   final String stockStatus;
   final String fav;
-
   final bool isfavouriteApi;
   final int percentagePrice;
   final bool isBundle;
@@ -48,6 +49,7 @@ class CardScreenModel extends StatefulWidget {
 
 class _CardScreenModelState extends State<CardScreenModel> {
   Icon icon1 = const Icon(LineAwesomeIcons.heart);
+  API api = API();
 
   @override
   void initState() {
@@ -135,7 +137,25 @@ class _CardScreenModelState extends State<CardScreenModel> {
                     width: 60.0,
                   ),
                 TextButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    if (icon1 == const Icon(LineAwesomeIcons.heart)) {
+                      setState(() {
+                        api.addToFavourite(
+                            widget.token, widget.id.toString(), widget.sku);
+                        icon1 = const Icon(
+                          LineAwesomeIcons.heart,
+                          color: Colors.pink,
+                        );
+                      });
+                    } else {
+                      setState(() {
+                        api.removeFromFavourite(
+                            widget.token, widget.id.toString(), widget.sku);
+                        icon1 = const Icon(CupertinoIcons.heart_fill,
+                            color: Colors.pink);
+                      });
+                    }
+                  },
                   child: Container(
                     width: 40,
                     height: 30,
@@ -145,17 +165,16 @@ class _CardScreenModelState extends State<CardScreenModel> {
                 )
               ],
             ),
-
             Container(
               margin: const EdgeInsets.all(5),
               child: FadeInImage(
                 image: NetworkImage(widget.image),
                 width: MediaQuery.of(context).size.width / 3.3,
                 height: MediaQuery.of(context).size.width / 2.5,
-                placeholder: const AssetImage("assets/no-img.jpg"),
+                placeholder: const AssetImage("assets/loading.png"),
                 imageErrorBuilder: (context, error, stackTrace) {
                   return Image.asset(
-                    'assets/no-img.jpg',
+                    'assets/loading.png',
                     fit: BoxFit.fitWidth,
                     width: MediaQuery.of(context).size.width / 3.3,
                     height: MediaQuery.of(context).size.width / 3.3,
@@ -164,10 +183,6 @@ class _CardScreenModelState extends State<CardScreenModel> {
                 fit: BoxFit.fitWidth,
               ),
             ),
-            // const Divider(
-            //   thickness: 2.0,
-            // ),
-
             if (widget.regularPrice != widget.price &&
                 widget.regularPrice != "0")
               Text(
@@ -212,7 +227,6 @@ class _CardScreenModelState extends State<CardScreenModel> {
                     style: const TextStyle(
                         fontSize: 10.0, fontWeight: FontWeight.bold)),
               ),
-
             widget.stockStatus != ''
                 ? Container(
                     width: 50,

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:rayab2bupdated/Models/AddtoCartResponseModel.dart';
+import 'package:rayab2bupdated/Models/BrandModel.dart';
 import 'package:rayab2bupdated/Models/CustomerModel.dart';
 import 'package:rayab2bupdated/Models/GetAddressModel.dart';
 import 'package:rayab2bupdated/Models/GetCartResponseModel.dart';
@@ -27,6 +28,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/CheckOTPModel.dart';
 import '../Models/CreateAddressModel.dart';
 import '../Models/EstimateShippingMethodResponse.dart';
+import '../Models/FavouriteModel.dart';
 import '../Models/GetCategoriesNewResponseModel.dart';
 import '../Models/GetProductSearchModel.dart' as getpro;
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -94,6 +96,86 @@ class API {
       }
     }
     return res;
+  }
+
+  addToFavourite(String token, String productId, String productSKU) async {
+    var headers = {
+      'lang': 'ar',
+      'branchid': '2',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.MultipartRequest('POST',
+        Uri.parse('http://41.78.23.95:8021/dist/api/v2/favorites/add-to-fav'));
+    request.fields.addAll({'product_id': productId, 'product_sku': productSKU});
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print(response.stream);
+        print(await response.stream.bytesToString());
+      }
+    } else {
+      if (kDebugMode) {
+        print(response.stream);
+
+        print(response.reasonPhrase);
+      }
+    }
+  }
+
+  removeFromFavourite(String token, String productId, String productSKU) async {
+    var headers = {
+      'lang': 'ar',
+      'branchid': '2',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'http://41.78.23.95:8021/dist/api/v2/favorites/deleted-to-fav'));
+    request.fields.addAll({'product_id': productId, 'product_sku': productSKU});
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print(response.stream);
+        print(await response.stream.bytesToString());
+      }
+    } else {
+      if (kDebugMode) {
+        print(response.stream);
+
+        print(response.reasonPhrase);
+      }
+    }
+  }
+
+  Future<FavouriteModel> getFavourite(String token, int? page) async {
+    var headers = {
+      'lang': 'ar',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.MultipartRequest('GET',
+        Uri.parse('http://41.78.23.95:8021/dist/api/v2/favorites?page=$page'));
+
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    if (response.statusCode == 200) {
+      return FavouriteModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception("Error");
+    }
   }
 
   Future<LoginResponseModel?> login(String mobile, String password,
@@ -405,6 +487,21 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
       return GetCategoriesNewResponseModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception("Error");
+    }
+  }
+
+  Future<BrandsModel> getBrands( String token) async {
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.Request('GET', Uri.parse('http://41.78.23.95:8021/dist/api/v2/getBrands'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    if (response.statusCode == 200) {
+      return BrandsModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Error");
     }

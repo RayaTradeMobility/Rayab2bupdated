@@ -101,11 +101,11 @@ class _ProductScreenState extends State<ProductScreen> {
                                     height: MediaQuery.of(context).size.height /
                                         2.8,
                                     placeholder:
-                                        const AssetImage("assets/no-img.jpg"),
+                                        const AssetImage("assets/loading.png"),
                                     imageErrorBuilder:
                                         (context, error, stackTrace) {
                                       return Image.asset(
-                                        'assets/no-img.jpg',
+                                        'assets/loading.png',
                                         fit: BoxFit.fitWidth,
                                         width:
                                             MediaQuery.of(context).size.width /

@@ -67,10 +67,10 @@ class ShoppingCardsState extends State<ShoppingCards> {
                     image: NetworkImage(widget.image),
                     width: MediaQuery.of(context).size.width / 7,
                     height: MediaQuery.of(context).size.height / 7,
-                    placeholder: const AssetImage("assets/no-img.jpg"),
+                    placeholder: const AssetImage("assets/loading.png"),
                     imageErrorBuilder: (context, error, stackTrace) {
                       return Image.asset(
-                        'assets/no-img.jpg',
+                        'assets/loading.png',
                         fit: BoxFit.fitWidth,
                         width: MediaQuery.of(context).size.width / 7,
                         height: MediaQuery.of(context).size.height / 7,

@@ -6,6 +6,7 @@ import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/LogoutModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
+import 'package:rayab2bupdated/Screens/FavouriteScreen.dart';
 import 'package:rayab2bupdated/Screens/NavScreen.dart';
 import 'package:rayab2bupdated/Screens/NotificationScreen.dart';
 
@@ -191,6 +192,51 @@ class ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  elevation: 10,
+                  color: Colors.white70,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return FavouriteScreen(token: widget.token);
+                          }));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: MyColorsSample.primaryDark
+                                      .withOpacity(0.2)),
+                              child: const Icon(LineAwesomeIcons.heart_1)),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          const Center(
+                              child: Text(
+                                "المنتجات المفضله",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                          const Icon(LineAwesomeIcons.angle_left),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
