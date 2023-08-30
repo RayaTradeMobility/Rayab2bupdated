@@ -38,7 +38,7 @@ class Data {
   Null prevPageUrl;
   int? to;
   int? total;
-  List<Items>? items;
+  List<Itemss>? items;
 
   Data(
       {this.currentPage,
@@ -67,9 +67,9 @@ class Data {
     to = json['to'];
     total = json['total'];
     if (json['items'] != null) {
-      items = <Items>[];
+      items = <Itemss>[];
       json['items'].forEach((v) {
-        items!.add(Items.fromJson(v));
+        items!.add(Itemss.fromJson(v));
       });
     }
   }
@@ -94,14 +94,14 @@ class Data {
   }
 }
 
-class Items {
+class Itemss {
   int? id;
   String? message;
   String? createdAt;
 
-  Items({this.id, this.message, this.createdAt});
+  Itemss({this.id, this.message, this.createdAt});
 
-  Items.fromJson(Map<String, dynamic> json) {
+  Itemss.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     message = json['message'];
     createdAt = json['created_at'];

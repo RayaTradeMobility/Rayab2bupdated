@@ -2,10 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/Screens/ProductScreen.dart';
 
 import '../API/API.dart';
+import 'Constants.dart';
 
 class CardScreenModel extends StatefulWidget {
   const CardScreenModel(
@@ -138,21 +140,45 @@ class _CardScreenModelState extends State<CardScreenModel> {
                   ),
                 TextButton(
                   onPressed: () async {
-                    if (icon1 == const Icon(LineAwesomeIcons.heart)) {
+                    if (icon1.icon == LineAwesomeIcons.heart) {
                       setState(() {
                         api.addToFavourite(
-                            widget.token, widget.id.toString(), widget.sku);
+                          widget.token,
+                          widget.id.toString(),
+                          widget.sku,
+                        );
+                        Fluttertoast.showToast(
+                            msg: "Added to Favourite",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: MyColorsSample.fontColor,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
                         icon1 = const Icon(
-                          LineAwesomeIcons.heart,
+                          CupertinoIcons.heart_fill,
                           color: Colors.pink,
                         );
                       });
                     } else {
                       setState(() {
                         api.removeFromFavourite(
-                            widget.token, widget.id.toString(), widget.sku);
-                        icon1 = const Icon(CupertinoIcons.heart_fill,
-                            color: Colors.pink);
+                          widget.token,
+                          widget.id.toString(),
+                          widget.sku,
+                        );
+                        Fluttertoast.showToast(
+                            msg: "Removed from Favourite",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: MyColorsSample.fontColor,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                        icon1 = const Icon(
+                          LineAwesomeIcons.heart,
+                          color: Colors.pink,
+                        );
                       });
                     }
                   },

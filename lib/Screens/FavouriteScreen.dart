@@ -5,13 +5,18 @@ import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/CardsModel.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/FavouriteModel.dart';
-
+import 'package:rayab2bupdated/Screens/HomeScreen.dart';
 
 class FavouriteScreen extends StatefulWidget {
-  final String token;
+  final String token, email, mobile, firstname, customerId;
 
-  const FavouriteScreen({
-    super.key, required this.token });
+  const FavouriteScreen(
+      {super.key,
+      required this.token,
+      required this.email,
+      required this.mobile,
+      required this.firstname,
+      required this.customerId});
 
   @override
   FavouriteScreenState createState() => FavouriteScreenState();
@@ -27,7 +32,7 @@ class FavouriteScreenState extends State<FavouriteScreen> {
   @override
   void initState() {
     super.initState();
-    _futureData = api.getFavourite(widget.token , currentPage);
+    _futureData = api.getFavourite(widget.token, currentPage);
     isLoadingMore = false;
   }
 
@@ -37,7 +42,7 @@ class FavouriteScreenState extends State<FavouriteScreen> {
       currentPage++;
     });
 
-    api.getFavourite(  widget.token , currentPage).then((data) {
+    api.getFavourite(widget.token, currentPage).then((data) {
       setState(() {
         if (favourite != null && favourite!.data != null && data.data != null) {
           favourite!.data!.items!.addAll(data.data!.items!);
@@ -59,11 +64,8 @@ class FavouriteScreenState extends State<FavouriteScreen> {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(10),
-
           ),
-
         ),
-
       ),
       body: FutureBuilder<FavouriteModel>(
         future: _futureData,
@@ -79,12 +81,28 @@ class FavouriteScreenState extends State<FavouriteScreen> {
                     height: MediaQuery.of(context).size.width - 1,
                   ),
                   Text(
-                    'لا توجد منتجات في الوقت الحالي',
+                    'لا توجد منتجات مفضله',
                     style: TextStyle(
                         color: Colors.deepPurple.withOpacity(0.7),
                         fontWeight: FontWeight.w700,
                         fontSize: 22),
-                  )
+                  ),
+                  const SizedBox(height: 9),
+                  FloatingActionButton.extended(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return HomeScreen(
+                            token: widget.token,
+                            email: widget.email,
+                            mobile: widget.mobile,
+                            firstname: widget.firstname,
+                            customerId: widget.customerId,
+                          );
+                        }));
+                      },
+                      label: const Text("اختر المنتجات المفضله"),
+                      backgroundColor: Colors.deepPurple.withOpacity(0.7))
                 ]),
               );
             }
@@ -104,11 +122,11 @@ class FavouriteScreenState extends State<FavouriteScreen> {
                       child: GridView.count(
                         crossAxisCount: 2,
                         shrinkWrap: true,
-                        childAspectRatio: 6/12,
+                        childAspectRatio: 6 / 12,
                         physics: const NeverScrollableScrollPhysics(),
                         children: List.generate(
                           favourite!.data!.items!.length,
-                              (index) {
+                          (index) {
                             final t = favourite!.data!.items![index];
                             return CardScreenModel(
                               name: t.name!,

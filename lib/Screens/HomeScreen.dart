@@ -11,6 +11,7 @@ import 'package:rayab2bupdated/Screens/CategoriesScreen.dart';
 import '../Models/GetProductSearchModel.dart';
 import 'ModelScreen.dart';
 import 'ProductScreen.dart';
+import '../Models/NotificationModel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen(
@@ -32,6 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final int _fontcolor = 0xFF4C53A5;
   Icon customIcon = const Icon(Icons.search);
   TextEditingController searchController = TextEditingController();
+  int notificationCount = 0;
+  NotificationModel? notifications;
+
+  void showNotification() {
+    api.getNotification(widget.token);
+  }
 
   API api = API();
   late Future<HomeResponseModel> _home;
@@ -155,7 +162,57 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   },
                   icon: customIcon,
-                )
+                ),
+                IconButton(
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.notification_add),
+                      if (notificationCount > 0)
+                        Positioned(
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 18,
+                              minHeight: 18,
+                            ),
+                            child: Text(
+                              notificationCount.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      notificationCount++; // Increment the notification count
+                    });
+
+                    showNotification();
+                  },
+                ),
+                // Expanded(
+                //   child: ListView.builder(
+                //     itemCount: notifications?.data?.items?.length ?? 0,
+                //     itemBuilder: (context, index) {
+                //       var notification = notifications?.data?.items?[index];
+                //
+                //       return ListTile(
+                //         title: Text(notification?.message ?? ''),
+                //         subtitle: Text(notification?.id.toString() ?? ''),
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -254,116 +311,115 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: snapshot
-                                    .data!.data![0].products!.isNotEmpty
+                                        .data!.data![0].products!.isNotEmpty
                                     ? Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    for (var i in snapshot
-                                        .data!.data![0].categories!)
-                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          SizedBox(
-                                              height: 80.0,
-                                              width: 150.0,
-                                              child: TextButton(
-                                                  child: Card(
-                                                    shape:
-                                                    const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              10.0)),
-                                                    ),
-                                                    elevation: 5.0,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .center,
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                      children: [
-                                                        FadeInImage(
-                                                          image: NetworkImage(
-                                                              i.imageLink!),
-                                                          placeholder:
-                                                          const AssetImage(
-                                                              "assets/loading.png"),
-                                                          imageErrorBuilder:
-                                                              (context,
-                                                              error,
-                                                              stackTrace) {
-                                                            return Image.asset(
-                                                                'assets/loading.png',
-                                                                width: MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                    7,
-                                                                height: MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                    12,
+                                          for (var i in snapshot
+                                              .data!.data![0].categories!)
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                    height: 80.0,
+                                                    width: 150.0,
+                                                    child: TextButton(
+                                                        child: Card(
+                                                          shape:
+                                                              const RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        10.0)),
+                                                          ),
+                                                          elevation: 5.0,
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              FadeInImage(
+                                                                image: NetworkImage(
+                                                                    i.imageLink!),
+                                                                placeholder:
+                                                                    const AssetImage(
+                                                                        "assets/loading.png"),
+                                                                imageErrorBuilder:
+                                                                    (context,
+                                                                        error,
+                                                                        stackTrace) {
+                                                                  return Image.asset(
+                                                                      'assets/loading.png',
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          7,
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          12,
+                                                                      fit: BoxFit
+                                                                          .fitWidth);
+                                                                },
                                                                 fit: BoxFit
-                                                                    .fitWidth);
-                                                          },
-                                                          fit: BoxFit
-                                                              .fitWidth,
-                                                          height: 50.0,
-                                                          width: 130.0,
+                                                                    .fitWidth,
+                                                                height: 50.0,
+                                                                width: 130.0,
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) {
-                                                              return ModelScreen(
-                                                                token:
-                                                                widget.token,
-                                                                categoryName:
-                                                                i.name!,
-                                                                catID: i.id!,
-                                                                mobile:
-                                                                widget.mobile,
-                                                                firstname: widget
-                                                                    .firstname,
-                                                                email:
-                                                                widget.email,
-                                                                customerId: widget
-                                                                    .customerId,
-                                                              );
-                                                            }));
-                                                  })),
-                                          Center(
-                                              child: Text(
-                                                i.name!,
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.bold),
-                                              ))
+                                                        onPressed: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) {
+                                                            return ModelScreen(
+                                                              token:
+                                                                  widget.token,
+                                                              categoryName:
+                                                                  i.name!,
+                                                              catID: i.id!,
+                                                              mobile:
+                                                                  widget.mobile,
+                                                              firstname: widget
+                                                                  .firstname,
+                                                              email:
+                                                                  widget.email,
+                                                              customerId: widget
+                                                                  .customerId,
+                                                            );
+                                                          }));
+                                                        })),
+                                                Center(
+                                                    child: Text(
+                                                  i.name!,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ))
+                                              ],
+                                            ),
+                                          const SizedBox(
+                                            width: 30.0,
+                                          ),
                                         ],
-                                      ),
-                                    const SizedBox(
-                                      width: 30.0,
-                                    ),
-                                  ],
-                                )
+                                      )
                                     : const Text(
-                                  "لا توجد اقسام في الوقت الحالي",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                        "لا توجد اقسام في الوقت الحالي",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                               ),
                             ),
                           ),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -386,19 +442,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return CategoriesScreen(
-                                          token: widget.token,
-                                          email: widget.email,
-                                          mobile: widget.mobile,
-                                          firstname: widget.firstname,
-                                          customerId: widget.customerId,
-                                        );
-                                      }));
+                                    return CategoriesScreen(
+                                      token: widget.token,
+                                      email: widget.email,
+                                      mobile: widget.mobile,
+                                      firstname: widget.firstname,
+                                      customerId: widget.customerId,
+                                    );
+                                  }));
                                 },
                               )
                             ],
                           ),
-
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Center(

@@ -15,6 +15,21 @@ Future<void> backgroundHandler(RemoteMessage message) async {
   }
 }
 
+void showNotification() async {
+  const AndroidNotificationDetails androidPlatformChannelSpecifics =
+  AndroidNotificationDetails('your channel id', 'your channel name',
+
+      importance: Importance.max, priority: Priority.high);
+  const NotificationDetails platformChannelSpecifics =
+  NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  await flutterLocalNotificationsPlugin.show(
+      0,
+      'Notification Title',
+      'Notification Body',
+      platformChannelSpecifics,
+      payload: 'item x');
+}
 Future<void> _handleMessage(RemoteMessage message) async {
   if (kDebugMode) {
     print(message.notification!.title);

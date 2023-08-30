@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -8,8 +9,6 @@ import 'package:rayab2bupdated/Models/LogoutModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/FavouriteScreen.dart';
 import 'package:rayab2bupdated/Screens/NavScreen.dart';
-import 'package:rayab2bupdated/Screens/NotificationScreen.dart';
-
 import 'AboutScreen.dart';
 import 'ContactScreen.dart';
 import 'SettingsScreen.dart';
@@ -23,7 +22,7 @@ class ProfileScreen extends StatefulWidget {
       required this.firstname,
       required this.customerId});
 
-  final String token, email, mobile,  firstname, customerId;
+  final String token, email, mobile, firstname, customerId;
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
@@ -87,11 +86,19 @@ class ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white70,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return NotificationScreen(
-                            token: widget.token, customerId: widget.customerId);
-                      }));
+                      Fluttertoast.showToast(
+                          msg: "Coming Soon",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: MyColorsSample.fontColor,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) {
+                      //   return NotificationScreen(
+                      //       token: widget.token, customerId: widget.customerId);
+                      // }));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -202,8 +209,14 @@ class ProfileScreenState extends State<ProfileScreen> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return FavouriteScreen(token: widget.token);
-                          }));
+                        return FavouriteScreen(
+                          token: widget.token,
+                          email: widget.email,
+                          mobile: widget.mobile,
+                          firstname: widget.firstname,
+                          customerId: widget.customerId,
+                        );
+                      }));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -218,18 +231,18 @@ class ProfileScreenState extends State<ProfileScreen> {
                                   borderRadius: BorderRadius.circular(100),
                                   color: MyColorsSample.primaryDark
                                       .withOpacity(0.2)),
-                              child: const Icon(LineAwesomeIcons.heart_1)),
+                              child: const Icon(LineAwesomeIcons.heart)),
                           const SizedBox(
-                            width: 10.0,
+                            width: 1,
                           ),
                           const Center(
                               child: Text(
-                                "المنتجات المفضله",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
+                            "المنتجات المفضله",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
                           const Icon(LineAwesomeIcons.angle_left),
                         ],
                       ),
@@ -291,7 +304,10 @@ class ProfileScreenState extends State<ProfileScreen> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return SettingsScreen(token: widget.token , mobile: widget.mobile, name: widget.firstname);
+                        return SettingsScreen(
+                            token: widget.token,
+                            mobile: widget.mobile,
+                            name: widget.firstname);
                       }));
                     },
                     child: Padding(

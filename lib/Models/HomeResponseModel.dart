@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class HomeResponseModel {
   bool? success;
   String? message;
@@ -103,12 +105,12 @@ class Products {
 
   Products(
       {this.id,
-        this.name,
-        this.sku,
-        this.price,
-        this.qty,
-        this.isStock,
-        this.images});
+      this.name,
+      this.sku,
+      this.price,
+      this.qty,
+      this.isStock,
+      this.images});
 
   Products.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -117,8 +119,7 @@ class Products {
     price = json['price'];
     qty = json['qty'];
     isStock = json['is_stock'];
-    images =
-    json['images'] != null ? Images.fromJson(json['images']) : null;
+    images = json['images'] != null ? Images.fromJson(json['images']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -157,7 +158,6 @@ class Brands {
     return data;
   }
 }
-
 
 class Images {
   int? valueId;
