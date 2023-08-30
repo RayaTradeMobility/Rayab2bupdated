@@ -76,7 +76,7 @@ class FavouriteScreenState extends State<FavouriteScreen> {
               return Center(
                 child: Column(children: [
                   Image.asset(
-                    'assets/nodata.jpg',
+                    'assets/nofavimage.png',
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.width - 1,
                   ),
