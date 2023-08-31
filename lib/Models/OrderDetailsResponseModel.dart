@@ -28,7 +28,7 @@ class Data {
   int? orderId;
   int? statusId;
   int? shippingAmount;
-  int? grandTotal;
+  double? grandTotal;
   int? paymentMethodId;
   int? totalQty;
   int? totalQtyItem;
