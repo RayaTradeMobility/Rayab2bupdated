@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     _home = api.getHome();
+    showNotification();
 
     super.initState();
   }
@@ -163,43 +164,43 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   icon: customIcon,
                 ),
-                IconButton(
-                  icon: Stack(
-                    children: [
-                      const Icon(Icons.notification_add),
-                      if (notificationCount > 0)
-                        Positioned(
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                            constraints: const BoxConstraints(
-                              minWidth: 18,
-                              minHeight: 18,
-                            ),
-                            child: Text(
-                              notificationCount.toString(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      notificationCount++; // Increment the notification count
-                    });
-
-                    showNotification();
-                  },
-                ),
+                // IconButton(
+                //   icon: Stack(
+                //     children: [
+                //       const Icon(Icons.notification_add),
+                //       if (notificationCount > 0)
+                //         Positioned(
+                //           right: 0,
+                //           child: Container(
+                //             padding: const EdgeInsets.all(2),
+                //             decoration: const BoxDecoration(
+                //               color: Colors.red,
+                //               shape: BoxShape.circle,
+                //             ),
+                //             constraints: const BoxConstraints(
+                //               minWidth: 18,
+                //               minHeight: 18,
+                //             ),
+                //             child: Text(
+                //               notificationCount.toString(),
+                //               style: const TextStyle(
+                //                 color: Colors.white,
+                //                 fontSize: 12,
+                //               ),
+                //               textAlign: TextAlign.center,
+                //             ),
+                //           ),
+                //         ),
+                //     ],
+                //   ),
+                //   onPressed: () {
+                //     setState(() {
+                //       notificationCount++; // Increment the notification count
+                //     });
+                //
+                //     showNotification();
+                //   },
+                // ),
                 // Expanded(
                 //   child: ListView.builder(
                 //     itemCount: notifications?.data?.items?.length ?? 0,

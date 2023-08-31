@@ -227,19 +227,19 @@ class _LoginScreenState extends State<LoginScreen> {
             height: MediaQuery.of(context).size.height / 15,
           ),
           Container(
-            color: Colors.white24,
+            color: MyColorsSample.fontColor,
             child: businessUnitValue.isEmpty
                 ? const CircularProgressIndicator()
                 : DropdownButton<String>(
                     value: businessUnitValue,
-                    dropdownColor: Colors.white24,
+                    dropdownColor: MyColorsSample.fontColor,
                     itemHeight: null,
                     menuMaxHeight: 292,
                     borderRadius: BorderRadius.circular(10),
                     alignment: AlignmentDirectional.center,
                     icon: const Icon(Icons.arrow_drop_down_sharp),
                     elevation: 0,
-                    style: const TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.white),
                     onChanged: (String? newValue) {
                       setState(() {
                         businessUnitValue = newValue!;
