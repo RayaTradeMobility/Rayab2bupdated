@@ -133,9 +133,9 @@ class ModelScreenState extends State<ModelScreen> {
                         ),
                         child: FadeInImage(
                           image: NetworkImage(suggestion.images!.imageLink!),
-                          placeholder: const AssetImage("assets/loading.png"),
+                          placeholder: const AssetImage("assets/logo-raya.png"),
                           imageErrorBuilder: (context, error, stackTrace) {
-                            return Image.asset('assets/loading.png',
+                            return Image.asset('assets/logo-raya.png',
                                 height: 50.0,
                                 width: 120.0,
                                 fit: BoxFit.fitWidth);
@@ -178,7 +178,7 @@ class ModelScreenState extends State<ModelScreen> {
                       child: GridView.count(
                         crossAxisCount: 2,
                         shrinkWrap: true,
-                        childAspectRatio: 0.68,
+                        childAspectRatio: 0.54,
                         physics: const NeverScrollableScrollPhysics(),
                         children: List.generate(
                           category!.data!.items!.length,

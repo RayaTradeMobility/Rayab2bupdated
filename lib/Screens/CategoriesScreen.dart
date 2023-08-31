@@ -131,11 +131,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                     .items![index]
                                                     .imageLink!),
                                                 placeholder: const AssetImage(
-                                                    "assets/loading.png"),
+                                                    "assets/logo-raya.png"),
                                                 imageErrorBuilder: (context,
                                                     error, stackTrace) {
                                                   return Image.asset(
-                                                      'assets/loading.png',
+                                                      'assets/logo-raya.png',
                                                       height:
                                                           MediaQuery.of(context)
                                                                   .size
@@ -251,11 +251,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                               image: NetworkImage(snapshot.data!
                                                   .data![index].imageLink!),
                                               placeholder: const AssetImage(
-                                                  "assets/loading.png"),
+                                                  "assets/logo-raya.png"),
                                               imageErrorBuilder:
                                                   (context, error, stackTrace) {
                                                 return Image.asset(
-                                                    'assets/loading.png',
+                                                    'assets/logo-raya.png',
                                                     height: 50.0,
                                                     width: 70.0,
                                                     fit: BoxFit.fitWidth);
@@ -272,7 +272,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                   .trim(),
                                               style: const TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 10,
+                                                  fontSize: 8,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ],

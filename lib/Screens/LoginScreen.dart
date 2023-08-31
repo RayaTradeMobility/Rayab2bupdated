@@ -11,6 +11,7 @@ import 'package:rayab2bupdated/Models/LoginResponseModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'BottomNavMenu.dart';
 import 'ForgotPasswordScreen.dart';
+import 'IntroductionScreen.dart';
 import 'RegisterScreen.dart';
 import 'package:http/http.dart' as http;
 
@@ -171,39 +172,58 @@ class _LoginScreenState extends State<LoginScreen> {
                   api.checkNetwork();
 
                   LoginResponseModel? loginUser = await api.login(
-                      mobileController.text,
-                      password.text,
-                      api.fcmToken,
-                      businessUnitValue);
+                    mobileController.text,
+                    password.text,
+                    api.fcmToken,
+                    businessUnitValue,
+                  );
 
                   if (loginUser!.success == true) {
                     setState(() {
                       _isLoading = false;
                     });
 
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) {
-                      return BottomNavMenu(
-                        token: loginUser.data!.token!,
-                        email: loginUser.data!.email!,
-                        firstname: loginUser.data!.name!,
-                        mobile: loginUser.data!.mobile!,
-                        customerId: loginUser.data!.id!.toString(),
+                    bool isFirstTime = await checkIfFirstTime();
+                    if (isFirstTime) {
+                      // Show IntroductionScreen
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setBool('isFirstTime', false);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => IntroductionScreens( token: loginUser.data!.token!,
+                            email: loginUser.data!.email!,
+                            firstname: loginUser.data!.name!,
+                            mobile: loginUser.data!.mobile!,
+                            customerId: loginUser.data!.id!.toString(),),
+                        ),
                       );
-                    }));
+                    } else {
+                      // Proceed with regular login flow
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                        return BottomNavMenu(
+                          token: loginUser.data!.token!,
+                          email: loginUser.data!.email!,
+                          firstname: loginUser.data!.name!,
+                          mobile: loginUser.data!.mobile!,
+                          customerId: loginUser.data!.id!.toString(),
+                        );
+                      }));
+                    }
                   } else {
                     setState(() {
                       _isLoading = false;
                     });
 
                     Fluttertoast.showToast(
-                        msg: loginUser.message!,
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: MyColorsSample.fontColor,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
+                      msg: loginUser.message!,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: MyColorsSample.fontColor,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
                   }
                 } else {
                   setState(() {
@@ -218,18 +238,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(32.0),
                 ),
               ),
-              child: _isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text("تسجيل الدخول"),
+              child: _isLoading ? const CircularProgressIndicator() : const Text("تسجيل الدخول"),
             ),
+
+
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 15,
           ),
           Container(
+            width: MediaQuery.of(context).size.width -50 ,
+            height: MediaQuery.of(context).size.height / 15  ,
             color: MyColorsSample.fontColor,
             child: businessUnitValue.isEmpty
-                ? const CircularProgressIndicator()
+                ? const Center(child: CircularProgressIndicator())
                 : DropdownButton<String>(
                     value: businessUnitValue,
                     dropdownColor: MyColorsSample.fontColor,
@@ -250,7 +272,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: SizedBox(
-                            width: 325,
+                            width: MediaQuery.of(context).size.width *0.79
+                            ,
+                            height: MediaQuery.of(context).size.height /20 ,
                             child: Center(child: Text(value)),
                           ),
                         );
@@ -291,12 +315,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isPasswordValid(String password) => password.length >= 6;
 
-  // bool isEmailValid(String email) {
-  //   bool emailValid = RegExp(
-  //           r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-  //       .hasMatch(email);
-  //   return emailValid;
-  // }
+  Future<bool> checkIfFirstTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+    return isFirstTime;
+  }
 
   void _loadUserEmailPassword() async {
     try {

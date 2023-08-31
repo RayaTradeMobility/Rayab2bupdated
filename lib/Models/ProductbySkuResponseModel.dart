@@ -25,64 +25,100 @@ class ProductbySkuResponseModel {
 }
 
 class Data {
+  int? currentPage;
+  String? firstPageUrl;
+  int? from;
+  int? lastPage;
+  String? lastPageUrl;
+  String? nextPageUrl;
+  String? path;
+  int? perPage;
+  String? prevPageUrl;
+  int? to;
+  int? total;
+  List<Items>? items;
+
+  Data(
+      {this.currentPage,
+        this.firstPageUrl,
+        this.from,
+        this.lastPage,
+        this.lastPageUrl,
+        this.nextPageUrl,
+        this.path,
+        this.perPage,
+        this.prevPageUrl,
+        this.to,
+        this.total,
+        this.items});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    currentPage = json['current_page'];
+    firstPageUrl = json['first_page_url'];
+    from = json['from'];
+    lastPage = json['last_page'];
+    lastPageUrl = json['last_page_url'];
+    nextPageUrl = json['next_page_url'];
+    path = json['path'];
+    perPage = json['per_page'];
+    prevPageUrl = json['prev_page_url'];
+    to = json['to'];
+    total = json['total'];
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(Items.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['current_page'] = currentPage;
+    data['first_page_url'] = firstPageUrl;
+    data['from'] = from;
+    data['last_page'] = lastPage;
+    data['last_page_url'] = lastPageUrl;
+    data['next_page_url'] = nextPageUrl;
+    data['path'] = path;
+    data['per_page'] = perPage;
+    data['prev_page_url'] = prevPageUrl;
+    data['to'] = to;
+    data['total'] = total;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Items {
   int? id;
   String? name;
   String? sku;
   String? price;
-  int? qty;
-  int? salableQuantity;
-  String? description;
+  String? priceWithoutComma;
   int? isStock;
-  int? minSaleQty;
-  int? maxSaleQty;
-  List<Images>? images;
-  List<Categories>? categories;
-  List<Attributes>? attributes;
+  Images? images;
 
-  Data(
+  Items(
       {this.id,
-      this.name,
-      this.sku,
-      this.price,
-      this.qty,
-      this.salableQuantity,
-      this.description,
-      this.isStock,
-      this.minSaleQty,
-      this.maxSaleQty,
-      this.images,
-      this.categories,
-      this.attributes});
+        this.name,
+        this.sku,
+        this.price,
+        this.priceWithoutComma,
+        this.isStock,
+        this.images});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     sku = json['sku'];
     price = json['price'];
-    qty = json['qty'];
-    salableQuantity = json['salable_quantity'];
-    description = json['description'];
+    priceWithoutComma = json['price_without_comma'];
     isStock = json['is_stock'];
-    minSaleQty = json['min_sale_qty'];
-    maxSaleQty = json['max_sale_qty'];
-    if (json['images'] != null) {
-      images = <Images>[];
-      json['images'].forEach((v) {
-        images!.add(Images.fromJson(v));
-      });
-    }
-    if (json['categories'] != null) {
-      categories = <Categories>[];
-      json['categories'].forEach((v) {
-        categories!.add(Categories.fromJson(v));
-      });
-    }
-    if (json['attributes'] != null) {
-      attributes = <Attributes>[];
-      json['attributes'].forEach((v) {
-        attributes!.add(Attributes.fromJson(v));
-      });
-    }
+    images =
+    json['images'] != null ? Images.fromJson(json['images']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -91,146 +127,27 @@ class Data {
     data['name'] = name;
     data['sku'] = sku;
     data['price'] = price;
-    data['qty'] = qty;
-    data['salable_quantity'] = salableQuantity;
-    data['description'] = description;
+    data['price_without_comma'] = priceWithoutComma;
     data['is_stock'] = isStock;
-    data['min_sale_qty'] = minSaleQty;
-    data['max_sale_qty'] = maxSaleQty;
     if (images != null) {
-      data['images'] = images!.map((v) => v.toJson()).toList();
-    }
-    if (categories != null) {
-      data['categories'] = categories!.map((v) => v.toJson()).toList();
-    }
-    if (attributes != null) {
-      data['attributes'] = attributes!.map((v) => v.toJson()).toList();
+      data['images'] = images!.toJson();
     }
     return data;
   }
 }
 
 class Images {
-  int? valueId;
-  int? storeId;
-  int? entityId;
-  String? label;
-  int? position;
-  int? disabled;
-  int? recordId;
   String? imageLink;
 
-  Images(
-      {this.valueId,
-      this.storeId,
-      this.entityId,
-      this.label,
-      this.position,
-      this.disabled,
-      this.recordId,
-      this.imageLink});
+  Images({this.imageLink});
 
   Images.fromJson(Map<String, dynamic> json) {
-    valueId = json['value_id'];
-    storeId = json['store_id'];
-    entityId = json['entity_id'];
-    label = json['label'];
-    position = json['position'];
-    disabled = json['disabled'];
-    recordId = json['record_id'];
     imageLink = json['image_link'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['value_id'] = valueId;
-    data['store_id'] = storeId;
-    data['entity_id'] = entityId;
-    data['label'] = label;
-    data['position'] = position;
-    data['disabled'] = disabled;
-    data['record_id'] = recordId;
     data['image_link'] = imageLink;
-    return data;
-  }
-}
-
-class Categories {
-  int? entityId;
-  int? categoryId;
-  int? productId;
-  int? position;
-  String? nameCategary;
-
-  Categories(
-      {this.entityId,
-      this.categoryId,
-      this.productId,
-      this.position,
-      this.nameCategary});
-
-  Categories.fromJson(Map<String, dynamic> json) {
-    entityId = json['entity_id'];
-    categoryId = json['category_id'];
-    productId = json['product_id'];
-    position = json['position'];
-    nameCategary = json['name_categary'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['entity_id'] = entityId;
-    data['category_id'] = categoryId;
-    data['product_id'] = productId;
-    data['position'] = position;
-    data['name_categary'] = nameCategary;
-    return data;
-  }
-}
-
-class Attributes {
-  int? attributeId;
-  int? value;
-  NameAttribute? nameAttribute;
-
-  Attributes({this.attributeId, this.value, this.nameAttribute});
-
-  Attributes.fromJson(Map<String, dynamic> json) {
-    attributeId = json['attribute_id'];
-    value = json['value'];
-    nameAttribute = json['name_attribute'] != null
-        ? NameAttribute.fromJson(json['name_attribute'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['attribute_id'] = attributeId;
-    data['value'] = value;
-    if (nameAttribute != null) {
-      data['name_attribute'] = nameAttribute!.toJson();
-    }
-    return data;
-  }
-}
-
-class NameAttribute {
-  String? name;
-
-  // ignore: prefer_typing_uninitialized_variables
-  var value;
-
-  NameAttribute({this.name, this.value});
-
-  NameAttribute.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    value = json['value'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['value'] = value;
     return data;
   }
 }

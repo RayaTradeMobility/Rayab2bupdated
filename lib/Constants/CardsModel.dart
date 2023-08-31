@@ -78,6 +78,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(20)),
       child: GestureDetector(
+
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return ProductScreen(
@@ -197,13 +198,15 @@ class _CardScreenModelState extends State<CardScreenModel> {
                 image: NetworkImage(widget.image),
                 width: MediaQuery.of(context).size.width / 3.3,
                 height: MediaQuery.of(context).size.width / 2.5,
-                placeholder: const AssetImage("assets/loading.png"),
+                placeholder: const AssetImage("assets/logo-raya"
+                    ".png"),
                 imageErrorBuilder: (context, error, stackTrace) {
                   return Image.asset(
-                    'assets/loading.png',
+                    'assets/logo-raya'
+                        '.png',
                     fit: BoxFit.fitWidth,
                     width: MediaQuery.of(context).size.width / 3.3,
-                    height: MediaQuery.of(context).size.width / 3.3,
+                    height: MediaQuery.of(context).size.height / 6.3,
                   );
                 },
                 fit: BoxFit.fitWidth,
@@ -234,6 +237,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
               ),
             if (widget.price != null || widget.price != "0")
               Container(
+
                 padding: const EdgeInsets.only(bottom: 10),
                 alignment: Alignment.centerRight,
                 child: Text(

@@ -105,6 +105,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.8"
+  dots_indicator:
+    dependency: transitive
+    description:
+      name: dots_indicator
+      sha256: f1599baa429936ba87f06ae5f2adc920a367b16d08f74db58c3d0f6e93bcdb5c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   fake_async:
     dependency: transitive
     description:
@@ -262,6 +270,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0+1"
+  flutter_swiper_plus:
+    dependency: "direct main"
+    description:
+      name: flutter_swiper_plus
+      sha256: cf2e39b230c570f6bdb87f8a19d1c94be47441ffacb09ddc371c7a628e0dbe6a
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -304,6 +320,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  introduction_screen:
+    dependency: "direct main"
+    description:
+      name: introduction_screen
+      sha256: ef5a5479a8e06a84b9a7eff16c698b9b82f70cd1b6203b264bc3686f9bfb77e2
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.11"
   js:
     dependency: transitive
     description:

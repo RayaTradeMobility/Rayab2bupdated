@@ -67,12 +67,12 @@ class Items {
 
   Items(
       {this.id,
-      this.sku,
-      this.qty,
-      this.price,
-      this.totalPrice,
-      this.name,
-      this.imageUrl});
+        this.sku,
+        this.qty,
+        this.price,
+        this.totalPrice,
+        this.name,
+        this.imageUrl});
 
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -81,8 +81,9 @@ class Items {
     price = json['price'];
     totalPrice = json['total_price'];
     name = json['name'];
-    imageUrl =
-        json['image_url'] != null ? ImageUrl.fromJson(json['image_url']) : null;
+    imageUrl = json['image_url'] != null
+        ? ImageUrl.fromJson(json['image_url'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -101,19 +102,16 @@ class Items {
 }
 
 class ImageUrl {
-  int? valueId;
   String? imageLink;
 
-  ImageUrl({this.valueId, this.imageLink});
+  ImageUrl({this.imageLink});
 
   ImageUrl.fromJson(Map<String, dynamic> json) {
-    valueId = json['value_id'];
     imageLink = json['image_link'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['value_id'] = valueId;
     data['image_link'] = imageLink;
     return data;
   }

@@ -30,8 +30,8 @@ class ShoppingCards extends StatefulWidget {
   final String price;
   final int productId;
   final String sku;
-  final double totalPriceProduct;
-  final double totalPrice;
+  final String totalPriceProduct;
+  final String totalPrice;
   final String postTitle;
   final int countProducts;
   final String cardID;
@@ -67,10 +67,10 @@ class ShoppingCardsState extends State<ShoppingCards> {
                     image: NetworkImage(widget.image),
                     width: MediaQuery.of(context).size.width / 7,
                     height: MediaQuery.of(context).size.height / 7,
-                    placeholder: const AssetImage("assets/loading.png"),
+                    placeholder: const AssetImage("assets/logo-raya.png"),
                     imageErrorBuilder: (context, error, stackTrace) {
                       return Image.asset(
-                        'assets/loading.png',
+                        'assets/logo-raya.png',
                         fit: BoxFit.fitWidth,
                         width: MediaQuery.of(context).size.width / 7,
                         height: MediaQuery.of(context).size.height / 7,

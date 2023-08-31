@@ -459,7 +459,7 @@ class API {
 
   Future<ProductbySkuResponseModel> getProductBySku(String sku) async {
     var headers = {'Accept': 'application/json'};
-    var request = http.Request('GET', Uri.parse('$url/getProduct?sku=$sku'));
+    var request = http.Request('GET', Uri.parse('$url/getProductsNew?sku=$sku'));
 
     request.headers.addAll(headers);
 
@@ -813,8 +813,6 @@ class API {
     var headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
-      'Cookie':
-          'XSRF-TOKEN=eyJpdiI6IlBaNTRnbXQrV2N1MGVyV0lZa2cyUmc9PSIsInZhbHVlIjoiYlVlOFY3SXdwYW41OWgvbXNUWDdoM3A1T1YvWlhGYUNYcVI0QzZJcGdqTW5hdXlzQ0IySVJDdi9TbkYwUURoMUNDdmdKRnI0c1Nzdmp5bzdTUkRSdEZGNGhIM0NlbzB5VDNFK1ZXSzdhM3NCVDg3Uy9LMjF4YlZzUXdwVUI1NksiLCJtYWMiOiIzYjFiMWZkZGRmYzNkZjY5NmQyMGJhNjhlMGYyYzJiOWFmNzllOTVjNjY1ZTNlMDk5NTc4ZTViNWMwMzNjNDRhIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6Ik9JK0tkcFV1MEpBdzI3WmFBVkgzbUE9PSIsInZhbHVlIjoia2o5V2VaOGFWRk9EUDFnQzVacDJ0eTluYUFDci9vbWxsRTNSNUZnSXA4WTRuYm5UQkFXMFk0b3prenFwRUw5ZzVjb2pLb25qMkRQekZoUngrR1dkM3htSEVXaUtZaUM3OE1ncmdxZzhFamRYb0JKMVhpTXRRRm1tL2MzYmZMV1MiLCJtYWMiOiJiNjJjMzQ0M2ZlMjEwNjM0ZDFhMDFlNmYyMDllNjA3ZGNlNTllZTVkZTVjZThhYzU0MmFiMjYwOTczM2ExMDNkIiwidGFnIjoiIn0%3D'
     };
     var request = http.Request(
         'GET',
@@ -830,6 +828,7 @@ class API {
       res = GetOrdersResponseModel.fromJson(jsonDecode(response.body));
       return res;
     } else {
+
       res.success = false;
       res.message = "Error";
       return res;
