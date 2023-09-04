@@ -8,10 +8,12 @@ import 'package:rayab2bupdated/Constants/CardsModel.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/HomeResponseModel.dart';
 import 'package:rayab2bupdated/Screens/CategoriesScreen.dart';
+import 'package:transparent_image/transparent_image.dart';
 import '../Models/GetProductSearchModel.dart';
 import 'ModelScreen.dart';
 import 'ProductScreen.dart';
 import '../Models/NotificationModel.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen(
@@ -124,11 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       maxWidth: 64,
                                       maxHeight: 64,
                                     ),
-                                    child: FadeInImage(
-                                      image: NetworkImage(
-                                          suggestion.images!.imageLink!),
-                                      placeholder:
-                                          const AssetImage("assets/logo-raya.png"),
+                                    child: FadeInImage.memoryNetwork(
+                                      image:
+                                          suggestion.images!.imageLink!,
+                                      placeholder:kTransparentImage,
                                       imageErrorBuilder:
                                           (context, error, stackTrace) {
                                         return Image.asset('assets/logo-raya.png',
@@ -351,12 +352,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
                                                               children: [
-                                                                FadeInImage(
-                                                                  image: NetworkImage(
-                                                                      i.imageLink!),
-                                                                  placeholder:
-                                                                      const AssetImage(
-                                                                          "assets/logo-raya.png"),
+                                                                FadeInImage.memoryNetwork(
+                                                                  image:
+                                                                      i.imageLink!,
+                                                                  placeholder: kTransparentImage,
                                                                   imageErrorBuilder:
                                                                       (context,
                                                                           error,
@@ -500,12 +499,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
                                                               children: [
-                                                                FadeInImage(
-                                                                  image: NetworkImage(
-                                                                      i.imageLink!),
-                                                                  placeholder:
-                                                                      const AssetImage(
-                                                                          "assets/logo-raya.png"),
+                                                                FadeInImage.memoryNetwork(
+                                                                  image:
+                                                                      i.imageLink!,
+                                                                  placeholder:kTransparentImage,
                                                                   imageErrorBuilder:
                                                                       (context,
                                                                           error,
@@ -642,7 +639,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       } else if (snapshot.hasError) {
                         return Text('${snapshot.error}'
-                            "You don't have data in this time");
+                            ",s You don't have data in this time");
                       }
                       return const Padding(
                           padding: EdgeInsets.only(top: 280),

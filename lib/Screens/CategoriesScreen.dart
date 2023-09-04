@@ -6,6 +6,7 @@ import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/GetCategoriesNewResponseModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/ModelScreen.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../Models/BrandModel.dart';
 
@@ -124,14 +125,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                               const SizedBox(
                                                 height: 4,
                                               ),
-                                              FadeInImage(
-                                                image: NetworkImage(snapshot
+                                              FadeInImage.memoryNetwork(
+                                                image:snapshot
                                                     .data!
                                                     .data!
                                                     .items![index]
-                                                    .imageLink!),
-                                                placeholder: const AssetImage(
-                                                    "assets/logo-raya.png"),
+                                                    .imageLink!,
+                                                placeholder: kTransparentImage,
                                                 imageErrorBuilder: (context,
                                                     error, stackTrace) {
                                                   return Image.asset(
@@ -247,11 +247,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            FadeInImage(
-                                              image: NetworkImage(snapshot.data!
-                                                  .data![index].imageLink!),
-                                              placeholder: const AssetImage(
-                                                  "assets/logo-raya.png"),
+                                            FadeInImage.memoryNetwork(
+                                              image: snapshot.data!
+                                                  .data![index].imageLink!,
+                                              placeholder: kTransparentImage,
                                               imageErrorBuilder:
                                                   (context, error, stackTrace) {
                                                 return Image.asset(

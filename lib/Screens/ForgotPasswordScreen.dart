@@ -164,7 +164,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                           textColor: Colors.white,
                           fontSize: 16.0);
                       // ignore: use_build_context_synchronously
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) {
                           return const LoginScreen();

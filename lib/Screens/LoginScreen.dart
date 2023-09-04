@@ -35,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   List<String> businessUnitId = [''];
   List<String> businessUnit = [''];
 
+
   Future<void> _loadData() async {
     var url = Uri.parse('http://41.78.23.95:8021/dist/api/v2/getBusinessUnits');
     var response = await http.get(url);
@@ -47,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             List<String>.from(jsonData['data'].map((x) => x['name']));
         businessUnitId =
             List<String>.from(jsonData['data'].map((x) => x['id'].toString()));
-        businessUnitValue = businessUnit.first;
+        businessUnitValue = businessUnitId.indexed as String;
       });
     }
   }
@@ -175,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mobileController.text,
                     password.text,
                     api.fcmToken,
-                    businessUnitValue,
+                    idValue,
                   );
 
                   if (loginUser!.success == true) {
@@ -265,6 +266,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (String? newValue) {
                       setState(() {
                         businessUnitValue = newValue!;
+                        idValue = businessUnitId[businessUnit.indexOf(businessUnitValue)];
+
                       });
                     },
                     items: businessUnit.map<DropdownMenuItem<String>>(

@@ -194,8 +194,9 @@ class API {
 
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
+    LoginResponseModel? user = LoginResponseModel();
     if (response.statusCode == 200) {
-      LoginResponseModel? user =
+       user =
           LoginResponseModel.fromJson(jsonDecode(response.body));
       if (kDebugMode) {
         print(user.data!.token);
@@ -204,14 +205,14 @@ class API {
       sharedPreferences.setString('password', password);
       return user;
     } else {
-      LoginResponseModel? user =
+       user =
           LoginResponseModel.fromJson(jsonDecode(response.body));
       if (kDebugMode) {
         print('User : $user');
         return user;
       }
     }
-    return null;
+    return user;
   }
 
   getDataCustomer(String token) async {
@@ -451,6 +452,9 @@ class API {
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print(response.body);
+      }
       return HomeResponseModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Error");

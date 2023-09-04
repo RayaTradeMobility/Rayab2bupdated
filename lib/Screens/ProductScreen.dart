@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/Models/ProductbySkuResponseModel.dart';
 import 'package:rayab2bupdated/Screens/ShoppingCardScreen.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -103,14 +104,13 @@ class _ProductScreenState extends State<ProductScreen> {
                                 children: [
                                   //slider
                                   for (var i in snapshot.data!.data!.items!)
-                                    FadeInImage(
-                                      image: NetworkImage(i.images?.imageLink ?? 'https://www.google.com/url?sa=i&url=https%3A%2F%2Frayacorp.com%2F&psig=AOvVaw1EHF8VcdSB-ZEH4AydtjcN&ust=1693557822972000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCOiLjtrAhoEDFQAAAAAdAAAAABAJ'),
-                                      width:
+                                    FadeInImage.memoryNetwork(
+                                      image: i.images?.imageLink ?? 'https://www.google.com/url?sa=i&url=https%3A%2F%2Frayacorp.com%2F&psig=AOvVaw1EHF8VcdSB-ZEH4AydtjcN&ust=1693557822972000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCOiLjtrAhoEDFQAAAAAdAAAAABAJ'
+                                      , width:
                                           MediaQuery.of(context).size.width / 1.6,
                                       height: MediaQuery.of(context).size.height /
                                           2.8,
-                                      placeholder:
-                                          const AssetImage("assets/logo-raya.png"),
+                                      placeholder:kTransparentImage,
                                       imageErrorBuilder:
                                           (context, error, stackTrace) {
                                         return Image.asset(

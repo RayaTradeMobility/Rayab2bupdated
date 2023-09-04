@@ -5,6 +5,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/CardsModel.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
+import 'package:transparent_image/transparent_image.dart';
 import '../Models/GetProductSearchModel.dart';
 import 'ProductScreen.dart';
 
@@ -131,9 +132,9 @@ class ModelScreenState extends State<ModelScreen> {
                           maxWidth: 64,
                           maxHeight: 64,
                         ),
-                        child: FadeInImage(
-                          image: NetworkImage(suggestion.images!.imageLink!),
-                          placeholder: const AssetImage("assets/logo-raya.png"),
+                        child: FadeInImage.memoryNetwork(
+                          image: suggestion.images!.imageLink!,
+                          placeholder: kTransparentImage,
                           imageErrorBuilder: (context, error, stackTrace) {
                             return Image.asset('assets/logo-raya.png',
                                 height: 50.0,
