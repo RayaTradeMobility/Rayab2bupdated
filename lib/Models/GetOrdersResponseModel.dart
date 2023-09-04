@@ -40,17 +40,17 @@ class Data {
 
   Data(
       {this.currentPage,
-      this.firstPageUrl,
-      this.from,
-      this.lastPage,
-      this.lastPageUrl,
-      this.nextPageUrl,
-      this.path,
-      this.perPage,
-      this.prevPageUrl,
-      this.to,
-      this.total,
-      this.items});
+        this.firstPageUrl,
+        this.from,
+        this.lastPage,
+        this.lastPageUrl,
+        this.nextPageUrl,
+        this.path,
+        this.perPage,
+        this.prevPageUrl,
+        this.to,
+        this.total,
+        this.items});
 
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
@@ -96,25 +96,27 @@ class Items {
   int? orderId;
   int? statusId;
   int? shippingAmount;
-  double? grandTotal;
+  int? grandTotal;
   int? paymentMethodId;
   int? totalQty;
   int? totalQtyItem;
   String? statusName;
   String? paymentMethodName;
   String? createdAt;
+  GetAddress? getAddress;
 
   Items(
       {this.orderId,
-      this.statusId,
-      this.shippingAmount,
-      this.grandTotal,
-      this.paymentMethodId,
-      this.totalQty,
-      this.totalQtyItem,
-      this.statusName,
-      this.paymentMethodName,
-      this.createdAt});
+        this.statusId,
+        this.shippingAmount,
+        this.grandTotal,
+        this.paymentMethodId,
+        this.totalQty,
+        this.totalQtyItem,
+        this.statusName,
+        this.paymentMethodName,
+        this.createdAt,
+        this.getAddress});
 
   Items.fromJson(Map<String, dynamic> json) {
     orderId = json['order_id'];
@@ -127,6 +129,9 @@ class Items {
     statusName = json['status_name'];
     paymentMethodName = json['payment_method_name'];
     createdAt = json['created_at'];
+    getAddress = json['get_address'] != null
+        ? GetAddress.fromJson(json['get_address'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -141,6 +146,35 @@ class Items {
     data['status_name'] = statusName;
     data['payment_method_name'] = paymentMethodName;
     data['created_at'] = createdAt;
+    if (getAddress != null) {
+      data['get_address'] = getAddress!.toJson();
+    }
+    return data;
+  }
+}
+
+class GetAddress {
+  String? address;
+  String? street;
+  String? buildingNumber;
+  String? fullAddress;
+
+  GetAddress(
+      {this.address, this.street, this.buildingNumber, this.fullAddress});
+
+  GetAddress.fromJson(Map<String, dynamic> json) {
+    address = json['address'];
+    street = json['street'];
+    buildingNumber = json['building_number'];
+    fullAddress = json['full_address'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['address'] = address;
+    data['street'] = street;
+    data['building_number'] = buildingNumber;
+    data['full_address'] = fullAddress;
     return data;
   }
 }

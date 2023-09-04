@@ -76,7 +76,7 @@ class OrdersScreenState extends State<OrdersScreen>
               bottom: Radius.circular(10),
             ),
           ),
-          title: const Text("طلباتي"),
+          title:  const Text("طلباتي"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -124,7 +124,7 @@ class OrdersScreenState extends State<OrdersScreen>
                               for (var i in snapshot.data!.data!.items!)
                                 if (i.statusId != 5 && i.statusId != 6)
                                   buildSingleChildScrollView(
-                                      i.grandTotal ?? 0.0,
+                                      i.grandTotal ?? 0,
                                       i.statusName ?? '',
                                       i.orderId ?? 0,
                                       i.createdAt ?? '',
@@ -166,7 +166,8 @@ class OrdersScreenState extends State<OrdersScreen>
                                   ],
                                 )
                             ]);
-                          } else if (snapshot.hasError) {
+                          } else if (snapshot.hasError)
+                          {
                             return Center(
                               child: TextButton(
                                 child: const Text('Login'),
@@ -252,7 +253,8 @@ class OrdersScreenState extends State<OrdersScreen>
                                 },
                               ),
                             );
-                          } else {
+                          }
+                          else {
                             return const Center(
                                 child: Padding(
                                   padding: EdgeInsets.all(180.0),
@@ -270,7 +272,7 @@ class OrdersScreenState extends State<OrdersScreen>
     );
   }
 
-  Column buildSingleChildScrollView(double netTotal, String status, int orderId,
+  Column buildSingleChildScrollView(int netTotal, String status, int orderId,
       String createdDate, int qtyTotal) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,

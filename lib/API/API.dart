@@ -21,7 +21,6 @@ import 'package:rayab2bupdated/Models/NotificationModel.dart';
 import 'package:rayab2bupdated/Models/OpenCartResponseModel.dart';
 import 'package:rayab2bupdated/Models/OrderDetailsResponseModel.dart';
 import 'package:rayab2bupdated/Models/OrderResponseModel.dart';
-import 'package:rayab2bupdated/Models/ProductbySkuResponseModel.dart';
 import 'package:rayab2bupdated/Models/RegisterResponseModel.dart';
 import 'package:rayab2bupdated/Models/ShippingInformationResponseModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +29,7 @@ import '../Models/CreateAddressModel.dart';
 import '../Models/EstimateShippingMethodResponse.dart';
 import '../Models/FavouriteModel.dart';
 import '../Models/GetCategoriesNewResponseModel.dart';
+import '../Models/GetProductScreenModel.dart';
 import '../Models/GetProductSearchModel.dart' as getpro;
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -191,7 +191,9 @@ class API {
       'business_unit_id': businessUnitID
     });
     request.headers.addAll(headers);
-
+    if (kDebugMode) {
+      print(request.body);
+    }
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     LoginResponseModel? user = LoginResponseModel();
@@ -443,8 +445,9 @@ class API {
     }
   }
 
-  Future<HomeResponseModel> getHome() async {
-    var headers = {'Accept': 'application/json'};
+  Future<HomeResponseModel> getHome(String token) async {
+    var headers = {'Accept': 'application/json',
+      'Authorization': 'Bearer $token'};
     var request = http.Request('GET', Uri.parse('$url/home'));
 
     request.headers.addAll(headers);
@@ -461,20 +464,20 @@ class API {
     }
   }
 
-  Future<ProductbySkuResponseModel> getProductBySku(String sku) async {
-    var headers = {'Accept': 'application/json'};
-    var request = http.Request('GET', Uri.parse('$url/getProductsNew?sku=$sku'));
-
-    request.headers.addAll(headers);
-
-    var streamedResponse = await request.send();
-    var response = await http.Response.fromStream(streamedResponse);
-    if (response.statusCode == 200) {
-      return ProductbySkuResponseModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception("Error");
-    }
-  }
+  // Future<ProductbySkuResponseModel> getProductBySku(String sku) async {
+  //   var headers = {'Accept': 'application/json'};
+  //   var request = http.Request('GET', Uri.parse('$url/getProductsNew?sku=$sku'));
+  //
+  //   request.headers.addAll(headers);
+  //
+  //   var streamedResponse = await request.send();
+  //   var response = await http.Response.fromStream(streamedResponse);
+  //   if (response.statusCode == 200) {
+  //     return ProductbySkuResponseModel.fromJson(jsonDecode(response.body));
+  //   } else {
+  //     throw Exception("Error");
+  //   }
+  // }
 
   Future<GetCategoriesNewResponseModel> getCategoriesNew(int? page) async {
     var headers = {'Accept': 'application/json'};
@@ -571,7 +574,21 @@ class API {
       throw Exception("Error");
     }
   }
+  Future<ProductbySkuModel> getProductBySku(String sku,String token) async {
+    var headers = {'Accept': 'application/json',
+    'Authorization':'Bearer $token'};
+    var request = http.Request('GET', Uri.parse('$url/getProduct?sku=$sku'));
 
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    if (response.statusCode == 200) {
+      return ProductbySkuModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception("Error");
+    }
+  }
   Future<getpro.GetProductSearchModel> getProductCat(
       int categoryID, int pageNumber, String token) async {
     var headers = {'Authorization': 'Bearer $token'};

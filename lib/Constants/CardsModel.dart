@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, file_names
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -141,6 +142,9 @@ class _CardScreenModelState extends State<CardScreenModel> {
                   ),
                 TextButton(
                   onPressed: () async {
+                    if (kDebugMode) {
+                      print(widget.sku);
+                    }
                     if (icon1.icon == LineAwesomeIcons.heart) {
                       setState(() {
                         api.addToFavourite(

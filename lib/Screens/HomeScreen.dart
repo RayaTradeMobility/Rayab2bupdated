@@ -14,7 +14,6 @@ import 'ModelScreen.dart';
 import 'ProductScreen.dart';
 import '../Models/NotificationModel.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen(
       {Key? key,
@@ -48,14 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    _home = api.getHome();
+    _home = api.getHome(widget.token);
     showNotification();
 
     super.initState();
   }
+
   Future<void> _refreshData() async {
     setState(() {
-      _home = api.getHome();
+      _home = api.getHome(widget.token);
     });
   }
 
@@ -127,12 +127,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       maxHeight: 64,
                                     ),
                                     child: FadeInImage.memoryNetwork(
-                                      image:
-                                          suggestion.images!.imageLink!,
-                                      placeholder:kTransparentImage,
+                                      image: suggestion.images!.imageLink!,
+                                      placeholder: kTransparentImage,
                                       imageErrorBuilder:
                                           (context, error, stackTrace) {
-                                        return Image.asset('assets/logo-raya.png',
+                                        return Image.asset(
+                                            'assets/logo-raya.png',
                                             height: 50.0,
                                             width: 120.0,
                                             fit: BoxFit.fitWidth);
@@ -266,8 +266,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             border: Border.all(
                                                 color: Colors.black,
                                                 style: BorderStyle.none),
-                                            borderRadius: const BorderRadius.all(
-                                                Radius.circular(15))),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(15))),
                                         child: Image.asset(
                                           imagePath,
                                           width: 400,
@@ -320,7 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: snapshot
-                                          .data!.data![0].products!.isNotEmpty
+                                          .data!.data![0].categories!.isNotEmpty
                                       ? Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -338,9 +339,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           child: Card(
                                                             shape:
                                                                 const RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius.all(
-                                                                      Radius.circular(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
                                                                           10.0)),
                                                             ),
                                                             elevation: 5.0,
@@ -352,24 +353,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
                                                               children: [
-                                                                FadeInImage.memoryNetwork(
-                                                                  image:
-                                                                      i.imageLink!,
-                                                                  placeholder: kTransparentImage,
+                                                                FadeInImage
+                                                                    .memoryNetwork(
+                                                                  image: i
+                                                                      .imageLink!,
+                                                                  placeholder:
+                                                                      kTransparentImage,
                                                                   imageErrorBuilder:
                                                                       (context,
                                                                           error,
                                                                           stackTrace) {
                                                                     return Image.asset(
                                                                         'assets/logo-raya.png',
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width /
-                                                                            7,
-                                                                        height: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width /
-                                                                            12,
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                7,
+                                                                        height:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                12,
                                                                         fit: BoxFit
                                                                             .fitWidth);
                                                                   },
@@ -388,17 +389,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     builder:
                                                                         (context) {
                                                               return ModelScreen(
-                                                                token:
-                                                                    widget.token,
+                                                                token: widget
+                                                                    .token,
                                                                 categoryName:
                                                                     i.name!,
                                                                 catID: i.id!,
-                                                                mobile:
-                                                                    widget.mobile,
+                                                                mobile: widget
+                                                                    .mobile,
                                                                 firstname: widget
                                                                     .firstname,
-                                                                email:
-                                                                    widget.email,
+                                                                email: widget
+                                                                    .email,
                                                                 customerId: widget
                                                                     .customerId,
                                                               );
@@ -467,7 +468,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: snapshot
-                                          .data!.data![0].products!.isNotEmpty
+                                          .data!.data![0].brands!.isNotEmpty
                                       ? Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -485,9 +486,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           child: Card(
                                                             shape:
                                                                 const RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius.all(
-                                                                      Radius.circular(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
                                                                           10.0)),
                                                             ),
                                                             elevation: 5.0,
@@ -499,24 +500,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
                                                               children: [
-                                                                FadeInImage.memoryNetwork(
-                                                                  image:
-                                                                      i.imageLink!,
-                                                                  placeholder:kTransparentImage,
+                                                                FadeInImage
+                                                                    .memoryNetwork(
+                                                                  image: i
+                                                                      .imageLink!,
+                                                                  placeholder:
+                                                                      kTransparentImage,
                                                                   imageErrorBuilder:
                                                                       (context,
                                                                           error,
                                                                           stackTrace) {
                                                                     return Image.asset(
                                                                         'assets/logo-raya.png',
-                                                                        width: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width /
-                                                                            7,
-                                                                        height: MediaQuery.of(context)
-                                                                                .size
-                                                                                .width /
-                                                                            12,
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                7,
+                                                                        height:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                12,
                                                                         fit: BoxFit
                                                                             .fitWidth);
                                                                   },
@@ -535,17 +536,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     builder:
                                                                         (context) {
                                                               return ModelScreen(
-                                                                token:
-                                                                    widget.token,
+                                                                token: widget
+                                                                    .token,
                                                                 categoryName:
                                                                     i.name!,
                                                                 catID: i.id!,
-                                                                mobile:
-                                                                    widget.mobile,
+                                                                mobile: widget
+                                                                    .mobile,
                                                                 firstname: widget
                                                                     .firstname,
-                                                                email:
-                                                                    widget.email,
+                                                                email: widget
+                                                                    .email,
                                                                 customerId: widget
                                                                     .customerId,
                                                               );
@@ -604,14 +605,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              child: snapshot.data!.data![0].products!.isNotEmpty
+                              child: snapshot
+                                      .data!.data![0].products!.isNotEmpty
                                   ? Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        for (var t
-                                            in snapshot.data!.data![0].products!)
+                                        for (var t in snapshot
+                                            .data!.data![0].products!)
                                           CardScreenModel(
                                             name: t.name!,
                                             salePrice: t.price!,

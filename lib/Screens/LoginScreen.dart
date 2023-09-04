@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   API api = API();
   final _formKey = GlobalKey<FormState>();
   String idValue = '';
-  String businessUnitValue = '';
+  String businessUnitValue = "";
   List<String> businessUnitId = [''];
   List<String> businessUnit = [''];
 
@@ -48,7 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
             List<String>.from(jsonData['data'].map((x) => x['name']));
         businessUnitId =
             List<String>.from(jsonData['data'].map((x) => x['id'].toString()));
-        businessUnitValue = businessUnitId.indexed as String;
+        businessUnitValue = businessUnit.first;
+        idValue = businessUnitId.first;
       });
     }
   }
@@ -124,6 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Theme.of(context).primaryColorDark,
                 ),
                 onPressed: () {
+                  if (kDebugMode) {
+                    print(idValue);
+                  }
                   setState(() {
                     _passwordVisibility = !_passwordVisibility;
                   });
@@ -169,68 +173,85 @@ class _LoginScreenState extends State<LoginScreen> {
                 setState(() {
                   _isLoading = true;
                 });
-                if (_formKey.currentState!.validate()) {
-                  api.checkNetwork();
+                if(idValue!=''){
+                  if (_formKey.currentState!.validate()) {
+                    api.checkNetwork();
 
-                  LoginResponseModel? loginUser = await api.login(
-                    mobileController.text,
-                    password.text,
-                    api.fcmToken,
-                    idValue,
-                  );
+                    LoginResponseModel? loginUser = await api.login(
+                      mobileController.text,
+                      password.text,
+                      api.fcmToken,
+                      idValue,
+                    );
 
-                  if (loginUser!.success == true) {
-                    setState(() {
-                      _isLoading = false;
-                    });
+                    if (loginUser!.success == true) {
+                      setState(() {
+                        _isLoading = false;
+                      });
 
-                    bool isFirstTime = await checkIfFirstTime();
-                    if (isFirstTime) {
-                      // Show IntroductionScreen
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      await prefs.setBool('isFirstTime', false);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => IntroductionScreens( token: loginUser.data!.token!,
+                      bool isFirstTime = await checkIfFirstTime();
+                      if (isFirstTime) {
+                        // Show IntroductionScreen
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        await prefs.setBool('isFirstTime', false);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => IntroductionScreens( token: loginUser.data!.token!,
+                              email: loginUser.data!.email!,
+                              firstname: loginUser.data!.name!,
+                              mobile: loginUser.data!.mobile!,
+                              customerId: loginUser.data!.id!.toString(),),
+                          ),
+                        );
+                      } else {
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+                          return BottomNavMenu(
+                            token: loginUser.data!.token!,
                             email: loginUser.data!.email!,
                             firstname: loginUser.data!.name!,
                             mobile: loginUser.data!.mobile!,
-                            customerId: loginUser.data!.id!.toString(),),
-                        ),
-                      );
+                            customerId: loginUser.data!.id!.toString(),
+                          );
+                        }),  (route) => false);
+                      }
                     } else {
-                      // Proceed with regular login flow
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                        return BottomNavMenu(
-                          token: loginUser.data!.token!,
-                          email: loginUser.data!.email!,
-                          firstname: loginUser.data!.name!,
-                          mobile: loginUser.data!.mobile!,
-                          customerId: loginUser.data!.id!.toString(),
-                        );
-                      }));
+                      setState(() {
+                        _isLoading = false;
+                      });
+
+                      Fluttertoast.showToast(
+                        msg: loginUser.message!,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: MyColorsSample.fontColor,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                     }
-                  } else {
+                  }
+                  else {
                     setState(() {
                       _isLoading = false;
                     });
-
-                    Fluttertoast.showToast(
-                      msg: loginUser.message!,
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: MyColorsSample.fontColor,
-                      textColor: Colors.white,
-                      fontSize: 16.0,
-                    );
                   }
-                } else {
+                }
+                else{
                   setState(() {
                     _isLoading = false;
                   });
+                  Fluttertoast.showToast(
+                    msg: "Please choose Business Unit",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: MyColorsSample.fontColor,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
                 }
+
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -287,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           if (businessUnitValue.isEmpty)
             const Text(
-              'Select a business unit',
+              'Please wait to select business unit...',
               style: TextStyle(color: Colors.red),
             ),
           SizedBox(

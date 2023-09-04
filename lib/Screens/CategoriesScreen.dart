@@ -231,8 +231,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                 builder: (context) {
                                           return ModelScreen(
                                             token: widget.token,
-                                            catID: snapshot
-                                                .data!.data![index].id as int,
+                                            catID: 0,
                                             categoryName: snapshot
                                                 .data!.data![index].name!,
                                             email: widget.email,
