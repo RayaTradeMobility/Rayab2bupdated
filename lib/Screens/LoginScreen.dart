@@ -35,7 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
   List<String> businessUnitId = [''];
   List<String> businessUnit = [''];
 
-
   Future<void> _loadData() async {
     var url = Uri.parse('http://41.78.23.95:8021/dist/api/v2/getBusinessUnits');
     var response = await http.get(url);
@@ -173,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 setState(() {
                   _isLoading = true;
                 });
-                if(idValue!=''){
+                if (idValue != '') {
                   if (_formKey.currentState!.validate()) {
                     api.checkNetwork();
 
@@ -192,20 +191,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       bool isFirstTime = await checkIfFirstTime();
                       if (isFirstTime) {
                         // Show IntroductionScreen
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
                         await prefs.setBool('isFirstTime', false);
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => IntroductionScreens( token: loginUser.data!.token!,
+                            builder: (context) => IntroductionScreens(
+                              token: loginUser.data!.token!,
                               email: loginUser.data!.email!,
                               firstname: loginUser.data!.name!,
                               mobile: loginUser.data!.mobile!,
-                              customerId: loginUser.data!.id!.toString(),),
+                              customerId: loginUser.data!.id!.toString(),
+                            ),
                           ),
                         );
                       } else {
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) {
                           return BottomNavMenu(
                             token: loginUser.data!.token!,
                             email: loginUser.data!.email!,
@@ -213,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             mobile: loginUser.data!.mobile!,
                             customerId: loginUser.data!.id!.toString(),
                           );
-                        }),  (route) => false);
+                        }), (route) => false);
                       }
                     } else {
                       setState(() {
@@ -230,14 +233,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 16.0,
                       );
                     }
-                  }
-                  else {
+                  } else {
                     setState(() {
                       _isLoading = false;
                     });
                   }
-                }
-                else{
+                } else {
                   setState(() {
                     _isLoading = false;
                   });
@@ -251,7 +252,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontSize: 16.0,
                   );
                 }
-
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -260,17 +260,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(32.0),
                 ),
               ),
-              child: _isLoading ? const CircularProgressIndicator() : const Text("تسجيل الدخول"),
+              child: _isLoading
+                  ? const CircularProgressIndicator()
+                  : const Text("تسجيل الدخول"),
             ),
-
-
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 15,
           ),
           Container(
-            width: MediaQuery.of(context).size.width -50 ,
-            height: MediaQuery.of(context).size.height / 15  ,
+            width: MediaQuery.of(context).size.width - 50,
+            height: MediaQuery.of(context).size.height / 15,
             color: MyColorsSample.fontColor,
             child: businessUnitValue.isEmpty
                 ? const Center(child: CircularProgressIndicator())
@@ -287,8 +287,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (String? newValue) {
                       setState(() {
                         businessUnitValue = newValue!;
-                        idValue = businessUnitId[businessUnit.indexOf(businessUnitValue)];
-
+                        idValue = businessUnitId[
+                            businessUnit.indexOf(businessUnitValue)];
                       });
                     },
                     items: businessUnit.map<DropdownMenuItem<String>>(
@@ -296,9 +296,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width *0.79
-                            ,
-                            height: MediaQuery.of(context).size.height /20 ,
+                            width: MediaQuery.of(context).size.width * 0.79,
+                            height: MediaQuery.of(context).size.height / 20,
                             child: Center(child: Text(value)),
                           ),
                         );
@@ -308,7 +307,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           if (businessUnitValue.isEmpty)
             const Text(
-              'Please wait to select business unit...',
+              'Please wait to select business unit',
               style: TextStyle(color: Colors.red),
             ),
           SizedBox(

@@ -88,11 +88,13 @@ class _ProductScreenState extends State<ProductScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 if (snapshot.data!.data!.images!.isEmpty)
-                                  Image.asset('assets/logo-raya.png',width: MediaQuery.of(context).size.width /
-                                      1.6,
-                                    height:
-                                    MediaQuery.of(context).size.height /
-                                        2.8,)
+                                  Image.asset(
+                                    'assets/logo-raya.png',
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.6,
+                                    height: MediaQuery.of(context).size.height /
+                                        2.8,
+                                  )
                                 else
                                   //slider
                                   for (var i in snapshot.data!.data!.images!)
@@ -156,8 +158,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                   onPressed: () {
                                     setState(() {
                                       quantity += 1;
-                                      double sale = double.parse(
-                                          snapshot.data!.data!.priceWithoutComma!);
+                                      double sale = double.parse(snapshot
+                                          .data!.data!.priceWithoutComma!);
                                       double price = sale;
                                       total = quantity * price;
                                       result = total;
@@ -180,6 +182,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       keyboardType: TextInputType.number,
                                       controller: quantityController,
                                       inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
                                         LengthLimitingTextInputFormatter(4),
                                       ],
                                       validator: (quantittes) {
@@ -202,7 +205,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                               double sale;
                                               try {
                                                 sale = double.parse(snapshot
-                                                    .data!.data!.priceWithoutComma!);
+                                                    .data!
+                                                    .data!
+                                                    .priceWithoutComma!);
                                               } catch (e) {
                                                 if (kDebugMode) {
                                                   print(
@@ -230,8 +235,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                   onPressed: () {
                                     setState(() {
                                       if (quantity != 1) {
-                                        double sale = double.parse(
-                                            snapshot.data!.data!.priceWithoutComma!);
+                                        double sale = double.parse(snapshot
+                                            .data!.data!.priceWithoutComma!);
                                         double price = sale;
                                         quantity -= 1;
                                         total = quantity * price;
@@ -249,7 +254,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             )
                           ],
                         ),
-                        if (result != null)
+                        if (result != null && result! > 0)
                           Row(
                             children: [
                               const Text(

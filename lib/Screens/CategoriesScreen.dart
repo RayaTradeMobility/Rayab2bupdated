@@ -126,11 +126,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                 height: 4,
                                               ),
                                               FadeInImage.memoryNetwork(
-                                                image:snapshot
-                                                    .data!
-                                                    .data!
-                                                    .items![index]
-                                                    .imageLink!,
+                                                image: snapshot.data!.data!
+                                                    .items![index].imageLink!,
                                                 placeholder: kTransparentImage,
                                                 imageErrorBuilder: (context,
                                                     error, stackTrace) {
@@ -247,8 +244,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                               CrossAxisAlignment.center,
                                           children: [
                                             FadeInImage.memoryNetwork(
-                                              image: snapshot.data!
-                                                  .data![index].imageLink!,
+                                              image: snapshot.data!.data![index]
+                                                  .imageLink!,
                                               placeholder: kTransparentImage,
                                               imageErrorBuilder:
                                                   (context, error, stackTrace) {

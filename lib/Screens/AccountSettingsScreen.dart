@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 import 'ForgotPasswordScreen.dart';
 
 class AccountSettingScreen extends StatefulWidget {
-  const AccountSettingScreen({super.key, required this.token, required this.name, required this.mobile});
+  const AccountSettingScreen(
+      {super.key,
+      required this.token,
+      required this.name,
+      required this.mobile});
 
-  final String token, name , mobile;
+  final String token, name, mobile;
 
   @override
   State<AccountSettingScreen> createState() => _AccountSettingScreenState();
@@ -60,7 +64,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 )
               ],
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
 
             // TextButton(
             //   onPressed: () {},
@@ -83,7 +89,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                     ))
               ],
             ),
-            const SizedBox(height: 14,),
+            const SizedBox(
+              height: 14,
+            ),
             Row(
               children: [
                 const Icon(
@@ -157,10 +165,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return const ResetPasswordPage();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ResetPasswordPage();
+                }));
               },
             ),
           ],

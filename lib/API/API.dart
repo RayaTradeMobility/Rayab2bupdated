@@ -198,8 +198,7 @@ class API {
     var response = await http.Response.fromStream(streamedResponse);
     LoginResponseModel? user = LoginResponseModel();
     if (response.statusCode == 200) {
-       user =
-          LoginResponseModel.fromJson(jsonDecode(response.body));
+      user = LoginResponseModel.fromJson(jsonDecode(response.body));
       if (kDebugMode) {
         print(user.data!.token);
       }
@@ -207,8 +206,7 @@ class API {
       sharedPreferences.setString('password', password);
       return user;
     } else {
-       user =
-          LoginResponseModel.fromJson(jsonDecode(response.body));
+      user = LoginResponseModel.fromJson(jsonDecode(response.body));
       if (kDebugMode) {
         print('User : $user');
         return user;
@@ -446,8 +444,10 @@ class API {
   }
 
   Future<HomeResponseModel> getHome(String token) async {
-    var headers = {'Accept': 'application/json',
-      'Authorization': 'Bearer $token'};
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
     var request = http.Request('GET', Uri.parse('$url/home'));
 
     request.headers.addAll(headers);
@@ -499,9 +499,10 @@ class API {
     }
   }
 
-  Future<BrandsModel> getBrands( String token) async {
+  Future<BrandsModel> getBrands(String token) async {
     var headers = {'Authorization': 'Bearer $token'};
-    var request = http.Request('GET', Uri.parse('http://41.78.23.95:8021/dist/api/v2/getBrands'));
+    var request = http.Request(
+        'GET', Uri.parse('http://41.78.23.95:8021/dist/api/v2/getBrands'));
     request.body = '''''';
     request.headers.addAll(headers);
 
@@ -574,9 +575,12 @@ class API {
       throw Exception("Error");
     }
   }
-  Future<ProductbySkuModel> getProductBySku(String sku,String token) async {
-    var headers = {'Accept': 'application/json',
-    'Authorization':'Bearer $token'};
+
+  Future<ProductbySkuModel> getProductBySku(String sku, String token) async {
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
     var request = http.Request('GET', Uri.parse('$url/getProduct?sku=$sku'));
 
     request.headers.addAll(headers);
@@ -589,6 +593,7 @@ class API {
       throw Exception("Error");
     }
   }
+
   Future<getpro.GetProductSearchModel> getProductCat(
       int categoryID, int pageNumber, String token) async {
     var headers = {'Authorization': 'Bearer $token'};
@@ -849,7 +854,6 @@ class API {
       res = GetOrdersResponseModel.fromJson(jsonDecode(response.body));
       return res;
     } else {
-
       res.success = false;
       res.message = "Error";
       return res;

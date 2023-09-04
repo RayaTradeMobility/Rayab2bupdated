@@ -6,7 +6,14 @@ import '../Constants/Constants.dart';
 import 'BottomNavMenu.dart';
 
 class IntroductionScreens extends StatelessWidget {
-  const IntroductionScreens({Key? key, required this.token, required this.email, required this.mobile, required this.firstname, required this.customerId}) : super(key: key);
+  const IntroductionScreens(
+      {Key? key,
+      required this.token,
+      required this.email,
+      required this.mobile,
+      required this.firstname,
+      required this.customerId})
+      : super(key: key);
   final String token, email, mobile, firstname, customerId;
 
   @override
@@ -48,7 +55,8 @@ class IntroductionScreens extends StatelessWidget {
             ),
           ],
           onDone: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
               return BottomNavMenu(
                 token: token,
                 email: email,
@@ -57,10 +65,10 @@ class IntroductionScreens extends StatelessWidget {
                 customerId: customerId.toString(),
               );
             }));
-
           },
-          onSkip: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+          onSkip: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
               return BottomNavMenu(
                 token: token,
                 email: email,
@@ -69,17 +77,16 @@ class IntroductionScreens extends StatelessWidget {
                 customerId: customerId.toString(),
               );
             }));
-
           },
           scrollPhysics: const ClampingScrollPhysics(),
           showDoneButton: true,
           showNextButton: true,
           showSkipButton: true,
           skip:
-          const Text("Skip", style: TextStyle(fontWeight: FontWeight.w600)),
+              const Text("Skip", style: TextStyle(fontWeight: FontWeight.w600)),
           next: const Icon(Icons.forward),
           done:
-          const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
+              const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
           dotsDecorator: getDotsDecorator()),
     );
   }
@@ -88,10 +95,10 @@ class IntroductionScreens extends StatelessWidget {
   Widget buildImage(String imagePath) {
     return Center(
         child: Image.asset(
-          imagePath,
-          width: 450,
-          height: 200,
-        ));
+      imagePath,
+      width: 450,
+      height: 200,
+    ));
   }
 
   //method to customise the page style

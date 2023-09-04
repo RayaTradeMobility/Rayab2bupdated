@@ -166,7 +166,8 @@ class _CardScreenState extends State<CardScreen> {
                 height: 120,
                 placeholder: const AssetImage("assets/logo-raya.png"),
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/logo-raya.png', fit: BoxFit.fitWidth);
+                  return Image.asset('assets/logo-raya.png',
+                      fit: BoxFit.fitWidth);
                 },
                 fit: BoxFit.fitWidth,
               ),

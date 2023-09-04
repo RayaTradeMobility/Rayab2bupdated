@@ -17,10 +17,11 @@ class PayScreen extends StatefulWidget {
     required this.firstname,
     required this.customerId,
     required this.totalPrice,
-    required this.totalQty, required this.mobile,
+    required this.totalQty,
+    required this.mobile,
   });
 
-  final String token, email, firstname, customerId, totalPrice , mobile;
+  final String token, email, firstname, customerId, totalPrice, mobile;
 
   final int totalQty;
 
@@ -412,7 +413,7 @@ class PayScreenState extends State<PayScreen> {
                     customerId: widget.customerId,
                     orderId: res.data!.id!.toString(),
                     totalPrice: widget.totalPrice,
-                    mobile:widget.mobile,
+                    mobile: widget.mobile,
                   );
                 }));
               } else {
@@ -504,7 +505,7 @@ class PayScreenState extends State<PayScreen> {
 }
 
 class AlertDialogPage extends StatefulWidget {
-  final String token, email, firstname, customerId, totalPrice , mobile;
+  final String token, email, firstname, customerId, totalPrice, mobile;
 
   final int totalQty;
 
@@ -515,7 +516,8 @@ class AlertDialogPage extends StatefulWidget {
     required this.firstname,
     required this.customerId,
     required this.totalPrice,
-    required this.totalQty, required this.mobile,
+    required this.totalQty,
+    required this.mobile,
   }) : super(key: key);
 
   @override

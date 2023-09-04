@@ -467,111 +467,115 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Center(
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
-                                  child: snapshot
-                                          .data!.data![0].brands!.isNotEmpty
-                                      ? Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            for (var i in snapshot
-                                                .data!.data![0].brands!)
-                                              Column(
-                                                children: [
-                                                  SizedBox(
-                                                      height: 80.0,
-                                                      width: 150.0,
-                                                      child: TextButton(
-                                                          child: Card(
-                                                            shape:
-                                                                const RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10.0)),
-                                                            ),
-                                                            elevation: 5.0,
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                FadeInImage
-                                                                    .memoryNetwork(
-                                                                  image: i
-                                                                      .imageLink!,
-                                                                  placeholder:
-                                                                      kTransparentImage,
-                                                                  imageErrorBuilder:
-                                                                      (context,
+                                  child:
+                                      snapshot.data!.data![0].brands!.isNotEmpty
+                                          ? Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                for (var i in snapshot
+                                                    .data!.data![0].brands!)
+                                                  Column(
+                                                    children: [
+                                                      SizedBox(
+                                                          height: 80.0,
+                                                          width: 150.0,
+                                                          child: TextButton(
+                                                              child: Card(
+                                                                shape:
+                                                                    const RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              10.0)),
+                                                                ),
+                                                                elevation: 5.0,
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    FadeInImage
+                                                                        .memoryNetwork(
+                                                                      image: i
+                                                                          .imageLink!,
+                                                                      placeholder:
+                                                                          kTransparentImage,
+                                                                      imageErrorBuilder: (context,
                                                                           error,
                                                                           stackTrace) {
-                                                                    return Image.asset(
-                                                                        'assets/logo-raya.png',
-                                                                        width:
-                                                                            MediaQuery.of(context).size.width /
+                                                                        return Image.asset(
+                                                                            'assets/logo-raya.png',
+                                                                            width: MediaQuery.of(context).size.width /
                                                                                 7,
-                                                                        height:
-                                                                            MediaQuery.of(context).size.width /
+                                                                            height: MediaQuery.of(context).size.width /
                                                                                 12,
-                                                                        fit: BoxFit
-                                                                            .fitWidth);
-                                                                  },
-                                                                  fit: BoxFit
-                                                                      .fitWidth,
-                                                                  height: 50.0,
-                                                                  width: 130.0,
+                                                                            fit:
+                                                                                BoxFit.fitWidth);
+                                                                      },
+                                                                      fit: BoxFit
+                                                                          .fitWidth,
+                                                                      height:
+                                                                          50.0,
+                                                                      width:
+                                                                          130.0,
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          onPressed: () {
-                                                            Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) {
-                                                              return ModelScreen(
-                                                                token: widget
-                                                                    .token,
-                                                                categoryName:
-                                                                    i.name!,
-                                                                catID: i.id!,
-                                                                mobile: widget
-                                                                    .mobile,
-                                                                firstname: widget
-                                                                    .firstname,
-                                                                email: widget
-                                                                    .email,
-                                                                customerId: widget
-                                                                    .customerId,
-                                                              );
-                                                            }));
-                                                          })),
-                                                  Center(
-                                                      child: Text(
-                                                    i.name!,
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ))
-                                                ],
+                                                              ),
+                                                              onPressed: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) {
+                                                                  return ModelScreen(
+                                                                    token: widget
+                                                                        .token,
+                                                                    categoryName:
+                                                                        i.name!,
+                                                                    catID:
+                                                                        i.id!,
+                                                                    mobile: widget
+                                                                        .mobile,
+                                                                    firstname:
+                                                                        widget
+                                                                            .firstname,
+                                                                    email: widget
+                                                                        .email,
+                                                                    customerId:
+                                                                        widget
+                                                                            .customerId,
+                                                                  );
+                                                                }));
+                                                              })),
+                                                      Center(
+                                                          child: Text(
+                                                        i.name!,
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ))
+                                                    ],
+                                                  ),
+                                                const SizedBox(
+                                                  width: 30.0,
+                                                ),
+                                              ],
+                                            )
+                                          : const Text(
+                                              "لا توجد اقسام في الوقت الحالي",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                            const SizedBox(
-                                              width: 30.0,
                                             ),
-                                          ],
-                                        )
-                                      : const Text(
-                                          "لا توجد اقسام في الوقت الحالي",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
                                 ),
                               ),
                             ),

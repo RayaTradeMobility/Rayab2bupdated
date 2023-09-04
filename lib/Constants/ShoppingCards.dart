@@ -121,7 +121,6 @@ class ShoppingCardsState extends State<ShoppingCards> {
                                         email: widget.email,
                                         mobile: widget.mobile,
                                         firstname: widget.firstname,
-
                                         customerId: widget.customerId,
                                       );
                                     }));

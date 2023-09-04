@@ -11,12 +11,7 @@ import 'ProductScreen.dart';
 
 class ModelScreen extends StatefulWidget {
   final int catID;
-  final String categoryName,
-      token,
-      email,
-      mobile,
-      firstname,
-      customerId;
+  final String categoryName, token, email, mobile, firstname, customerId;
 
   const ModelScreen({
     super.key,
@@ -201,7 +196,7 @@ class ModelScreenState extends State<ModelScreen> {
                               sku: t.sku!,
                               email: widget.email,
                               firstname: widget.firstname,
-                                  mobile: widget.mobile,
+                              mobile: widget.mobile,
                               customerId: widget.customerId,
                             );
                           },

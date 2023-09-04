@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables
 
 class OrderDetailsResponseModel {
   bool? success;
@@ -28,7 +28,7 @@ class Data {
   int? orderId;
   int? statusId;
   int? shippingAmount;
-  double? grandTotal;
+  var grandTotal;
   int? paymentMethodId;
   int? totalQty;
   int? totalQtyItem;
