@@ -244,65 +244,65 @@ class PayScreenState extends State<PayScreen> {
                         ),
                       ),
                     ),
+                    // const Divider(
+                    //   color: Colors.black,
+                    //   thickness: 0.5,
+                    // ),
+                    // Row(
+                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     Text(
+                    //       'اختر طريقة شحن',
+                    //       style: TextStyle(
+                    //           color: Color(_fontColor),
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 16),
+                    //     ),
+                    //     const SizedBox(width: 5.0),
+                    //     const Icon(Icons.local_shipping),
+                    //   ],
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(10.0),
+                    //   child: Card(
+                    //     shape: const RoundedRectangleBorder(
+                    //         borderRadius:
+                    //             BorderRadius.all(Radius.circular(10))),
+                    //     elevation: 10.0,
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.all(10.0),
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.center,
+                    //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //         children: [
+                    //           ListTile(
+                    //             title: const Text("الشحن اليوم التالي"),
+                    //             leading: Radio(
+                    //               value: 1,
+                    //               groupValue: _radioSelected,
+                    //               activeColor: Colors.blue,
+                    //               onChanged: (value) {
+                    //                 setState(() {
+                    //                   _radioSelected1 = value!;
+                    //                 });
+                    //               },
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     const Divider(
                       color: Colors.black,
                       thickness: 0.5,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'اختر طريقة شحن',
-                          style: TextStyle(
-                              color: Color(_fontColor),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
-                        const SizedBox(width: 5.0),
-                        const Icon(Icons.local_shipping),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        elevation: 10.0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ListTile(
-                                title: const Text("الشحن اليوم التالي"),
-                                leading: Radio(
-                                  value: 1,
-                                  groupValue: _radioSelected,
-                                  activeColor: Colors.blue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _radioSelected1 = value!;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Divider(
-                      color: Colors.black,
-                      thickness: 0.5,
-                    ),
-                    paymentRadio(),
-                    const Divider(
-                      color: Colors.black,
-                      thickness: 0.5,
-                    ),
+                    // paymentRadio(),
+                    // const Divider(
+                    //   color: Colors.black,
+                    //   thickness: 0.5,
+                    // ),
                     Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
@@ -435,73 +435,73 @@ class PayScreenState extends State<PayScreen> {
                 ? const CircularProgressIndicator()
                 : const Icon(Icons.payment);
           },
-          label: const Text('اكمال الاوردر'),
+          label: const Text('اكمال الطلب'),
           backgroundColor: Color(_fontColor)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
-  Widget paymentRadio() {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              'اختر طريقة دفع',
-              style: TextStyle(
-                  color: Color(_fontColor),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
-            const SizedBox(width: 5.0),
-            const Icon(CupertinoIcons.money_dollar),
-          ],
-        ),
-        Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Card(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              elevation: 10.0,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: const Text("الدفع عند الاستلام"),
-                      leading: Radio(
-                        value: 1,
-                        groupValue: _radioSelected1,
-                        activeColor: Colors.blue,
-                        onChanged: (value) {
-                          setState(() {
-                            _radioSelected1 = value!;
-                          });
-                        },
-                      ),
-                    ),
-                    ListTile(
-                      title: const Text(" Visa"),
-                      leading: Radio(
-                        value: 2,
-                        groupValue: _radioSelected1,
-                        activeColor: Colors.blue,
-                        onChanged: (value) {
-                          setState(() {
-                            _radioSelected1 = value!;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )),
-      ],
-    );
-  }
+  // Widget paymentRadio() {
+  //   return Column(
+  //     children: [
+  //       Row(
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //         children: [
+  //           Text(
+  //             'اختر طريقة دفع',
+  //             style: TextStyle(
+  //                 color: Color(_fontColor),
+  //                 fontWeight: FontWeight.bold,
+  //                 fontSize: 16),
+  //           ),
+  //           const SizedBox(width: 5.0),
+  //           const Icon(CupertinoIcons.money_dollar),
+  //         ],
+  //       ),
+  //       Padding(
+  //           padding: const EdgeInsets.all(10.0),
+  //           child: Card(
+  //             shape: const RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.all(Radius.circular(10))),
+  //             elevation: 10.0,
+  //             child: Padding(
+  //               padding: const EdgeInsets.all(10.0),
+  //               child: Column(
+  //                 children: [
+  //                   ListTile(
+  //                     title: const Text("الدفع عند الاستلام"),
+  //                     leading: Radio(
+  //                       value: 1,
+  //                       groupValue: _radioSelected1,
+  //                       activeColor: Colors.blue,
+  //                       onChanged: (value) {
+  //                         setState(() {
+  //                           _radioSelected1 = value!;
+  //                         });
+  //                       },
+  //                     ),
+  //                   ),
+  //                   ListTile(
+  //                     title: const Text(" Visa"),
+  //                     leading: Radio(
+  //                       value: 2,
+  //                       groupValue: _radioSelected1,
+  //                       activeColor: Colors.blue,
+  //                       onChanged: (value) {
+  //                         setState(() {
+  //                           _radioSelected1 = value!;
+  //                         });
+  //                       },
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           )),
+  //     ],
+  //   );
+  // }
 }
 
 class AlertDialogPage extends StatefulWidget {

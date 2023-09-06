@@ -324,6 +324,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                 ],
                               ),
                             ),
+
+                            Text("SKU:  ${widget.sku}"),
                             for (var i in snapshot.data!.data!.attributes!)
                               Column(
                                 children: [

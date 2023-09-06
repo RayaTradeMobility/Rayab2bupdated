@@ -228,6 +228,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
                 padding: const EdgeInsets.only(bottom: 10),
                 alignment: Alignment.centerLeft,
                 child: Text(
+
                   widget.name.trim(),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -236,6 +237,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
                     fontSize: 13,
                     color: Color(0xFF4C53A5),
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             if (widget.price != null || widget.price != "0")

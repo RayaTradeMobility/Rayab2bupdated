@@ -68,7 +68,7 @@ class ThanksScreenState extends State<ThanksScreen> {
               ),
               Center(
                   child: Text(
-                'Thanks For Your Order',
+                'شكراً على طلبك.',
                 style: TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.bold,
@@ -79,7 +79,7 @@ class ThanksScreenState extends State<ThanksScreen> {
               ),
               Center(
                   child: Text(
-                'We are working now for your order and will send copy of your receipt to',
+                'نحن نعمل الآن على طلبك وسنرسل نسخة من إيصالك إلى',
                 style: TextStyle(color: Color(_fontcolor)),
               )),
               Center(
@@ -100,7 +100,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                   style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Color(_fontcolor)),
-                  child: const Text("Track Your Order"),
+                  child: const Text("تتبع طلبك"),
                 ),
               ),
               Center(
@@ -120,7 +120,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                   style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
                       backgroundColor: Colors.white),
-                  child: const Text("Back to home screen"),
+                  child: const Text("الرجوع للصفحه الرئيسيه"),
                 ),
               ),
               const SizedBox(
@@ -131,7 +131,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'Order Date',
+                    'معاد الطلب ',
                     style: TextStyle(color: Color(_fontcolor)),
                   ),
                   Text(
@@ -155,7 +155,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'Total Invoice',
+                    'اجمالي الفاتوره',
                     style: TextStyle(color: Color(_fontcolor)),
                   ),
                   Text(

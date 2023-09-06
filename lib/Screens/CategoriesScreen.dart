@@ -87,6 +87,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               snapshot.data!.data!.items!.length,
                               (index) => Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
                                     width:
@@ -149,15 +150,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                 height: 50.0,
                                                 width: 130.0,
                                               ),
-                                              // const SizedBox(height: 5.0),
+                                              const SizedBox(height: 5.0),
                                               Text(
                                                 snapshot.data!.data!
                                                     .items![index].name!,
                                                 style: const TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 10,
+                                                    fontSize: 8,
                                                     fontWeight:
-                                                        FontWeight.bold),
+                                                        FontWeight.bold , ),textAlign: TextAlign.center,
                                               ),
                                             ],
                                           ),

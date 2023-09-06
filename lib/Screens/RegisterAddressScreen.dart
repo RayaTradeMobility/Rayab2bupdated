@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rayab2bupdated/Models/CreateAddressModel.dart';
 import 'package:rayab2bupdated/Screens/LoginScreen.dart';
 import '../API/API.dart';
+import 'NavScreen.dart';
 
 class RegisterAddressScreen extends StatefulWidget {
   const RegisterAddressScreen({Key? key, required this.token})
@@ -28,57 +29,68 @@ class _RegisterAddressScreenState extends State<RegisterAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          child: registerForm(context),
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: SingleChildScrollView(
+            child: registerForm(context),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          setState(() {
-            _isLoading = true;
-          });
-          if (_formKey.currentState!.validate()) {
-            api.checkNetwork();
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          FloatingActionButton.extended(
+            onPressed: () async {
+              setState(() {
+                _isLoading = true;
+              });
+              if (_formKey.currentState!.validate()) {
+                api.checkNetwork();
 
-            CreateAddressModel get = await api.createAddress(
-                widget.token, city.text, street.text, int.parse(building.text));
-            if (get.success == true) {
+                CreateAddressModel get = await api.createAddress(widget.token,
+                    city.text, street.text, int.parse(building.text));
+                if (get.success == true) {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                  // ignore: use_build_context_synchronously
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const LoginScreen();
+                  }));
+                } else {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                  Fluttertoast.showToast(
+                      msg: get.message!.isEmpty ? 'Error' : get.message!,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
+              }
+
               setState(() {
                 _isLoading = false;
               });
-              // ignore: use_build_context_synchronously
+            },
+            label: _isLoading
+                ? const CircularProgressIndicator()
+                : const Text('تسجيل 2/2'),
+            backgroundColor: Color(_fontcolor),
+          ),
+          FloatingActionButton.extended(
+            onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const LoginScreen();
+                return NavScreen();
               }));
-            } else {
-              setState(() {
-                _isLoading = false;
-              });
-              Fluttertoast.showToast(
-                  msg: get.message!.isEmpty ? 'Error' : get.message!,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            }
-          }
-
-          setState(() {
-            _isLoading = false;
-          });
-        },
-        label: _isLoading
-            ? const CircularProgressIndicator()
-            : const Text('تسجيل 2/2'),
-        backgroundColor: Color(_fontcolor),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+            },
+            backgroundColor: Color(_fontcolor),
+            label: Text(' تخطي'),
+          ),
+        ]));
   }
 
   Form registerForm(BuildContext context) {

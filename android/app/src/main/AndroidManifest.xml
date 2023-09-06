@@ -2,7 +2,7 @@
     package="com.raya.rayab2bupdated">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="rayab2bupdated"
+        android:label="Raya Distribution"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
