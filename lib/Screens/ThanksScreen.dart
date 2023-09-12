@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Screens/OrdersScreen.dart';
 import 'BottomNavMenu.dart';
 
@@ -99,7 +100,7 @@ class ThanksScreenState extends State<ThanksScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Color(_fontcolor)),
+                      backgroundColor: MyColorsSample.primary),
                   child: const Text("تتبع طلبك"),
                 ),
               ),

@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rayab2bupdated/Screens/LoginScreen.dart';
@@ -28,9 +29,31 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColorsSample.fontColor,
-        title: const Text('Reset Password'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+        child: AppBar(
+          backgroundColor: MyColorsSample.fontColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+
+            ),
+          ),
+          centerTitle: true,
+          title: Center(child: const Text("اعادة تعيين كلمة المرور" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  MyColorsSample.primary,
+                  MyColorsSample.teal,
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -42,7 +65,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                 controller: phoneNumberController,
                 keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
-                  labelText: 'Phone Number',
+                  labelText: 'رقم الموبايل',
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -55,7 +78,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor: MyColorsSample.fontColor,
+                  backgroundColor: MyColorsSample.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32.0),
                   ),
@@ -122,7 +145,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: MyColorsSample.fontColor,
+                    backgroundColor: MyColorsSample.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0),
                     ),
@@ -183,7 +206,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: MyColorsSample.fontColor,
+                    backgroundColor: MyColorsSample.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0),
                     ),

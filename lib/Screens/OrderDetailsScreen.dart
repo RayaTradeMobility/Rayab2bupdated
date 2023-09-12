@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/OrderDetailsResponseModel.dart';
@@ -22,7 +23,7 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   late Future<OrderDetailsResponseModel> _futureData;
-  final int _fontColor = 0xFF4C53A5;
+  // final int _fontColor = 0xFF4C53A5;
   OrderDetailsResponseModel? order;
   API api = API();
 
@@ -47,15 +48,31 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColorsSample.fontColor,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height /16),
+        child: AppBar(
+          backgroundColor: MyColorsSample.fontColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+            ),
+          ),
+          title: Center(child: const Text("تفاصيل الطلب" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  MyColorsSample.primary,
+                  MyColorsSample.teal,
+                ],
+              ),
+            ),
           ),
         ),
-        title: const Text("تفاصيل الطلب"),
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder<OrderDetailsResponseModel>(
@@ -80,7 +97,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             'طلب رقم ${order!.data?.orderId}#',
                             style: TextStyle(
-                              color: Color(_fontColor),
+                              color: MyColorsSample.primary,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -158,7 +175,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             '${order!.data?.grandTotal!} ج.م ',
                             style: const TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -199,7 +216,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             '${order!.data?.grandTotal!} ج.م ',
                             style: const TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -220,7 +237,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           const Text(
                             '0 ج.م ',
                             style: TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -244,7 +261,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             '${order!.data?.grandTotal!} ج.م ',
                             style: const TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -327,7 +344,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             order!.data!.companyName ?? "",
                             style: const TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -348,7 +365,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             order!.data!.mobile!,
                             style: const TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -369,7 +386,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             '${order!.data!.getAddress!.fullAddress!} ',
                             style: const TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),
@@ -390,7 +407,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           Text(
                             '${order!.data?.shippingAmount!}',
                             style: const TextStyle(
-                                color: MyColorsSample.primaryDark,
+                                color: MyColorsSample.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800),
                           ),

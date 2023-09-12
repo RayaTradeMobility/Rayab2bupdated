@@ -96,7 +96,7 @@ class Items {
   int? orderId;
   int? statusId;
   int? shippingAmount;
-  int? grandTotal;
+  var grandTotal;
   int? paymentMethodId;
   int? totalQty;
   int? totalQtyItem;

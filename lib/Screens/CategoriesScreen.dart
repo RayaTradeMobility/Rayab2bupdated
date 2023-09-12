@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -55,14 +56,33 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: MyColorsSample.fontColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(10),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 9),
+          child: AppBar(
+            backgroundColor: MyColorsSample.fontColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(50),
+              ),
+            ),
+            centerTitle: true, // Added line to center the title
+            title: const Text(
+              "\n شركائنا",
+              style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+            ),
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    MyColorsSample.primary,
+                    MyColorsSample.teal,
+                  ],
+                ),
+              ),
             ),
           ),
-          title: const Text("الاقسام"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -75,100 +95,82 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return SizedBox(
-                        height: MediaQuery.of(context).size.height / 1.6,
+                        // height: MediaQuery.of(context).size.height / 1.6,
                         child: GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            mainAxisSpacing: 0.0,
-                            crossAxisSpacing: 0.0,
-                            childAspectRatio: 1 / 1,
-                            crossAxisCount: 3,
-                            children: List.generate(
-                              snapshot.data!.data!.items!.length,
-                              (index) => Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3.5,
-                                    height: MediaQuery.of(context).size.height /
-                                        7.7,
-                                    child: Card(
-                                      elevation: 10,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                      ),
-                                      child: TextButton(
-                                        onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return ModelScreen(
-                                              token: widget.token,
-                                              catID: snapshot.data!.data!
-                                                  .items![index].id!,
-                                              categoryName: snapshot.data!.data!
-                                                  .items![index].name!,
-                                              email: widget.email,
-                                              mobile: widget.mobile,
-                                              firstname: widget.firstname,
-                                              customerId: widget.customerId,
-                                            );
-                                          }));
-                                        },
-                                        child: Center(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const SizedBox(
-                                                height: 4,
-                                              ),
-                                              FadeInImage.memoryNetwork(
-                                                image: snapshot.data!.data!
-                                                    .items![index].imageLink!,
-                                                placeholder: kTransparentImage,
-                                                imageErrorBuilder: (context,
-                                                    error, stackTrace) {
-                                                  return Image.asset(
-                                                      'assets/logo-raya.png',
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height /
-                                                              21,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height /
-                                                              19,
-                                                      fit: BoxFit.cover);
-                                                },
-                                                fit: BoxFit.fitWidth,
-                                                height: 50.0,
-                                                width: 130.0,
-                                              ),
-                                              const SizedBox(height: 5.0),
-                                              Text(
-                                                snapshot.data!.data!
-                                                    .items![index].name!,
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 8,
-                                                    fontWeight:
-                                                        FontWeight.bold , ),textAlign: TextAlign.center,
-                                              ),
-                                            ],
-                                          ),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          mainAxisSpacing: 0.0,
+                          crossAxisSpacing: 0.0,
+                          childAspectRatio: 1 / 1,
+                          crossAxisCount: 3,
+                          children: List.generate(
+                            snapshot.data!.data!.items!.length,
+                                (index) => Column(
+                              children: [
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 3.5,
+                                  height: MediaQuery.of(context).size.height / 9.7,
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                          return ModelScreen(
+                                            token: widget.token,
+                                            catID: snapshot.data!.data!.items![index].id!,
+                                            categoryName: snapshot.data!.data!.items![index].name!,
+                                            email: widget.email,
+                                            mobile: widget.mobile,
+                                            firstname: widget.firstname,
+                                            customerId: widget.customerId,
+                                          );
+                                        }));
+                                      },
+                                      child: Center(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            FadeInImage.memoryNetwork(
+                                              image: snapshot.data!.data!.items![index].imageLink!,
+                                              placeholder: kTransparentImage,
+                                              imageErrorBuilder: (context, error, stackTrace) {
+                                                return Image.asset(
+                                                  'assets/logo-raya.png',
+                                                  height: MediaQuery.of(context).size.height / 21,
+                                                  width: MediaQuery.of(context).size.height / 19,
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                              fit: BoxFit.fitWidth,
+                                              width: MediaQuery.of(context).size.width / 4.5,
+                                              height: MediaQuery.of(context).size.height / 15.7,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            )),
+                                ),
+                                SizedBox(height: 5.0),
+                                Text(
+                                  snapshot.data!.data!.items![index].name!,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       );
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}'

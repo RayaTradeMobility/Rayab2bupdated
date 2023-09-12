@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Screens/ProductScreen.dart';
@@ -32,7 +33,6 @@ class ShoppingCardScreen extends StatefulWidget {
 }
 
 class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
-  final int _fontcolor = 0xFF4C53A5;
   late Future<GetCartResponseModel> card;
   API api = API();
 
@@ -64,16 +64,35 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: MyColorsSample.fontColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(10),
-            ),
-          ),
-          title: const Text("عربه التسوق"),
-        ),
-        body: RefreshIndicator(
+         appBar:PreferredSize(
+      preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+    child: AppBar(
+    backgroundColor: MyColorsSample.fontColor,
+    shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(
+    bottom: Radius.circular(50),
+
+    ),
+    ),
+    centerTitle: true,
+    title: Center(child: const Text("عربه التسوق" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+    flexibleSpace: Container(
+    decoration: BoxDecoration(
+    gradient: LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+    MyColorsSample.primary,
+    MyColorsSample.teal,
+    ],
+    ),
+    ),
+    ),
+    ),
+    ),
+
+
+    body: RefreshIndicator(
           onRefresh: _refreshData,
           child: SingleChildScrollView(
             child: Padding(
@@ -102,7 +121,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                 Text(
                                   "لا توجد منتجات في عربه التسوق \n",
                                   style: TextStyle(
-                                      color: Color(_fontcolor),
+                                      color: MyColorsSample.primary,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 // Text(
@@ -128,7 +147,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                       }));
                                     },
                                     label: const Text("تسوق الان"),
-                                    backgroundColor: Color(_fontcolor))
+                                    backgroundColor: MyColorsSample.primary)
                               ],
                             )
                           else if (snapshot.data!.success! == true &&
@@ -172,6 +191,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                           if (snapshot.data!.success! == true &&
                               snapshot.data!.data!.items!.isNotEmpty)
                             FloatingActionButton.extended(
+
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -189,7 +209,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                 );
                               },
                               label: const Text("احصل على المنتج بعد الخصم"),
-                              backgroundColor: Color(_fontcolor),
+                              backgroundColor: MyColorsSample.primary,
                               elevation: 5,
                             ),
                         ],

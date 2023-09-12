@@ -57,14 +57,27 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColorsSample.fontColor,
-        iconTheme: const IconThemeData(
-          color: Colors.white, //change your color here
-        ),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+        child: AppBar(
+          backgroundColor: MyColorsSample.fontColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+            ),
+          ),
+          // title: Center(child: const Text("شــركــائـنا" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  MyColorsSample.primary,
+                  MyColorsSample.teal,
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -265,7 +278,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     color: Colors.lightBlue),
                               ),
                               Text(
-                                "$result جنيه مصري ",
+                                "${result!.toStringAsFixed(2)} جنيه مصري ",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,

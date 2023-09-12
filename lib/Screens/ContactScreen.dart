@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 
@@ -9,14 +10,31 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-            "Contact Us",
-            style: TextStyle(color: Colors.white),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+          child: AppBar(
+            backgroundColor: MyColorsSample.fontColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(50),
+
+              ),
+            ),
+            centerTitle: true,
+            title: Center(child: const Text("تواصل معنا" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    MyColorsSample.primary,
+                    MyColorsSample.teal,
+                  ],
+                ),
+              ),
+            ),
           ),
-          backgroundColor: MyColorsSample.fontColor,
         ),
         body: Column(
           children: [

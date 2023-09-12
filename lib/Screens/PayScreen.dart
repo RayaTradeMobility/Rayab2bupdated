@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, file_names
 
-import 'package:flutter/cupertino.dart';
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rayab2bupdated/Screens/ThanksScreen.dart';
@@ -34,7 +34,7 @@ class PayScreenState extends State<PayScreen> {
 
   bool _isLoading = false;
   final int _fontColor = 0xFF4C53A5;
-  final int _radioSelected = 1;
+  // final int _radioSelected = 1;
   int _radioSelected1 = 1;
   int? radioSelectedAddress;
 
@@ -58,21 +58,31 @@ class PayScreenState extends State<PayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(_fontColor),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+        child: AppBar(
+          backgroundColor: MyColorsSample.fontColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+            ),
+          ),
+          title: Center(child: const Text("عربه التسوق" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  MyColorsSample.primary,
+                  MyColorsSample.teal,
+                ],
+              ),
+            ),
           ),
         ),
-        centerTitle: true,
-        title: const Text(
-          "الدفع",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white),
-        ),
-        iconTheme: const IconThemeData(color: Colors.white),
       ),
+
       body: SingleChildScrollView(
           child: RefreshIndicator(
         onRefresh: _refreshData,
@@ -386,7 +396,7 @@ class PayScreenState extends State<PayScreen> {
             api.checkNetwork();
             if (radioSelectedAddress == null) {
               Fluttertoast.showToast(
-                  msg: "Please select Address",
+                  msg: "من فضلك اختر عنوان",
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 1,
@@ -394,7 +404,7 @@ class PayScreenState extends State<PayScreen> {
                   textColor: Colors.white,
                   fontSize: 16.0);
             }
-            {
+            else{
               setState(() {
                 _isLoading = true;
               });
@@ -436,7 +446,7 @@ class PayScreenState extends State<PayScreen> {
                 : const Icon(Icons.payment);
           },
           label: const Text('اكمال الطلب'),
-          backgroundColor: Color(_fontColor)),
+          backgroundColor: MyColorsSample.primary),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

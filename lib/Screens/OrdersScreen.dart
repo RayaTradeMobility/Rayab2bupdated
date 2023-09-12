@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -8,7 +9,6 @@ import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/LoginScreen.dart';
 import 'package:rayab2bupdated/Screens/OrderDetailsScreen.dart';
 import '../API/API.dart';
-import 'CategoriesScreen.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen(
@@ -68,14 +68,33 @@ class OrdersScreenState extends State<OrdersScreen>
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: MyColorsSample.fontColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(10),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 9),
+          child: AppBar(
+            backgroundColor: MyColorsSample.fontColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(50),
+              ),
+            ),
+            centerTitle: true, // Added line to center the title
+            title: const Text(
+              "\n طلباتي",
+              style: ArabicTextStyle(arabicFont: ArabicFont.dinNextLTArabic),
+            ),
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    MyColorsSample.primary,
+                    MyColorsSample.teal,
+                  ],
+                ),
+              ),
             ),
           ),
-          title: const Text("طلباتي"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -94,18 +113,21 @@ class OrdersScreenState extends State<OrdersScreen>
                   borderRadius: BorderRadius.circular(
                     25.0,
                   ),
-                  color: Colors.grey.withOpacity(0.3),
+                  color: MyColorsSample.primary,
                 ),
                 labelStyle:
-                    const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
-                labelColor: MyColorsSample.primary,
+                     ArabicTextStyle(fontWeight: FontWeight.w500, fontSize: 20, arabicFont: ArabicFont.dinNextLTArabic),
+                labelColor: Colors.white,
                 unselectedLabelColor: MyColorsSample.primary,
+                unselectedLabelStyle:ArabicTextStyle(fontWeight: FontWeight.w400, fontSize: 20, arabicFont: ArabicFont.dinNextLTArabic),
+
+
                 tabs: const [
                   Tab(
-                    text: 'الطلبات الجاريه',
+                    text: 'طلبات جارية',
                   ),
                   Tab(
-                    text: 'الطلبات السابقة',
+                    text: 'طلبات سابقة ' ,
                   ),
                 ],
               ),
@@ -130,36 +152,39 @@ class OrdersScreenState extends State<OrdersScreen>
                                   i.totalQty ?? 0),
                           if (snapshot.data!.data!.items!.isEmpty)
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Image.asset("assets/No_orders_img.jpeg"),
-                                const SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  "لا يوجد طلبات الان تسوق و تابع طلبك",
-                                  style: TextStyle(
-                                      color: Color(_fontColor),
-                                      fontWeight: FontWeight.w900),
-                                ),
-                                const SizedBox(
-                                  height: 10.0,
-                                ),
-                                FloatingActionButton.extended(
-                                    onPressed: () {
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return CategoriesScreen(
-                                            token: widget.token,
-                                            email: widget.email,
-                                            customerId: widget.customerId,
-                                            firstname: widget.firstname,
-                                            mobile: widget.mobile);
-                                      }));
-                                    },
-                                    label: const Text("تسوق الان"),
-                                    backgroundColor: Color(_fontColor))
+
+                                SizedBox(height: MediaQuery.of(context).size.height/6),
+
+                                Image.asset("assets/shoppingcard1.png"),
+                                // const SizedBox(
+                                //   height: 10.0,
+                                // ),
+                                // Text(
+                                //   "لا يوجد طلبات الان تسوق و تابع طلبك",
+                                //   style: TextStyle(
+                                //       color: Color(_fontColor),
+                                //       fontWeight: FontWeight.w900),
+                                // ),
+                                // const SizedBox(
+                                //   height: 10.0,
+                                // ),
+                                // FloatingActionButton.extended(
+                                //     onPressed: () {
+                                //       Navigator.push(context,
+                                //           MaterialPageRoute(builder: (context) {
+                                //         return CategoriesScreen(
+                                //             token: widget.token,
+                                //             email: widget.email,
+                                //             customerId: widget.customerId,
+                                //             firstname: widget.firstname,
+                                //             mobile: widget.mobile);
+                                //       }));
+                                //     },
+                                //     label: const Text("تسوق الان"),
+                                //     backgroundColor: Color(_fontColor))
                               ],
                             )
                         ]);
@@ -196,7 +221,7 @@ class OrdersScreenState extends State<OrdersScreen>
                               RefreshIndicator(
                                 onRefresh: _refreshData,
                                 child: buildSingleChildScrollView(
-                                    i.grandTotal!,
+                                    i.grandTotal ?? 0,
                                     i.statusName!,
                                     i.orderId!,
                                     i.createdAt!,
@@ -207,33 +232,34 @@ class OrdersScreenState extends State<OrdersScreen>
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Image.asset("assets/No_orders_img.jpeg"),
+                                SizedBox(height: MediaQuery.of(context).size.height /6,),
+                                Image.asset("assets/shoppingcard1.png"),
                                 const SizedBox(
                                   height: 10.0,
                                 ),
-                                Text(
-                                  "You don't have any order yet Shopping now and track your order",
-                                  style: TextStyle(
-                                      color: Color(_fontColor),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 10.0,
-                                ),
-                                FloatingActionButton.extended(
-                                    onPressed: () {
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return CategoriesScreen(
-                                            token: widget.token,
-                                            email: widget.email,
-                                            customerId: widget.customerId,
-                                            firstname: widget.firstname,
-                                            mobile: widget.mobile);
-                                      }));
-                                    },
-                                    label: const Text("Shopping now"),
-                                    backgroundColor: Color(_fontColor))
+                                // Text(
+                                //   "You don't have any order yet Shopping now and track your order",
+                                //   style: TextStyle(
+                                //       color: Color(_fontColor),
+                                //       fontWeight: FontWeight.bold),
+                                // ),
+                                // const SizedBox(
+                                //   height: 10.0,
+                                // ),
+                                // FloatingActionButton.extended(
+                                //     onPressed: () {
+                                //       Navigator.push(context,
+                                //           MaterialPageRoute(builder: (context) {
+                                //         return CategoriesScreen(
+                                //             token: widget.token,
+                                //             email: widget.email,
+                                //             customerId: widget.customerId,
+                                //             firstname: widget.firstname,
+                                //             mobile: widget.mobile);
+                                //       }));
+                                //     },
+                                //     label: const Text("Shopping now"),
+                                //     backgroundColor: Color(_fontColor))
                               ],
                             )
                         ]);
@@ -267,7 +293,7 @@ class OrdersScreenState extends State<OrdersScreen>
     );
   }
 
-  Column buildSingleChildScrollView(int netTotal, String status, int orderId,
+  Column buildSingleChildScrollView(var netTotal, String status, int orderId,
       String createdDate, int qtyTotal) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,

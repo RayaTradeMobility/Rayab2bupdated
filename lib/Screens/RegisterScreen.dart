@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../API/API.dart';
 import '../Models/RegisterResponseModel.dart';
-import 'RegisterAddressScreen.dart';
+import 'AcivateUserScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -77,9 +77,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 setState(() {
                   _isLoading = false;
                 });
-                // ignore: use_build_context_synchronously
+                // ignore: use_build_context_synchronouslyf
+
+
+
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return RegisterAddressScreen(token: res.data!.token!);
+                  return ActivateUserScreen(
+                      token: res.data!.token! ,
+                      mobileNumber:  mobileNumber.text);
                 }));
               } else {
                 setState(() {

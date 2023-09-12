@@ -27,10 +27,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: AnimatedSplashScreen(
-          splash: Image.asset("assets/logo-raya.png"),
+          splash: Image.asset("assets/splashscreen1.png"),
           nextScreen: const NavScreen(),
           duration: 3000,
-          backgroundColor: Colors.white,
+          splashTransition: SplashTransition.rotationTransition,
         ),
       ),
     );

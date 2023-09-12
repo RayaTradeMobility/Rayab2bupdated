@@ -101,7 +101,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
                   Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        color: const Color(0xFF4C53A5),
+                        color: MyColorsSample.primary,
                         borderRadius: BorderRadius.circular(20)),
                     child: Text(
                       'Sale ${widget.percentagePrice}%',
@@ -235,7 +235,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
                   softWrap: false,
                   style: const TextStyle(
                     fontSize: 13,
-                    color: Color(0xFF4C53A5),
+                    color: Colors.black,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -249,7 +249,7 @@ class _CardScreenModelState extends State<CardScreenModel> {
                   style: const TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF4C53A5),
+                    color: Colors.black,
                   ),
                 ),
               )
@@ -261,24 +261,24 @@ class _CardScreenModelState extends State<CardScreenModel> {
                     style: const TextStyle(
                         fontSize: 10.0, fontWeight: FontWeight.bold)),
               ),
-            widget.stockStatus != ''
-                ? Container(
-                    width: 50,
-                    height: 20,
-                    decoration: BoxDecoration(
-                        color: const Color(0xFF4C53A5),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                      child: Text(
-                        widget.stockStatus,
-                        style: const TextStyle(
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                  )
-                : Container()
+            // widget.stockStatus != ''
+            //     ? Container(
+            //         width: 50,
+            //         height: 20,
+            //         decoration: BoxDecoration(
+            //             color: const Color(0xFF4C53A5),
+            //             borderRadius: BorderRadius.circular(20)),
+            //         child: Center(
+            //           child: Text(
+            //             widget.stockStatus,
+            //             style: const TextStyle(
+            //                 fontSize: 10.0,
+            //                 fontWeight: FontWeight.bold,
+            //                 color: Colors.white),
+            //           ),
+            //         ),
+            //       )
+            //     : Container()
           ],
         ),
       ),

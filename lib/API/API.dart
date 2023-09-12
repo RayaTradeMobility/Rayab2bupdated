@@ -231,6 +231,47 @@ class API {
     }
   }
 
+  sendOTP(String mobile) async {
+    var headers = {
+      'Accept': 'application/json'
+    };
+    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/SendOTPSMS'));
+    request.fields.addAll({
+      'mobile': mobile
+    });
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+
+  }
+
+  Future<OtpCheckModel?> activateUserByOTP(String mobile, String otpPin) async {
+    var headers = {'Accept': 'application/json'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/activation-user'));
+    request.fields.addAll({'mobile': mobile, 'otp': otpPin});
+
+    request.headers.addAll(headers);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode == 200) {
+      return OtpCheckModel.fromJson(jsonDecode(response.body));
+    } else {
+      return OtpCheckModel.fromJson(jsonDecode(response.body));
+    }
+  }
+
+
   mobileOTP(String mobile) async {
     var headers = {'Accept': 'application/json'};
     var request = http.MultipartRequest(
