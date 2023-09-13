@@ -1,6 +1,9 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
+
+import '../Constants/Constants.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key, required this.token}) : super(key: key);
@@ -12,20 +15,38 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-  final int _fontcolor = 0xFF031639;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(_fontcolor),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+        child: AppBar(
+          backgroundColor: MyColorsSample.fontColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+            ),
+          ),
+          centerTitle: true,
+          title: Center(
+            child: const Text(
+              "حول التطبيق",
+              style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+            ),
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  MyColorsSample.primary,
+                  MyColorsSample.teal,
+                ],
+              ),
+            ),
           ),
         ),
-        title: const Text("حول التطبيق"),
-        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

@@ -23,7 +23,6 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   late Future<OrderDetailsResponseModel> _futureData;
-  // final int _fontColor = 0xFF4C53A5;
   OrderDetailsResponseModel? order;
   API api = API();
 
@@ -49,7 +48,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height /16),
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
         child: AppBar(
           backgroundColor: MyColorsSample.fontColor,
           shape: const RoundedRectangleBorder(
@@ -57,7 +56,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               bottom: Radius.circular(50),
             ),
           ),
-          title: Center(child: const Text("تفاصيل الطلب" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          title: Center(
+              child: const Text(
+            "تفاصيل الطلب",
+            style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+          )),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -72,7 +75,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           ),
         ),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder<OrderDetailsResponseModel>(
@@ -156,31 +158,31 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
-                      const Divider(
-                        thickness: 2.0,
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'اجمالي الفاتوره ',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '${order!.data?.grandTotal!} ج.م ',
-                            style: const TextStyle(
-                                color: MyColorsSample.primary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800),
-                          ),
-                        ],
-                      ),
+                      const SizedBox(height: 10),
+                      // const Divider(
+                      //   thickness: 2.0,
+                      // ),
+                      // const SizedBox(height: 20),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       'اجمالي الفاتوره ',
+                      //       style: TextStyle(
+                      //         color: Colors.black.withOpacity(0.5),
+                      //         fontSize: 12,
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //     Text(
+                      //       '${order!.data?.grandTotal!} ج.م ',
+                      //       style: const TextStyle(
+                      //           color: MyColorsSample.primary,
+                      //           fontSize: 12,
+                      //           fontWeight: FontWeight.w800),
+                      //     ),
+                      //   ],
+                      // ),
                       const SizedBox(height: 20),
                       const Divider(
                         thickness: 2.0,
@@ -201,52 +203,54 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 40),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            ' المنتجات(${order!.data!.totalQty!}) ',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '${order!.data?.grandTotal!} ج.م ',
-                            style: const TextStyle(
-                                color: MyColorsSample.primary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800),
-                          ),
-                        ],
-                      ),
+                      // const SizedBox(height: 40),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       ' المنتجات(${order!.data!.totalQty!}) ',
+                      //       style: TextStyle(
+                      //         color: Colors.black.withOpacity(0.5),
+                      //         fontSize: 12,
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //     Text(
+                      //       '${order!.data?.grandTotal!} ج.م ',
+                      //       style: const TextStyle(
+                      //           color: MyColorsSample.primary,
+                      //           fontSize: 12,
+                      //           fontWeight: FontWeight.w800),
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(height: 25),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       ' رصيدك ',
+                      //       style: TextStyle(
+                      //         color: Colors.black.withOpacity(0.5),
+                      //         fontSize: 12,
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //     const Text(
+                      //       '0 ج.م ',
+                      //       style: TextStyle(
+                      //           color: MyColorsSample.primary,
+                      //           fontSize: 12,
+                      //           fontWeight: FontWeight.w800),
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(height: 25),
+                      // const Divider(
+                      //   thickness: 2.0,
+                      // ),
                       const SizedBox(height: 25),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            ' رصيدك ',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Text(
-                            '0 ج.م ',
-                            style: TextStyle(
-                                color: MyColorsSample.primary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 25),
-                      const Divider(
-                        thickness: 2.0,
-                      ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

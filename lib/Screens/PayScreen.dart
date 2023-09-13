@@ -34,6 +34,7 @@ class PayScreenState extends State<PayScreen> {
 
   bool _isLoading = false;
   final int _fontColor = 0xFF4C53A5;
+
   // final int _radioSelected = 1;
   int _radioSelected1 = 1;
   int? radioSelectedAddress;
@@ -67,7 +68,11 @@ class PayScreenState extends State<PayScreen> {
               bottom: Radius.circular(50),
             ),
           ),
-          title: Center(child: const Text("عربه التسوق" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          title: Center(
+              child: const Text(
+            "عربه التسوق",
+            style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+          )),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -82,7 +87,6 @@ class PayScreenState extends State<PayScreen> {
           ),
         ),
       ),
-
       body: SingleChildScrollView(
           child: RefreshIndicator(
         onRefresh: _refreshData,
@@ -191,9 +195,43 @@ class PayScreenState extends State<PayScreen> {
                                     const SizedBox(
                                       height: 7,
                                     ),
+                                    // Row(
+                                    //   mainAxisAlignment:
+                                    //   MainAxisAlignment.center,
+                                    //   children: [
+                                    //     InkWell(
+                                    //         onTap: () {
+                                    //           showDialog(
+                                    //               context: context,
+                                    //               builder: (context) {
+                                    //                 return AlertDialogPage(
+                                    //                   token: widget.token,
+                                    //                   email: widget.email,
+                                    //                   firstname:
+                                    //                   widget.firstname,
+                                    //                   customerId:
+                                    //                   widget.customerId,
+                                    //                   totalPrice:
+                                    //                   widget.totalPrice,
+                                    //                   totalQty: widget.totalQty,
+                                    //                   mobile: widget.mobile,
+                                    //                 );
+                                    //               });
+                                    //         },
+                                    //         child: const Row(
+                                    //           children: [
+                                    //             Icon(Icons.add),
+                                    //             Text("اضافه عنوان جديد"),
+                                    //           ],
+                                    //         ))
+                                    //   ],
+                                    // ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         InkWell(
                                             onTap: () {
@@ -219,16 +257,7 @@ class PayScreenState extends State<PayScreen> {
                                                 Icon(Icons.add),
                                                 Text("اضافه عنوان جديد"),
                                               ],
-                                            ))
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
+                                            )),
                                         InkWell(
                                             onTap: () {
                                               _futureData =
@@ -403,8 +432,7 @@ class PayScreenState extends State<PayScreen> {
                   backgroundColor: Colors.red,
                   textColor: Colors.white,
                   fontSize: 16.0);
-            }
-            else{
+            } else {
               setState(() {
                 _isLoading = true;
               });
@@ -451,67 +479,67 @@ class PayScreenState extends State<PayScreen> {
     );
   }
 
-  // Widget paymentRadio() {
-  //   return Column(
-  //     children: [
-  //       Row(
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //         children: [
-  //           Text(
-  //             'اختر طريقة دفع',
-  //             style: TextStyle(
-  //                 color: Color(_fontColor),
-  //                 fontWeight: FontWeight.bold,
-  //                 fontSize: 16),
-  //           ),
-  //           const SizedBox(width: 5.0),
-  //           const Icon(CupertinoIcons.money_dollar),
-  //         ],
-  //       ),
-  //       Padding(
-  //           padding: const EdgeInsets.all(10.0),
-  //           child: Card(
-  //             shape: const RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.all(Radius.circular(10))),
-  //             elevation: 10.0,
-  //             child: Padding(
-  //               padding: const EdgeInsets.all(10.0),
-  //               child: Column(
-  //                 children: [
-  //                   ListTile(
-  //                     title: const Text("الدفع عند الاستلام"),
-  //                     leading: Radio(
-  //                       value: 1,
-  //                       groupValue: _radioSelected1,
-  //                       activeColor: Colors.blue,
-  //                       onChanged: (value) {
-  //                         setState(() {
-  //                           _radioSelected1 = value!;
-  //                         });
-  //                       },
-  //                     ),
-  //                   ),
-  //                   ListTile(
-  //                     title: const Text(" Visa"),
-  //                     leading: Radio(
-  //                       value: 2,
-  //                       groupValue: _radioSelected1,
-  //                       activeColor: Colors.blue,
-  //                       onChanged: (value) {
-  //                         setState(() {
-  //                           _radioSelected1 = value!;
-  //                         });
-  //                       },
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           )),
-  //     ],
-  //   );
-  // }
+// Widget paymentRadio() {
+//   return Column(
+//     children: [
+//       Row(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         children: [
+//           Text(
+//             'اختر طريقة دفع',
+//             style: TextStyle(
+//                 color: Color(_fontColor),
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 16),
+//           ),
+//           const SizedBox(width: 5.0),
+//           const Icon(CupertinoIcons.money_dollar),
+//         ],
+//       ),
+//       Padding(
+//           padding: const EdgeInsets.all(10.0),
+//           child: Card(
+//             shape: const RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.all(Radius.circular(10))),
+//             elevation: 10.0,
+//             child: Padding(
+//               padding: const EdgeInsets.all(10.0),
+//               child: Column(
+//                 children: [
+//                   ListTile(
+//                     title: const Text("الدفع عند الاستلام"),
+//                     leading: Radio(
+//                       value: 1,
+//                       groupValue: _radioSelected1,
+//                       activeColor: Colors.blue,
+//                       onChanged: (value) {
+//                         setState(() {
+//                           _radioSelected1 = value!;
+//                         });
+//                       },
+//                     ),
+//                   ),
+//                   ListTile(
+//                     title: const Text(" Visa"),
+//                     leading: Radio(
+//                       value: 2,
+//                       groupValue: _radioSelected1,
+//                       activeColor: Colors.blue,
+//                       onChanged: (value) {
+//                         setState(() {
+//                           _radioSelected1 = value!;
+//                         });
+//                       },
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           )),
+//     ],
+//   );
+// }
 }
 
 class AlertDialogPage extends StatefulWidget {

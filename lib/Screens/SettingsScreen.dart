@@ -34,11 +34,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(50),
-
             ),
           ),
           centerTitle: true,
-          title: Center(child: const Text("الاعدادات" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          title: Center(
+              child: const Text(
+            "الاعدادات",
+            style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+          )),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(

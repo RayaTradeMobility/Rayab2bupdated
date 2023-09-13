@@ -18,15 +18,9 @@ class ShoppingCardScreen extends StatefulWidget {
       required this.email,
       required this.mobile,
       required this.firstname,
-
       required this.customerId})
       : super(key: key);
-  final String token,
-      email,
-      mobile,
-      firstname,
-
-      customerId;
+  final String token, email, mobile, firstname, customerId;
 
   @override
   State<ShoppingCardScreen> createState() => _ShoppingCardScreenState();
@@ -64,35 +58,37 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
         return true;
       },
       child: Scaffold(
-         appBar:PreferredSize(
-      preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
-    child: AppBar(
-    backgroundColor: MyColorsSample.fontColor,
-    shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-    bottom: Radius.circular(50),
-
-    ),
-    ),
-    centerTitle: true,
-    title: Center(child: const Text("عربه التسوق" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
-    flexibleSpace: Container(
-    decoration: BoxDecoration(
-    gradient: LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [
-    MyColorsSample.primary,
-    MyColorsSample.teal,
-    ],
-    ),
-    ),
-    ),
-    ),
-    ),
-
-
-    body: RefreshIndicator(
+        appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height / 16),
+          child: AppBar(
+            backgroundColor: MyColorsSample.fontColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(50),
+              ),
+            ),
+            centerTitle: true,
+            title: Center(
+                child: const Text(
+              "عربه التسوق",
+              style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+            )),
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    MyColorsSample.primary,
+                    MyColorsSample.teal,
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        body: RefreshIndicator(
           onRefresh: _refreshData,
           child: SingleChildScrollView(
             child: Padding(
@@ -156,14 +152,13 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                               TextButton(
                                 child: ShoppingCards(
                                   token: widget.token,
-                                  image: i.imageUrl?.imageLink ?? "assets/logo-raya.png" ,
+                                  image: i.imageUrl?.imageLink ??
+                                      "assets/logo-raya.png",
                                   quantity: i.qty ?? 0,
-                                  price: i.price?.replaceAll(',', '')
-                                  ?? "0",
+                                  price: i.price?.replaceAll(',', '') ?? "0",
                                   productId: i.id!,
                                   sku: i.sku!,
-                                  totalPriceProduct:
-                                      i.totalPrice!,
+                                  totalPriceProduct: i.totalPrice!,
                                   postTitle: i.name ?? '',
                                   cardID: i.id!.toString(),
                                   countProducts: i.qty!,
@@ -191,7 +186,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                           if (snapshot.data!.success! == true &&
                               snapshot.data!.data!.items!.isNotEmpty)
                             FloatingActionButton.extended(
-
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -215,8 +209,8 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                         ],
                       );
                     } else if (snapshot.hasError) {
-                      return Text(
-                          '${snapshot.error}' "You don't have data in this time");
+                      return Text('${snapshot.error}'
+                          "You don't have data in this time");
                     } else {
                       return const Padding(
                         padding: EdgeInsets.all(180.0),

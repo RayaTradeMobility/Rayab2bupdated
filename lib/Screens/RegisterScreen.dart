@@ -79,12 +79,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 });
                 // ignore: use_build_context_synchronouslyf
 
-
-
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ActivateUserScreen(
-                      token: res.data!.token! ,
-                      mobileNumber:  mobileNumber.text);
+                      token: res.data!.token!, mobileNumber: mobileNumber.text);
                 }));
               } else {
                 setState(() {

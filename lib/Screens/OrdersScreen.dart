@@ -168,14 +168,12 @@ class OrdersScreenState extends State<OrdersScreen>
                                     child: Column(
                                       children: [
                                         SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3.5,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height /
-                                              9.7,
+                                              7.4,
                                           child: Card(
                                             elevation: 10,
                                             shape: const RoundedRectangleBorder(
@@ -304,11 +302,11 @@ class OrdersScreenState extends State<OrdersScreen>
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              3.5,
+                                              1,
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height /
-                                              9.7,
+                                              7.6,
                                           child: Card(
                                             elevation: 10,
                                             shape: const RoundedRectangleBorder(

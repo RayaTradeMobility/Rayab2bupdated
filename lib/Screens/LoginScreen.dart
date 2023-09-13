@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (loginUser!.success == true) {
                       setState(() {
                         _isLoading = false;
-                        _showOtpField=false;
+                        _showOtpField = false;
                       });
 
                       bool isFirstTime = await checkIfFirstTime();
@@ -221,12 +221,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         }), (route) => false);
                       }
-                    }
-                    else if (loginUser.success == false &&
+                    } else if (loginUser.success == false &&
                         loginUser.message ==
                             "Please activate the first account, in order to be able to purchase !") {
                       setState(() {
-                        _showOtpField =true;
+                        _showOtpField = true;
                         _isLoading = false;
                       });
                       api.sendOTP(mobileController.text);
@@ -239,9 +238,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         textColor: Colors.white,
                         fontSize: 16.0,
                       );
-
-                    }
-                    else {
+                    } else {
                       setState(() {
                         _isLoading = false;
                       });
@@ -328,37 +325,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     ).toList(),
                   ),
           ),
-
           if (businessUnitValue.isEmpty)
             const Text(
               'Please wait to select business unit',
               style: TextStyle(color: Colors.red),
             ),
-    if(_showOtpField==true)
-      ElevatedButton(
-        onPressed: () async {
-          setState(() {
-            _showOtpField =false;
-          });
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) {
-                return ActivateUserScreen(
-                    token: '', mobileNumber: mobileController.text);
-              }));
-        },
-
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: MyColorsSample.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32.0),
-          ),
-        ),
-
-        child: const Text('Activate Account'),
-      ),
-
-
+          if (_showOtpField == true)
+            ElevatedButton(
+              onPressed: () async {
+                setState(() {
+                  _showOtpField = false;
+                });
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ActivateUserScreen(
+                      token: '', mobileNumber: mobileController.text);
+                }));
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: MyColorsSample.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+              ),
+              child: const Text('Activate Account'),
+            ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 8,
           ),

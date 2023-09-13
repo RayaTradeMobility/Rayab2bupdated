@@ -73,7 +73,7 @@ class ModelScreenState extends State<ModelScreen> {
               bottom: Radius.circular(50),
             ),
           ),
-          title: Center(child:  Text(widget.categoryName) ),
+          title: Center(child: Text(widget.categoryName)),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -88,7 +88,6 @@ class ModelScreenState extends State<ModelScreen> {
           ),
         ),
       ),
-
       body: FutureBuilder<GetProductSearchModel>(
         future: _futureData,
         builder: (context, snapshot) {

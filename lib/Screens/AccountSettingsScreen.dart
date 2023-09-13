@@ -38,11 +38,14 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(50),
-
             ),
           ),
           centerTitle: true,
-          title: Center(child: const Text("اعدادات الحساب" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          title: Center(
+              child: const Text(
+            "اعدادات الحساب",
+            style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+          )),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(

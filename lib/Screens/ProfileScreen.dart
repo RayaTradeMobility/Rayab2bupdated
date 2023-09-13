@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -11,6 +10,7 @@ import 'package:rayab2bupdated/Screens/FavouriteScreen.dart';
 import 'package:rayab2bupdated/Screens/NavScreen.dart';
 import 'AboutScreen.dart';
 import 'ContactScreen.dart';
+import 'NotificationScreen.dart';
 import 'SettingsScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -86,19 +86,19 @@ class ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white70,
                   child: TextButton(
                     onPressed: () {
-                      Fluttertoast.showToast(
-                          msg: "Coming Soon",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: MyColorsSample.fontColor,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) {
-                      //   return NotificationScreen(
-                      //       token: widget.token, customerId: widget.customerId);
-                      // }));
+                      // Fluttertoast.showToast(
+                      //     msg: "Coming Soon",
+                      //     toastLength: Toast.LENGTH_SHORT,
+                      //     gravity: ToastGravity.CENTER,
+                      //     timeInSecForIosWeb: 1,
+                      //     backgroundColor: MyColorsSample.fontColor,
+                      //     textColor: Colors.white,
+                      //     fontSize: 16.0);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return NotificationScreen(
+                            token: widget.token, customerId: widget.customerId);
+                      }));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

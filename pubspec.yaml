@@ -54,6 +54,8 @@ dependencies:
   arabic_font: ^0.0.9
   skeletonizer: ^0.7.0
   shimmer: ^3.0.0
+  flutter_swipe_action_cell: ^3.1.2
+
 
 
 dev_dependencies:

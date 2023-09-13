@@ -68,7 +68,11 @@ class FavouriteScreenState extends State<FavouriteScreen> {
               bottom: Radius.circular(50),
             ),
           ),
-          title: Center(child: const Text("المنتجات المفضلة" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+          title: Center(
+              child: const Text(
+            "المنتجات المفضلة",
+            style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+          )),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -83,7 +87,6 @@ class FavouriteScreenState extends State<FavouriteScreen> {
           ),
         ),
       ),
-
       body: FutureBuilder<FavouriteModel>(
         future: _futureData,
         builder: (context, snapshot) {

@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/Models/NotificationModel.dart';
 
@@ -21,6 +22,8 @@ class NotificationScreenState extends State<NotificationScreen> {
   late Future<NotificationModel> _futureData;
   API api = API();
 
+  String logo = 'assets/notificationimg.png';
+
   @override
   void initState() {
     super.initState();
@@ -30,14 +33,34 @@ class NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColorsSample.fontColor,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+        child: AppBar(
+          backgroundColor: MyColorsSample.fontColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+            ),
+          ),
+          centerTitle: true,
+          title: Center(
+              child: const Text(
+            "الاشعارات",
+            style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+          )),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  MyColorsSample.primary,
+                  MyColorsSample.teal,
+                ],
+              ),
+            ),
+          ),
         ),
-        shadowColor: Colors.black,
-        title: const Text("الاشعارات"),
-        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -47,21 +70,48 @@ class NotificationScreenState extends State<NotificationScreen> {
               if (snapshot.hasData) {
                 final notification = snapshot.data;
                 return Expanded(
-                  child: ListView.builder(
-                    itemCount: notification!.data!.items!.length,
-                    itemBuilder: (context, index) {
-                      final order = notification.data!.items![index];
-                      return Card(
-                        child: CustomerCard(
-                          notificationMessage: order.message!,
-                          createdAt: order.createdAt!,
-                          token: widget.token,
-                          customerId: widget.customerId,
-                        ),
-                      );
-                    },
-                  ),
-                );
+                    child: ListView.separated(
+                  itemCount: notification!.data!.items!.length,
+                  itemBuilder: (context, index) {
+                    final order = notification.data!.items![index];
+                    return ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(width: 16.0),
+                          // Adjust the spacing between the image and text
+                          Expanded(
+                            child: Text(
+                              '${order.message!}',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(logo),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider(
+                      height: 14,
+                      thickness: 3,
+                    );
+                  },
+                ));
               } else if (snapshot.hasError) {
                 return const Center(
                   child: Column(

@@ -228,7 +228,6 @@ class _CardScreenModelState extends State<CardScreenModel> {
                 padding: const EdgeInsets.only(bottom: 10),
                 alignment: Alignment.centerLeft,
                 child: Text(
-
                   widget.name.trim(),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

@@ -6,7 +6,7 @@ import 'Screens/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   if (kDebugMode) {
@@ -17,19 +17,16 @@ Future<void> backgroundHandler(RemoteMessage message) async {
 
 void showNotification() async {
   const AndroidNotificationDetails androidPlatformChannelSpecifics =
-  AndroidNotificationDetails('your channel id', 'your channel name',
-
-      importance: Importance.max, priority: Priority.high);
+      AndroidNotificationDetails('your channel id', 'your channel name',
+          importance: Importance.max, priority: Priority.high);
   const NotificationDetails platformChannelSpecifics =
-  NotificationDetails(android: androidPlatformChannelSpecifics);
+      NotificationDetails(android: androidPlatformChannelSpecifics);
 
   await flutterLocalNotificationsPlugin.show(
-      0,
-      'Notification Title',
-      'Notification Body',
-      platformChannelSpecifics,
+      0, 'Notification Title', 'Notification Body', platformChannelSpecifics,
       payload: 'item x');
 }
+
 Future<void> _handleMessage(RemoteMessage message) async {
   if (kDebugMode) {
     print(message.notification!.title);
@@ -71,9 +68,9 @@ Future<void> main() async {
 
   // Initialize the notification plugin
   const AndroidInitializationSettings androidInitializationSettings =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
   const InitializationSettings initializationSettings =
-  InitializationSettings(android: androidInitializationSettings);
+      InitializationSettings(android: androidInitializationSettings);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   runApp(

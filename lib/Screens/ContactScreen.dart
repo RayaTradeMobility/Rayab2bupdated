@@ -11,17 +11,21 @@ class ContactUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height / 16),
           child: AppBar(
             backgroundColor: MyColorsSample.fontColor,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(50),
-
               ),
             ),
             centerTitle: true,
-            title: Center(child: const Text("تواصل معنا" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
+            title: Center(
+                child: const Text(
+              "تواصل معنا",
+              style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+            )),
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(

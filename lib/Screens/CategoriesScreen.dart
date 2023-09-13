@@ -59,7 +59,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       },
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 9),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height / 9),
           child: AppBar(
             backgroundColor: MyColorsSample.fontColor,
             shape: const RoundedRectangleBorder(
@@ -67,7 +68,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 bottom: Radius.circular(50),
               ),
             ),
-            centerTitle: true, // Added line to center the title
+            centerTitle: true,
+            // Added line to center the title
             title: const Text(
               "\n شركائنا",
               style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
@@ -92,143 +94,162 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              FutureBuilder<GetCategoriesNewResponseModel>(
-              future: cat,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 0.0,
-                    crossAxisSpacing: 0.0,
-                    childAspectRatio: 1 / 1,
-                    crossAxisCount: 3,
-                    children: List.generate(
-                      9,
+                FutureBuilder<GetCategoriesNewResponseModel>(
+                  future: cat,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 0.0,
+                        crossAxisSpacing: 0.0,
+                        childAspectRatio: 1 / 1,
+                        crossAxisCount: 3,
+                        children: List.generate(
+                          9,
                           (index) => Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 3.5,
-                              height: MediaQuery.of(context).size.height / 9.7,
-                              child: Card(
-                                elevation: 10,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  height:
+                                      MediaQuery.of(context).size.height / 9.7,
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    child: Container(),
+                                  ),
                                 ),
-                                child: Container(),
-                              ),
+                                SizedBox(height: 5.0),
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 4,
+                                  height: 8.0,
+                                  color: Colors.grey[300],
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 5.0),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 4,
-                              height: 8.0,
-                              color: Colors.grey[300],
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                } else if (snapshot.hasData) {
-                  // Display actual data
-                  return GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 0.0,
-                    crossAxisSpacing: 0.0,
-                    childAspectRatio: 1 / 1,
-                    crossAxisCount: 3,
-                    children: List.generate(
-                      snapshot.data!.data!.items!.length,
+                      );
+                    } else if (snapshot.hasData) {
+                      // Display actual data
+                      return GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 0.0,
+                        crossAxisSpacing: 0.0,
+                        childAspectRatio: 1 / 1,
+                        crossAxisCount: 3,
+                        children: List.generate(
+                          snapshot.data!.data!.items!.length,
                           (index) => Column(
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 3.5,
-                            height: MediaQuery.of(context).size.height / 9.7,
-                            child: Card(
-                              elevation: 10,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                    return ModelScreen(
-                                      token: widget.token,
-                                      catID: snapshot.data!.data!.items![index].id!,
-                                      categoryName: snapshot.data!.data!.items![index].name!,
-                                      email: widget.email,
-                                      mobile: widget.mobile,
-                                      firstname: widget.firstname,
-                                      customerId: widget.customerId,
-                                    );
-                                  }));
-                                },
-                                child: Center(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      const SizedBox(
-                                        height: 4,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                height:
+                                    MediaQuery.of(context).size.height / 9.7,
+                                child: Card(
+                                  elevation: 10,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return ModelScreen(
+                                          token: widget.token,
+                                          catID: snapshot
+                                              .data!.data!.items![index].id!,
+                                          categoryName: snapshot
+                                              .data!.data!.items![index].name!,
+                                          email: widget.email,
+                                          mobile: widget.mobile,
+                                          firstname: widget.firstname,
+                                          customerId: widget.customerId,
+                                        );
+                                      }));
+                                    },
+                                    child: Center(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(
+                                            height: 4,
+                                          ),
+                                          FadeInImage.memoryNetwork(
+                                            image: snapshot.data!.data!
+                                                .items![index].imageLink!,
+                                            placeholder: kTransparentImage,
+                                            imageErrorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                'assets/logo-raya.png',
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    21,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    19,
+                                                fit: BoxFit.cover,
+                                              );
+                                            },
+                                            fit: BoxFit.fitWidth,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4.5,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                15.7,
+                                          ),
+                                        ],
                                       ),
-                                      FadeInImage.memoryNetwork(
-                                        image: snapshot.data!.data!.items![index].imageLink!,
-                                        placeholder: kTransparentImage,
-                                        imageErrorBuilder: (context, error, stackTrace) {
-                                          return Image.asset(
-                                            'assets/logo-raya.png',
-                                            height: MediaQuery.of(context).size.height / 21,
-                                            width: MediaQuery.of(context).size.height / 19,
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                        fit: BoxFit.fitWidth,
-                                        width: MediaQuery.of(context).size.width / 4.5,
-                                        height: MediaQuery.of(context).size.height / 15.7,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                              SizedBox(height: 5.0),
+                              Text(
+                                snapshot.data!.data!.items![index].name!,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 5.0),
-                          Text(
-                            snapshot.data!.data!.items![index].name!,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 11,
-
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  // Show error message if there's an error
-                  return Text(
-                    '${snapshot.error}' "You don't have data at this time",
-                  );
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
-
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      // Show error message if there's an error
+                      return Text(
+                        '${snapshot.error}' "You don't have data at this time",
+                      );
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
                 const SizedBox(
                   height: 10.0,
                 ),
-
                 const SizedBox(
                   height: 20.0,
                 ),
-
                 const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -240,9 +261,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     ),
                   ],
                 ),
-            FutureBuilder<BrandsModel>(
-              future: brands,
-              builder: (context, snapshot) {
+                FutureBuilder<BrandsModel>(
+                  future: brands,
+                  builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return GridView.count(
                         shrinkWrap: true,
@@ -284,96 +305,112 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         ),
                       );
                     } else if (snapshot.hasData) {
-                  // Display actual data
-                  return GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 0.0,
-                    crossAxisSpacing: 0.0,
-                    childAspectRatio: 1 / 1,
-                    crossAxisCount: 3,
-                    children: List.generate(
-                      snapshot.data!.data!.length,
+                      // Display actual data
+                      return GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 0.0,
+                        crossAxisSpacing: 0.0,
+                        childAspectRatio: 1 / 1,
+                        crossAxisCount: 3,
+                        children: List.generate(
+                          snapshot.data!.data!.length,
                           (index) => Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 9,
-                            width: MediaQuery.of(context).size.width / 3.2,
-                            child: Card(
-                              elevation: 10,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                    return ModelScreen(
-                                      token: widget.token,
-                                      catID: 0,
-                                      categoryName: snapshot.data!.data![index].name!,
-                                      email: widget.email,
-                                      mobile: widget.mobile,
-                                      firstname: widget.firstname,
-                                      customerId: widget.customerId,
-                                    );
-                                  }));
-                                },
-                                child: Center(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      const SizedBox(
-                                        height: 4,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 9,
+                                width: MediaQuery.of(context).size.width / 3.2,
+                                child: Card(
+                                  elevation: 10,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return ModelScreen(
+                                          token: widget.token,
+                                          catID: 0,
+                                          categoryName:
+                                              snapshot.data!.data![index].name!,
+                                          email: widget.email,
+                                          mobile: widget.mobile,
+                                          firstname: widget.firstname,
+                                          customerId: widget.customerId,
+                                        );
+                                      }));
+                                    },
+                                    child: Center(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(
+                                            height: 4,
+                                          ),
+                                          FadeInImage.memoryNetwork(
+                                            image: snapshot
+                                                .data!.data![index].imageLink!,
+                                            placeholder: kTransparentImage,
+                                            imageErrorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                'assets/logo-raya.png',
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    21,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    19,
+                                                fit: BoxFit.cover,
+                                              );
+                                            },
+                                            fit: BoxFit.fitWidth,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4.5,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                15.7,
+                                          ),
+                                        ],
                                       ),
-                                      FadeInImage.memoryNetwork(
-                                        image: snapshot.data!.data![index].imageLink!,
-                                        placeholder: kTransparentImage,
-                                        imageErrorBuilder: (context, error, stackTrace) {
-                                          return Image.asset(
-                                            'assets/logo-raya.png',
-                                            height: MediaQuery.of(context).size.height / 21,
-                                            width: MediaQuery.of(context).size.height / 19,
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                        fit: BoxFit.fitWidth,
-                                        width: MediaQuery.of(context).size.width / 4.5,
-                                        height: MediaQuery.of(context).size.height / 15.7,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                              SizedBox(height: 5.0),
+                              Text(
+                                snapshot.data!.data![index].name!,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 5.0),
-                          Text(
-                            snapshot.data!.data![index].name!,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 11,
-
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  // Show error message if there's an error
-                  return Text(
-                    '${snapshot.error}' "You don't have data at this time",
-                  );
-                } else {
-                  // Show a fallback loading state
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      // Show error message if there's an error
+                      return Text(
+                        '${snapshot.error}' "You don't have data at this time",
+                      );
+                    } else {
+                      // Show a fallback loading state
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
               ],
             ),
           ),

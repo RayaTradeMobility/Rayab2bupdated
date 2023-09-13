@@ -41,14 +41,15 @@ class API {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Fluttertoast.showToast(
-            msg: "Loading",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        // Fluttertoast.showToast(
+        //     msg: "Loading",
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.BOTTOM,
+        //     timeInSecForIosWeb: 1,
+        //     backgroundColor: Colors.red,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
+        return null;
       }
     } on SocketException catch (_) {
       Fluttertoast.showToast(
@@ -232,13 +233,10 @@ class API {
   }
 
   sendOTP(String mobile) async {
-    var headers = {
-      'Accept': 'application/json'
-    };
-    var request = http.MultipartRequest('POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/SendOTPSMS'));
-    request.fields.addAll({
-      'mobile': mobile
-    });
+    var headers = {'Accept': 'application/json'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/SendOTPSMS'));
+    request.fields.addAll({'mobile': mobile});
 
     request.headers.addAll(headers);
 
@@ -246,17 +244,15 @@ class API {
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
-    }
-    else {
+    } else {
       print(response.reasonPhrase);
     }
-
   }
 
   Future<OtpCheckModel?> activateUserByOTP(String mobile, String otpPin) async {
     var headers = {'Accept': 'application/json'};
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('http://41.78.23.95:8021/dist/api/v2/activation-user'));
+    var request = http.MultipartRequest('POST',
+        Uri.parse('http://41.78.23.95:8021/dist/api/v2/activation-user'));
     request.fields.addAll({'mobile': mobile, 'otp': otpPin});
 
     request.headers.addAll(headers);
@@ -270,7 +266,6 @@ class API {
       return OtpCheckModel.fromJson(jsonDecode(response.body));
     }
   }
-
 
   mobileOTP(String mobile) async {
     var headers = {'Accept': 'application/json'};
