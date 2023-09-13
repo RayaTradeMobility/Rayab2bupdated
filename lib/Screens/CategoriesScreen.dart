@@ -8,7 +8,6 @@ import 'package:rayab2bupdated/Models/GetCategoriesNewResponseModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/ModelScreen.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../Models/BrandModel.dart';
@@ -255,11 +254,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'جميع الماركات',
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                      '  جميع الماركات',
+                      style: ArabicTextStyle(
+                          arabicFont: ArabicFont.amiri,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 FutureBuilder<BrandsModel>(
                   future: brands,

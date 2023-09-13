@@ -106,10 +106,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     Image.asset(
                       'assets/appbarlogo1.png',
                       height: MediaQuery.of(context).size.height / 8,
-                      width: MediaQuery.of(context).size.height / 2,
+                      width: MediaQuery.of(context).size.height / 1,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(
+                          bottom: 16.0, right: 20, left: 20),
                       child: Container(
                         decoration: BoxDecoration(
                           color: MyColorsSample.primary,
@@ -125,7 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                             decoration: InputDecoration(
                               labelText: 'Search',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle: ArabicTextStyle(
+                                  color: Colors.white,
+                                  arabicFont: ArabicFont.dinNextLTArabic),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(40),
                               ),
