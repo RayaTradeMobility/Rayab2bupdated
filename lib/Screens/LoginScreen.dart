@@ -9,7 +9,7 @@ import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/LoginResponseModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'AcivateUserScreen.dart';
+import 'ActivateUserScreen.dart';
 import 'BottomNavMenu.dart';
 import 'ForgotPasswordScreen.dart';
 import 'IntroductionScreen.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../API/API.dart';
 import '../Models/RegisterResponseModel.dart';
-import 'AcivateUserScreen.dart';
+import 'ActivateUserScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);

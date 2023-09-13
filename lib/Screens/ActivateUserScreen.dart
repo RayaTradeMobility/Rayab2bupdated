@@ -177,7 +177,7 @@ class _ActivateUserScreenState extends State<ActivateUserScreen> {
                 height: 18,
               ),
               Text(
-                "لم توصل لك رساله؟",
+                "لم توصل لك رسالة؟",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
