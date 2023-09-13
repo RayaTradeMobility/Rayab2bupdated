@@ -8,6 +8,7 @@ import 'package:rayab2bupdated/Models/GetOrdersResponseModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
 import 'package:rayab2bupdated/Screens/LoginScreen.dart';
 import 'package:rayab2bupdated/Screens/OrderDetailsScreen.dart';
+import 'package:shimmer/shimmer.dart';
 import '../API/API.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -69,7 +70,8 @@ class OrdersScreenState extends State<OrdersScreen>
       },
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 9),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height / 9),
           child: AppBar(
             backgroundColor: MyColorsSample.fontColor,
             shape: const RoundedRectangleBorder(
@@ -77,7 +79,8 @@ class OrdersScreenState extends State<OrdersScreen>
                 Radius.circular(50),
               ),
             ),
-            centerTitle: true, // Added line to center the title
+            centerTitle: true,
+            // Added line to center the title
             title: const Text(
               "\n طلباتي",
               style: ArabicTextStyle(arabicFont: ArabicFont.dinNextLTArabic),
@@ -115,19 +118,22 @@ class OrdersScreenState extends State<OrdersScreen>
                   ),
                   color: MyColorsSample.primary,
                 ),
-                labelStyle:
-                     ArabicTextStyle(fontWeight: FontWeight.w500, fontSize: 20, arabicFont: ArabicFont.dinNextLTArabic),
+                labelStyle: ArabicTextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                    arabicFont: ArabicFont.dinNextLTArabic),
                 labelColor: Colors.white,
                 unselectedLabelColor: MyColorsSample.primary,
-                unselectedLabelStyle:ArabicTextStyle(fontWeight: FontWeight.w400, fontSize: 20, arabicFont: ArabicFont.dinNextLTArabic),
-
-
+                unselectedLabelStyle: ArabicTextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                    arabicFont: ArabicFont.dinNextLTArabic),
                 tabs: const [
                   Tab(
                     text: 'طلبات جارية',
                   ),
                   Tab(
-                    text: 'طلبات سابقة ' ,
+                    text: 'طلبات سابقة ',
                   ),
                 ],
               ),
@@ -140,6 +146,64 @@ class OrdersScreenState extends State<OrdersScreen>
                   child: FutureBuilder<GetOrdersResponseModel>(
                     future: _futureData,
                     builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 22,
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                mainAxisSpacing: 3.0,
+                                crossAxisSpacing: 3.0,
+                                childAspectRatio: 3 / 1,
+                                crossAxisCount: 1,
+                                children: List.generate(
+                                  3,
+                                  (index) => Shimmer.fromColors(
+                                    baseColor: Colors.grey[300]!,
+                                    highlightColor: Colors.grey[100]!,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3.5,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              9.7,
+                                          child: Card(
+                                            elevation: 10,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                            ),
+                                            child: Container(),
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.0),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          height: 8.0,
+                                          color: Colors.grey[300],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+
                       if (snapshot.hasData) {
                         return Column(children: [
                           for (var i in snapshot.data!.data!.items!)
@@ -155,8 +219,9 @@ class OrdersScreenState extends State<OrdersScreen>
                               mainAxisAlignment: MainAxisAlignment.center,
                               // crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-
-                                SizedBox(height: MediaQuery.of(context).size.height/6),
+                                SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height / 6),
 
                                 Image.asset("assets/shoppingcard1.png"),
                                 // const SizedBox(
@@ -232,7 +297,10 @@ class OrdersScreenState extends State<OrdersScreen>
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(height: MediaQuery.of(context).size.height /6,),
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 6,
+                                ),
                                 Image.asset("assets/shoppingcard1.png"),
                                 const SizedBox(
                                   height: 10.0,

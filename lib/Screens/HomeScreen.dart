@@ -11,6 +11,7 @@ import 'package:rayab2bupdated/Constants/CardsModel.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/HomeResponseModel.dart';
 import 'package:rayab2bupdated/Screens/CategoriesScreen.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:transparent_image/transparent_image.dart';
 import '../Models/GetProductSearchModel.dart';
 import 'ModelScreen.dart';
@@ -192,7 +193,164 @@ class _HomeScreenState extends State<HomeScreen> {
                     return FutureBuilder<HomeResponseModel>(
                         future: _home,
                         builder: (context, snapshot) {
-                          if (snapshot.hasData) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 22,
+                              ),
+                              Shimmer.fromColors(
+                                baseColor: Colors.grey[300]!,
+                                highlightColor: Colors.grey[100]!,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: CarouselSlider(
+                                    options: CarouselOptions(
+                                      height: 200,
+                                      aspectRatio: 2 / 1,
+                                      viewportFraction: 0.8,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: true,
+                                      reverse: false,
+                                      autoPlay: true,
+                                      autoPlayInterval:
+                                          const Duration(seconds: 3),
+                                      autoPlayAnimationDuration:
+                                          const Duration(milliseconds: 800),
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      enlargeCenterPage: true,
+                                      enlargeFactor: 0.3,
+                                      scrollDirection: Axis.horizontal,
+                                    ),
+                                    items: [
+                                      "assets/panel.png",
+                                      "assets/panel.png",
+                                      "assets/panel.png",
+                                    ].map((imagePath) {
+                                      return Builder(
+                                        builder: (BuildContext context) {
+                                          return SizedBox(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Container(
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(25),
+                                              ),
+                                              child: Image.asset(
+                                                imagePath,
+                                                width: 400,
+                                                height: 200,
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                mainAxisSpacing: 0.0,
+                                crossAxisSpacing: 0.0,
+                                childAspectRatio: 1 / 1,
+                                crossAxisCount: 3,
+                                children: List.generate(
+                                  3,
+                                  (index) => Shimmer.fromColors(
+                                    baseColor: Colors.grey[300]!,
+                                    highlightColor: Colors.grey[100]!,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3.5,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              9.7,
+                                          child: Card(
+                                            elevation: 10,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                            ),
+                                            child: Container(),
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.0),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          height: 8.0,
+                                          color: Colors.grey[300],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                mainAxisSpacing: 0.0,
+                                crossAxisSpacing: 0.0,
+                                childAspectRatio: 1 / 1,
+                                crossAxisCount: 3,
+                                children: List.generate(
+                                  3,
+                                  (index) => Shimmer.fromColors(
+                                    baseColor: Colors.grey[300]!,
+                                    highlightColor: Colors.grey[100]!,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3.5,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              9.7,
+                                          child: Card(
+                                            elevation: 10,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                            ),
+                                            child: Container(),
+                                          ),
+                                        ),
+                                        SizedBox(height: 5.0),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          height: 8.0,
+                                          color: Colors.grey[300],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else if (snapshot.hasData) {
                             return Column(
                               children: [
                                 SizedBox(height: 22,),

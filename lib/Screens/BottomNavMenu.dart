@@ -4,10 +4,10 @@ import 'package:arabic_font/arabic_font.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
+// import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/Screens/HomeScreen.dart';
 import 'package:rayab2bupdated/Screens/ShoppingCardScreen.dart';
-
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'CategoriesScreen.dart';
 import 'OrdersScreen.dart';
@@ -16,11 +16,11 @@ import 'ProfileScreen.dart';
 class BottomNavMenu extends StatefulWidget {
   const BottomNavMenu(
       {Key? key,
-        required this.token,
-        required this.email,
-        required this.mobile,
-        required this.firstname,
-        required this.customerId})
+      required this.token,
+      required this.email,
+      required this.mobile,
+      required this.firstname,
+      required this.customerId})
       : super(key: key);
   final String token, email, mobile, firstname, customerId;
 
@@ -30,11 +30,12 @@ class BottomNavMenu extends StatefulWidget {
 
 class _BottomNavMenuState extends State<BottomNavMenu> {
   final PageController _myPage = PageController(initialPage: 0);
-  final Color _iconColor = Colors.black;
-  final Color _iconColor2 = Colors.black;
-  final Color _iconColor3 = Colors.black;
-  final Color _iconColor4 = Colors.black;
-  final Color _iconColor5 = Colors.black;
+
+  // final Color _iconColor = Colors.black;
+  // final Color _iconColor2 = Colors.black;
+  // final Color _iconColor3 = Colors.black;
+  // final Color _iconColor4 = Colors.black;
+  // final Color _iconColor5 = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -46,51 +47,95 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
         color: MyColorsSample.teal,
         items: [
           Container(
-            height: MediaQuery.of(context).size.height/16,
+            height: MediaQuery.of(context).size.height / 15,
             child: Column(
               children: <Widget>[
-                Icon(LineAwesomeIcons.home, size: 20.0, color: _iconColor),
-                Text("الرئيسيه", style: ArabicTextStyle(arabicFont: ArabicFont.amiri,fontSize: 12  ,color: Colors.white)),
+                Image.asset(
+                  'assets/barr.png',
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.height / 30,
+                ),
+                Text("الرئيسيه",
+                    style: ArabicTextStyle(
+                        arabicFont: ArabicFont.avenirArabic,
+                        fontSize: 12,
+                        color: Colors.white)),
               ],
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height/16,
-
-            child: Column(
-              children:<Widget> [
-                Icon(
-                  LineAwesomeIcons.shopping_cart, size: 15, color: _iconColor2,),
-                Text("العربه",style: TextStyle(color: Colors.white),),
-              ],
-            ),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height/16,
+            height: MediaQuery.of(context).size.height / 16,
             child: Column(
               children: <Widget>[
-                Icon(LineAwesomeIcons.archive, size: 15, color: _iconColor4),
-                Text("الاقسام",style: TextStyle(color: Colors.white),),
+                Image.asset(
+                  'assets/barr2.png',
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.height / 35,
+                ),
+                Text(
+                  "العربه",
+                  style: ArabicTextStyle(
+                      arabicFont: ArabicFont.avenirArabic,
+                      fontSize: 12,
+                      color: Colors.white),
+                ),
               ],
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height/16,
-
+            height: MediaQuery.of(context).size.height / 16,
             child: Column(
               children: <Widget>[
-                Icon(LineAwesomeIcons.file, size: 15, color: _iconColor3),
-                Text("طلباتي", style: TextStyle(color: Colors.white),),
+                Image.asset(
+                  'assets/barr1.png',
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.height / 35,
+                ),
+                Text(
+                  "الاقسام",
+                  style: ArabicTextStyle(
+                      arabicFont: ArabicFont.avenirArabic,
+                      fontSize: 12,
+                      color: Colors.white),
+                ),
               ],
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height/16,
-
+            height: MediaQuery.of(context).size.height / 16,
+            child: Column(
+              children: <Widget>[
+                Image.asset(
+                  'assets/barr3.png',
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.height / 35,
+                ),
+                Text(
+                  "طلباتي",
+                  style: ArabicTextStyle(
+                      arabicFont: ArabicFont.avenirArabic,
+                      fontSize: 12,
+                      color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height / 16,
             child: Column(
               children: [
-                Icon(LineAwesomeIcons.user, size: 15, color: _iconColor5),
-                Text("حسابي",style: TextStyle(color: Colors.white),),
+                Image.asset(
+                  'assets/barr4.png',
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.height / 35,
+                ),
+                Text(
+                  "حسابي",
+                  style: ArabicTextStyle(
+                      arabicFont: ArabicFont.avenirArabic,
+                      fontSize: 12,
+                      color: Colors.white),
+                ),
               ],
             ),
           ),

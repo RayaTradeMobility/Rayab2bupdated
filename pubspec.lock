@@ -432,14 +432,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
-  otp_autofill:
-    dependency: "direct main"
-    description:
-      name: otp_autofill
-      sha256: "7811e31a3db43d062fd1cd1131c1bac87410ab74aa403eeda36b850c62ec96e9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   page_transition:
     dependency: transitive
     description:
@@ -496,14 +488,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
-  pin_input_text_field:
-    dependency: transitive
-    description:
-      name: pin_input_text_field
-      sha256: "8d6fc670aa673a4df5976086f0e8039972a5b2bcb783c8db8dd3b9b4b072ca90"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.5.1"
   pinput:
     dependency: "direct main"
     description:
@@ -600,6 +584,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
+      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  skeletonizer:
+    dependency: "direct main"
+    description:
+      name: skeletonizer
+      sha256: "73a4a2a1aa5474550942868f7c4130e9b0170b53daf4a493de9314ee964607fd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -613,22 +613,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  sms_autofill:
-    dependency: "direct main"
-    description:
-      name: sms_autofill
-      sha256: "2eb159f53ed7d76002d6c15cad99e14dbd5f997f3bb7f9bcad9bd44ba5fcd6c3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
-  sms_otp_auto_verify:
-    dependency: "direct main"
-    description:
-      name: sms_otp_auto_verify
-      sha256: "7c7fa9c7f08f60b34e9ba683796899b13c889a68d074b5ed91db9ab72f9b1355"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   source_span:
     dependency: transitive
     description:
