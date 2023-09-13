@@ -40,17 +40,17 @@ class Data {
 
   Data(
       {this.currentPage,
-        this.firstPageUrl,
-        this.from,
-        this.lastPage,
-        this.lastPageUrl,
-        this.nextPageUrl,
-        this.path,
-        this.perPage,
-        this.prevPageUrl,
-        this.to,
-        this.total,
-        this.items});
+      this.firstPageUrl,
+      this.from,
+      this.lastPage,
+      this.lastPageUrl,
+      this.nextPageUrl,
+      this.path,
+      this.perPage,
+      this.prevPageUrl,
+      this.to,
+      this.total,
+      this.items});
 
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
@@ -107,16 +107,16 @@ class Items {
 
   Items(
       {this.orderId,
-        this.statusId,
-        this.shippingAmount,
-        this.grandTotal,
-        this.paymentMethodId,
-        this.totalQty,
-        this.totalQtyItem,
-        this.statusName,
-        this.paymentMethodName,
-        this.createdAt,
-        this.getAddress});
+      this.statusId,
+      this.shippingAmount,
+      this.grandTotal,
+      this.paymentMethodId,
+      this.totalQty,
+      this.totalQtyItem,
+      this.statusName,
+      this.paymentMethodName,
+      this.createdAt,
+      this.getAddress});
 
   Items.fromJson(Map<String, dynamic> json) {
     orderId = json['order_id'];

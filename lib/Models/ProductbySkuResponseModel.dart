@@ -40,17 +40,17 @@ class Data {
 
   Data(
       {this.currentPage,
-        this.firstPageUrl,
-        this.from,
-        this.lastPage,
-        this.lastPageUrl,
-        this.nextPageUrl,
-        this.path,
-        this.perPage,
-        this.prevPageUrl,
-        this.to,
-        this.total,
-        this.items});
+      this.firstPageUrl,
+      this.from,
+      this.lastPage,
+      this.lastPageUrl,
+      this.nextPageUrl,
+      this.path,
+      this.perPage,
+      this.prevPageUrl,
+      this.to,
+      this.total,
+      this.items});
 
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
@@ -103,12 +103,12 @@ class Items {
 
   Items(
       {this.id,
-        this.name,
-        this.sku,
-        this.price,
-        this.priceWithoutComma,
-        this.isStock,
-        this.images});
+      this.name,
+      this.sku,
+      this.price,
+      this.priceWithoutComma,
+      this.isStock,
+      this.images});
 
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -117,8 +117,7 @@ class Items {
     price = json['price'];
     priceWithoutComma = json['price_without_comma'];
     isStock = json['is_stock'];
-    images =
-    json['images'] != null ? Images.fromJson(json['images']) : null;
+    images = json['images'] != null ? Images.fromJson(json['images']) : null;
   }
 
   Map<String, dynamic> toJson() {
