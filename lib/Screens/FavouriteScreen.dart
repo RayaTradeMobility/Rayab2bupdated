@@ -7,6 +7,7 @@ import 'package:rayab2bupdated/Constants/CardsModel.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/FavouriteModel.dart';
 import 'package:rayab2bupdated/Screens/HomeScreen.dart';
+import 'package:shimmer/shimmer.dart';
 
 class FavouriteScreen extends StatefulWidget {
   final String token, email, mobile, firstname, customerId;
@@ -90,7 +91,57 @@ class FavouriteScreenState extends State<FavouriteScreen> {
       body: FutureBuilder<FavouriteModel>(
         future: _futureData,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 45,
+                  ),
+                  GridView.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    shrinkWrap: true,
+                    childAspectRatio: 0.64,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: List.generate(
+                      10,
+                      (index) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                height:
+                                    MediaQuery.of(context).size.height / 3.7,
+                                child: Card(
+                                  elevation: 10,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  // child: Container(),
+                                ),
+                              ),
+                              SizedBox(height: 10.0),
+                              Container(
+                                width: MediaQuery.of(context).size.width / 4,
+                                height: 8.0,
+                                color: Colors.grey[300],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else if (snapshot.hasData) {
             favourite = snapshot.data;
             if (favourite!.data!.items!.isEmpty) {
               return Center(
