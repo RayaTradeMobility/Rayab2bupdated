@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Screens/ProductScreen.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
+import 'package:shimmer/shimmer.dart';
 import '../Constants/ShoppingCards.dart';
 import '../Models/GetCartResponseModel.dart';
 import 'BottomNavMenu.dart';
@@ -96,7 +97,53 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
               child: FutureBuilder<GetCartResponseModel>(
                   future: card,
                   builder: (context, snapshot) {
-                    if (snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 22,
+                            ),
+                            GridView.count(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              mainAxisSpacing: 3.0,
+                              crossAxisSpacing: 3.0,
+                              childAspectRatio: 3 / 1,
+                              crossAxisCount: 1,
+                              children: List.generate(
+                                4,
+                                (index) => Shimmer.fromColors(
+                                  baseColor: Colors.grey[300]!,
+                                  highlightColor: Colors.grey[100]!,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.08,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                7.6,
+                                        child: Card(
+                                          elevation: 10,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                          ),
+                                          child: Container(),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5.0),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else if (snapshot.hasData) {
                       String totalPrice = snapshot.data!.data!.totalPrice!;
                       int totalQty = snapshot.data!.data!.totalQtyItems!;
 

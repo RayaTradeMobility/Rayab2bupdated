@@ -80,16 +80,18 @@ class NotificationScreenState extends State<NotificationScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SizedBox(width: 16.0),
-                          // Adjust the spacing between the image and text
                           Expanded(
                             child: Text(
-                              '${order.message!}',
+                              '${order.message!.replaceAll(',', '\n')}',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            width: 3,
                           ),
                           Container(
                             height: 50,

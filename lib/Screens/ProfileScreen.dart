@@ -1,7 +1,8 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -11,6 +12,7 @@ import 'package:rayab2bupdated/Screens/FavouriteScreen.dart';
 import 'package:rayab2bupdated/Screens/NavScreen.dart';
 import 'AboutScreen.dart';
 import 'ContactScreen.dart';
+import 'NotificationScreen.dart';
 import 'SettingsScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -86,19 +88,19 @@ class ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white70,
                   child: TextButton(
                     onPressed: () {
-                      Fluttertoast.showToast(
-                          msg: "Coming Soon",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: MyColorsSample.fontColor,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) {
-                      //   return NotificationScreen(
-                      //       token: widget.token, customerId: widget.customerId);
-                      // }));
+                      // Fluttertoast.showToast(
+                      //     msg: "Coming Soon",
+                      //     toastLength: Toast.LENGTH_SHORT,
+                      //     gravity: ToastGravity.CENTER,
+                      //     timeInSecForIosWeb: 1,
+                      //     backgroundColor: MyColorsSample.fontColor,
+                      //     textColor: Colors.white,
+                      //     fontSize: 16.0);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return NotificationScreen(
+                            token: widget.token, customerId: widget.customerId);
+                      }));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -174,14 +176,17 @@ class ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: MyColorsSample.primaryDark
-                                      .withOpacity(0.2)),
-                              child: const Icon(LineAwesomeIcons.info)),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 4.0),
+                            child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: MyColorsSample.primaryDark
+                                        .withOpacity(0.2)),
+                                child: const Icon(LineAwesomeIcons.info)),
+                          ),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -224,16 +229,19 @@ class ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: MyColorsSample.primaryDark
-                                      .withOpacity(0.2)),
-                              child: const Icon(LineAwesomeIcons.heart)),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: MyColorsSample.primaryDark
+                                        .withOpacity(0.2)),
+                                child: const Icon(LineAwesomeIcons.heart)),
+                          ),
                           const SizedBox(
-                            width: 1,
+                            width: 0,
                           ),
                           const Center(
                               child: Text(
@@ -276,7 +284,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                                   borderRadius: BorderRadius.circular(100),
                                   color: MyColorsSample.primaryDark
                                       .withOpacity(0.2)),
-                              child: const Icon(LineAwesomeIcons.user_check)),
+                              child: const Icon(LineAwesomeIcons.phone_volume)),
                           const SizedBox(
                             width: 10.0,
                           ),

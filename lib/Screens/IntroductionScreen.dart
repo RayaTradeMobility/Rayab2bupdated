@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import '../Constants/Constants.dart';
@@ -19,38 +20,56 @@ class IntroductionScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColorsSample.fontColor,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 16),
+        child: AppBar(
+          backgroundColor: MyColorsSample.fontColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
+            ),
+          ),
+          centerTitle: true,
+          title: Center(
+            child: const Text(
+              "حول التطبيق",
+              style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
+            ),
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  MyColorsSample.primary,
+                  MyColorsSample.teal,
+                ],
+              ),
+            ),
           ),
         ),
-        title: const Text("حول التطبيق"),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: IntroductionScreen(
           pages: [
             PageViewModel(
-              title: '1st Page',
+              title: '  ',
               body: 'رايه للتوزيع برنامج لتجاره البضاعه و صناعه الارباح',
-              image: buildImage("assets/About_Img.jpeg"),
-              //getPageDecoration, a method to customise the page style
+              image: buildImage(
+                'assets/panel.png',
+              ),
               decoration: getPageDecoration(),
             ),
             PageViewModel(
-              title: '2nd Page',
+              title: '',
               body: 'رايه للتوزيع برنامج لتجاره البضاعه و صناعه الارباح',
               image: buildImage("assets/About_Img.jpeg"),
-              //getPageDecoration, a method to customise the page style
               decoration: getPageDecoration(),
             ),
             PageViewModel(
-              title: '3rd Page',
+              title: '',
               body: 'رايه للتوزيع برنامج لتجاره البضاعه و صناعه الارباح',
-              image: buildImage("assets/About_Img.jpeg"),
-              //getPageDecoration, a method to customise the page style
+              image: buildImage("assets/aboutimg3.jpg"),
               decoration: getPageDecoration(),
             ),
           ],
@@ -91,7 +110,6 @@ class IntroductionScreens extends StatelessWidget {
     );
   }
 
-  //widget to add the image on screen
   Widget buildImage(String imagePath) {
     return Center(
         child: Image.asset(
@@ -101,7 +119,6 @@ class IntroductionScreens extends StatelessWidget {
     ));
   }
 
-  //method to customise the page style
   PageDecoration getPageDecoration() {
     return const PageDecoration(
       imagePadding: EdgeInsets.only(top: 120),
@@ -112,7 +129,6 @@ class IntroductionScreens extends StatelessWidget {
     );
   }
 
-  //method to customize the dots style
   DotsDecorator getDotsDecorator() {
     return const DotsDecorator(
       spacing: EdgeInsets.symmetric(horizontal: 2),

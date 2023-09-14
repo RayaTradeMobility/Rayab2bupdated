@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-// import 'package:particles_flutter/particles_flutter.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/CardsModel.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -65,9 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double h = MediaQuery.of(context).size.height;
-    // double w = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: _refreshData,
@@ -383,9 +379,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "assets/panel.png",
                                   "assets/panel.png",
                                   "assets/panel.png",
-
-                                  // "assets/About_Img.jpeg",
-                                  // "assets/aboutimg3.jpg",
                                 ].map((imagePath) {
                                   return Builder(
                                     builder: (BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/OrderDetailsResponseModel.dart';
+import 'package:shimmer/shimmer.dart';
 import '../API/API.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
@@ -80,7 +81,309 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         child: FutureBuilder<OrderDetailsResponseModel>(
           future: _futureData,
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Container(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 22,
+                      ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 3.0,
+                        crossAxisSpacing: 3.0,
+                        childAspectRatio: 2 / 1,
+                        crossAxisCount: 1,
+                        children: List.generate(
+                          2,
+                          (index) => Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 24,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 28,
+                                ),
+                                const Divider(
+                                  thickness: 5.0,
+                                ),
+                                // SizedBox(
+                                //   width: MediaQuery.of(context)
+                                //       .size
+                                //       .width /
+                                //       1,
+                                //   height: MediaQuery.of(context)
+                                //       .size
+                                //       .height /
+                                //       7.6,
+                                //   child: Card(
+                                //     elevation: 10,
+                                //     shape: const RoundedRectangleBorder(
+                                //       borderRadius: BorderRadius.all(
+                                //           Radius.circular(10)),
+                                //     ),
+                                //     child: Container(),
+                                //   ),
+                                // ),
+                                SizedBox(height: 5.0),
+                                // Container(
+                                //   width: MediaQuery.of(context)
+                                //       .size
+                                //       .width /
+                                //       4,
+                                //   height: 8.0,
+                                //   color: Colors.grey[300],
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 3.0,
+                        crossAxisSpacing: 3.0,
+                        childAspectRatio: 1 / 1,
+                        crossAxisCount: 1,
+                        children: List.generate(
+                          1,
+                          (index) => Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 24,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 28,
+                                ),
+                                Divider(
+                                  thickness: 2,
+                                ),
+                                SizedBox(
+                                  height: 28,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      height: 8.0,
+                                      color: Colors.grey[300],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 24,
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 1,
+                                  height:
+                                      MediaQuery.of(context).size.height / 7.6,
+                                  child: Card(
+                                    elevation: 10,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    child: Container(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else if (snapshot.hasData) {
               order = snapshot.data;
               if (order!.data!.items!.isEmpty) {
                 return const Center(

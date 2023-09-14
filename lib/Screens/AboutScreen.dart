@@ -2,7 +2,6 @@
 
 import 'package:arabic_font/arabic_font.dart';
 import 'package:flutter/material.dart';
-
 import '../Constants/Constants.dart';
 
 class AboutScreen extends StatefulWidget {
