@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:arabic_font/arabic_font.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -133,33 +134,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   'عروض',
                   style: TextStyle(color: Color(_fontcolor)),
                 ),
-                // Switch(
-                //   value: isSwitched,
-                //   onChanged: (value) {
-                //     setState(() {
-                //       isSwitched = value;
-                //       if (isSwitched) {
-                //         FirebaseMessaging.instance.subscribeToTopic('69886747923');
-                //       } else {
-                //         FirebaseMessaging.instance.unsubscribeFromTopic('69886747923');
-                //       }
-                //     });
-                //   },
-                //   activeTrackColor: Colors.blue,
-                //   activeColor: Colors.lightBlue,
-                // ),
                 Switch(
                   value: isSwitched,
                   onChanged: (value) {
-                    setState(
-                      () {
-                        isSwitched = value;
-                      },
-                    );
+                    setState(() {
+                      isSwitched = value;
+                      if (isSwitched) {
+                        FirebaseMessaging.instance
+                            .subscribeToTopic('Rayadistb2b');
+                      } else {
+                        FirebaseMessaging.instance
+                            .unsubscribeFromTopic('Rayadistb2b');
+                      }
+                    });
                   },
                   activeTrackColor: Colors.blue,
                   activeColor: Colors.lightBlue,
                 ),
+                // Switch(
+                //   value: isSwitched,
+                //   onChanged: (value) {
+                //     setState(
+                //       () {
+                //         isSwitched = value;
+                //       },
+                //     );
+                //   },
+                //   activeTrackColor: Colors.blue,
+                //   activeColor: Colors.lightBlue,
+                // ),
               ],
             ),
             Row(

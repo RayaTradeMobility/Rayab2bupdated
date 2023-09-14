@@ -765,9 +765,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               );
             } else if (snapshot.hasError) {
               return Center(
-                child: Image.asset(
-                    'assets/error.png'
-                ),
+                child: Image.asset('assets/error.png'),
               );
             }
             return const Center(child: CircularProgressIndicator());

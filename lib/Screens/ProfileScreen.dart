@@ -100,7 +100,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return NotificationScreen(
-                              token: widget.token, customerId: widget.customerId);
+                              token: widget.token,
+                              customerId: widget.customerId);
                         }));
                       },
                       child: Padding(
@@ -135,7 +136,6 @@ class ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -236,7 +236,6 @@ class ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),

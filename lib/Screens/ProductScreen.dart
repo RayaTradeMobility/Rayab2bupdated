@@ -464,9 +464,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     );
                   } else if (snapshot.hasError) {
                     return Center(
-                      child: Image.asset(
-                          'assets/error.png'
-                      ),
+                      child: Image.asset('assets/error.png'),
                     );
                   } else {
                     return const Center(child: CircularProgressIndicator());
