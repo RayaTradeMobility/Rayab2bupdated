@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../API/API.dart';
@@ -66,7 +67,6 @@ class _ProductScreenState extends State<ProductScreen> {
               bottom: Radius.circular(50),
             ),
           ),
-          // title: Center(child: const Text("شــركــائـنا" , style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),) ),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -89,7 +89,94 @@ class _ProductScreenState extends State<ProductScreen> {
             child: FutureBuilder<ProductbySkuModel>(
                 future: _product,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Container(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 22,
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            mainAxisSpacing: 3.0,
+                            crossAxisSpacing: 3.0,
+                            childAspectRatio: 1 / 1,
+                            crossAxisCount: 1,
+                            children: List.generate(
+                              1,
+                              (index) => Shimmer.fromColors(
+                                baseColor: Colors.grey[300]!,
+                                highlightColor: Colors.grey[100]!,
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width / 1,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              3.6,
+                                      child: Card(
+                                        elevation: 10,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
+                                        child: Container(),
+                                      ),
+                                    ),
+                                    SizedBox(height: 38.0),
+                                    Divider(
+                                      thickness: 3,
+                                    ),
+                                    SizedBox(height: 12.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3,
+                                          height: 8.0,
+                                          color: Colors.grey[300],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 18.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2.5,
+                                          height: 8.0,
+                                          color: Colors.grey[300],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Divider(
+                                      thickness: 2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else if (snapshot.hasData) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

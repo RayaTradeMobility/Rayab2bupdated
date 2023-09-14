@@ -56,11 +56,12 @@ class ShoppingCardsState extends State<ShoppingCards> {
               key: UniqueKey(),
               trailingActions: <SwipeAction>[
                 SwipeAction(
+                    performsFirstActionWithFullSwipe: true,
                     title: '',
                     icon: Icon(
                       LineAwesomeIcons.trash,
                       color: Colors.black,
-                      size: 24,
+                      size: 34,
                     ),
                     onTap: (CompletionHandler handler) async {
                       await api.deleteProducts(
@@ -81,7 +82,10 @@ class ShoppingCardsState extends State<ShoppingCards> {
                     color: Colors.red),
               ],
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                  right: 8.0,
+                  left: 8,
+                ),
                 child: Card(
                   elevation: 5,
                   shape: RoundedRectangleBorder(
