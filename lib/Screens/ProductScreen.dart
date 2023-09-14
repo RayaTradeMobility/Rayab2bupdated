@@ -463,8 +463,11 @@ class _ProductScreenState extends State<ProductScreen> {
                       ],
                     );
                   } else if (snapshot.hasError) {
-                    return Text(
-                        '${snapshot.error}' "You don't have data in this time");
+                    return Center(
+                      child: Image.asset(
+                          'assets/error.png'
+                      ),
+                    );
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }

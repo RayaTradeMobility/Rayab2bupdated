@@ -77,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 setState(() {
                   _isLoading = false;
                 });
-                // ignore: use_build_context_synchronouslyf
+                // ignore: use_build_context_synchronously
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ActivateUserScreen(
@@ -184,12 +184,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 icon: Icon(
-                  // Based on passwordVisible state choose the icon
                   _passwordVisibility ? Icons.visibility : Icons.visibility_off,
                   color: Theme.of(context).primaryColorDark,
                 ),
                 onPressed: () {
-                  // Update the state i.e. toogle the state of passwordVisible variable
                   setState(() {
                     _passwordVisibility = !_passwordVisibility;
                   });
@@ -215,44 +213,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               }
             },
           ),
-          // TextFormField(
-          //   controller: password,
-          //   obscureText: _passwordVisibility,
-          //   decoration: InputDecoration(
-          //     suffixIcon: IconButton(
-          //       icon: Icon(
-          //         // Based on passwordVisible state choose the icon
-          //         _passwordVisibility ? Icons.visibility : Icons.visibility_off,
-          //         color: Theme.of(context).primaryColorDark,
-          //       ),
-          //       onPressed: () {
-          //         // Update the state i.e. toogle the state of passwordVisible variable
-          //         setState(() {
-          //           _passwordVisibility = !_passwordVisibility;
-          //         });
-          //       },
-          //     ),
-          //     hintText: "تأكيد الباسورد",
-          //     prefixIcon: const Icon(Icons.password),
-          //     enabledBorder: const OutlineInputBorder(
-          //       borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          //       borderSide: BorderSide(
-          //         color: Colors.grey,
-          //       ),
-          //     ),
-          //     focusedBorder: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(20.0),
-          //     ),
-          //   ),
-          //   validator: (password) {
-          //     if (isPasswordValid(password!)) {
-          //       return null;
-          //     } else {
-          //       return 'ادخل باسورد اكبر من 6 حروف';
-          //     }
-          //   },
-          // ),
-
           const SizedBox(
             height: 10.0,
           ),
@@ -337,7 +297,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               }
             },
           ),
-
           const SizedBox(
             height: 10.0,
           ),

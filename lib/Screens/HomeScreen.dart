@@ -783,8 +783,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         );
                       } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}'
-                            ",s You don't have data in this time");
+                        return Center(
+                          child: Image.asset('assets/error.png'),
+                        );
                       }
                       return const Padding(
                           padding: EdgeInsets.only(top: 280),

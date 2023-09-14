@@ -4,10 +4,6 @@ import 'package:pinput/pinput.dart';
 import 'package:rayab2bupdated/API/API.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Screens/RegisterAddressScreen.dart';
-
-// import 'package:sms_autofill/sms_autofill.dart';
-// import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
-
 import '../Models/CheckOTPModel.dart';
 
 class ActivateUserScreen extends StatefulWidget {

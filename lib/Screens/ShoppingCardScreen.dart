@@ -167,12 +167,6 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                       color: MyColorsSample.primary,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                // Text(
-                                //   "and shopping now",
-                                //   style: TextStyle(
-                                //       color: Color(_fontcolor),
-                                //       fontWeight: FontWeight.bold),
-                                // ),
                                 const SizedBox(
                                   height: 10.0,
                                 ),
@@ -256,8 +250,9 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                         ],
                       );
                     } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}'
-                          "You don't have data in this time");
+                      return Center(
+                        child: Image.asset('assets/error.png'),
+                      );
                     } else {
                       return const Padding(
                         padding: EdgeInsets.all(180.0),

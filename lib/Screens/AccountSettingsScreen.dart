@@ -83,11 +83,6 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             const SizedBox(
               height: 10,
             ),
-
-            // TextButton(
-            //   onPressed: () {},
-            //   child: const Text('تعديل'),
-            // ),
             const Divider(
               thickness: 2.0,
             ),
@@ -124,36 +119,6 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             const Divider(
               thickness: 2.0,
             ),
-            // TextButton(
-            //   child: Card(
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(15.0),
-            //     ),
-            //     elevation: 10,
-            //     color: Colors.white70,
-            //     child: Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: Row(
-            //         crossAxisAlignment: CrossAxisAlignment.center,
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         children: [
-            //           const Icon(Icons.email),
-            //           const Text(
-            //             "غير البريد الشخصي",
-            //             style: TextStyle(
-            //               fontWeight: FontWeight.bold,
-            //             ),
-            //           ),
-            //           Text('البريد',
-            //               style: TextStyle(
-            //                   color: Color(_fontcolor), fontSize: 8.0)),
-            //           const Icon(Icons.arrow_right),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            //   onPressed: () {},
-            // ),
             TextButton(
               child: Card(
                 shape: RoundedRectangleBorder(

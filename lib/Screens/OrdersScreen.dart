@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
 import 'package:rayab2bupdated/Models/GetOrdersResponseModel.dart';
 import 'package:rayab2bupdated/Screens/BottomNavMenu.dart';
-import 'package:rayab2bupdated/Screens/LoginScreen.dart';
 import 'package:rayab2bupdated/Screens/OrderDetailsScreen.dart';
 import 'package:shimmer/shimmer.dart';
 import '../API/API.dart';
@@ -215,53 +214,17 @@ class OrdersScreenState extends State<OrdersScreen>
                           if (snapshot.data!.data!.items!.isEmpty)
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              // crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
                                     height:
                                         MediaQuery.of(context).size.height / 6),
-
                                 Image.asset("assets/shoppingcard1.png"),
-                                // const SizedBox(
-                                //   height: 10.0,
-                                // ),
-                                // Text(
-                                //   "لا يوجد طلبات الان تسوق و تابع طلبك",
-                                //   style: TextStyle(
-                                //       color: Color(_fontColor),
-                                //       fontWeight: FontWeight.w900),
-                                // ),
-                                // const SizedBox(
-                                //   height: 10.0,
-                                // ),
-                                // FloatingActionButton.extended(
-                                //     onPressed: () {
-                                //       Navigator.push(context,
-                                //           MaterialPageRoute(builder: (context) {
-                                //         return CategoriesScreen(
-                                //             token: widget.token,
-                                //             email: widget.email,
-                                //             customerId: widget.customerId,
-                                //             firstname: widget.firstname,
-                                //             mobile: widget.mobile);
-                                //       }));
-                                //     },
-                                //     label: const Text("تسوق الان"),
-                                //     backgroundColor: Color(_fontColor))
                               ],
                             )
                         ]);
                       } else if (snapshot.hasError) {
                         return Center(
-                          child: TextButton(
-                            child: const Text('Login'),
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const LoginScreen();
-                              }));
-                            },
-                          ),
+                          child: Image.asset('assets/error.png'),
                         );
                       } else {
                         return const Padding(
@@ -359,43 +322,22 @@ class OrdersScreenState extends State<OrdersScreen>
                                 const SizedBox(
                                   height: 10.0,
                                 ),
-                                // Text(
-                                //   "You don't have any order yet Shopping now and track your order",
-                                //   style: TextStyle(
-                                //       color: Color(_fontColor),
-                                //       fontWeight: FontWeight.bold),
-                                // ),
-                                // const SizedBox(
-                                //   height: 10.0,
-                                // ),
-                                // FloatingActionButton.extended(
-                                //     onPressed: () {
-                                //       Navigator.push(context,
-                                //           MaterialPageRoute(builder: (context) {
-                                //         return CategoriesScreen(
-                                //             token: widget.token,
-                                //             email: widget.email,
-                                //             customerId: widget.customerId,
-                                //             firstname: widget.firstname,
-                                //             mobile: widget.mobile);
-                                //       }));
-                                //     },
-                                //     label: const Text("Shopping now"),
-                                //     backgroundColor: Color(_fontColor))
                               ],
                             )
                         ]);
                       } else if (snapshot.hasError) {
-                        return Center(
-                          child: TextButton(
-                            child: const Text('Login'),
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const LoginScreen();
-                              }));
-                            },
-                          ),
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 6,
+                            ),
+                            Image.asset("assets/error.png"),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                          ],
                         );
                       } else {
                         return const Center(

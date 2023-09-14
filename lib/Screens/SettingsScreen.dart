@@ -134,6 +134,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   activeTrackColor: Colors.blue,
                   activeColor: Colors.lightBlue,
                 ),
+                // Switch(
+                //   value: isSwitched,
+                //   onChanged: (value) {
+                //     setState(() {
+                //       isSwitched = value;
+                //       if (isSwitched) {
+                //         FirebaseMessaging.instance.subscribeToTopic('');
+                //       } else {
+                //         FirebaseMessaging.instance.unsubscribeFromTopic('');
+                //       }
+                //     });
+                //   },
+                //   activeTrackColor: Colors.blue,
+                //   activeColor: Colors.lightBlue,
+                // ),
               ],
             ),
             Row(

@@ -235,8 +235,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       );
                     } else if (snapshot.hasError) {
                       // Show error message if there's an error
-                      return Text(
-                        '${snapshot.error}' "You don't have data at this time",
+                      return Center(
+                        child: Image.asset('assets/error.png'),
                       );
                     } else {
                       return const Center(child: CircularProgressIndicator());
@@ -406,12 +406,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         ),
                       );
                     } else if (snapshot.hasError) {
-                      // Show error message if there's an error
-                      return Text(
-                        '${snapshot.error}' "You don't have data at this time",
+                      return Center(
+                        child: Image.asset('assets/error.png'),
                       );
                     } else {
-                      // Show a fallback loading state
                       return const Center(child: CircularProgressIndicator());
                     }
                   },

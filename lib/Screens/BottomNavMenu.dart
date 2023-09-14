@@ -4,8 +4,6 @@ import 'package:arabic_font/arabic_font.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:rayab2bupdated/Screens/HomeScreen.dart';
 import 'package:rayab2bupdated/Screens/ShoppingCardScreen.dart';
 import 'package:rayab2bupdated/Constants/Constants.dart';
@@ -30,12 +28,6 @@ class BottomNavMenu extends StatefulWidget {
 
 class _BottomNavMenuState extends State<BottomNavMenu> {
   final PageController _myPage = PageController(initialPage: 0);
-
-  // final Color _iconColor = Colors.black;
-  // final Color _iconColor2 = Colors.black;
-  // final Color _iconColor3 = Colors.black;
-  // final Color _iconColor4 = Colors.black;
-  // final Color _iconColor5 = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +186,6 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             customerId: widget.customerId,
           )
         ],
-        // physics: NeverScrollableScrollPhysics(), // Comment this if you need to use Swipe.
       ),
     );
   }
