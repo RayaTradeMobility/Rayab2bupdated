@@ -80,83 +80,62 @@ class ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 )),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  elevation: 10,
-                  color: Colors.white70,
-                  child: TextButton(
-                    onPressed: () {
-                      // Fluttertoast.showToast(
-                      //     msg: "Coming Soon",
-                      //     toastLength: Toast.LENGTH_SHORT,
-                      //     gravity: ToastGravity.CENTER,
-                      //     timeInSecForIosWeb: 1,
-                      //     backgroundColor: MyColorsSample.fontColor,
-                      //     textColor: Colors.white,
-                      //     fontSize: 16.0);
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return NotificationScreen(
-                            token: widget.token, customerId: widget.customerId);
-                      }));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: MyColorsSample.primaryDark
-                                      .withOpacity(0.2)),
-                              child: const Icon(LineAwesomeIcons.bell)),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          const Center(
-                              child: Text(
-                            "الاشعارات",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                SingleChildScrollView(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    elevation: 10,
+                    color: Colors.white70,
+                    child: TextButton(
+                      onPressed: () {
+                        // Fluttertoast.showToast(
+                        //     msg: "Coming Soon",
+                        //     toastLength: Toast.LENGTH_SHORT,
+                        //     gravity: ToastGravity.CENTER,
+                        //     timeInSecForIosWeb: 1,
+                        //     backgroundColor: MyColorsSample.fontColor,
+                        //     textColor: Colors.white,
+                        //     fontSize: 16.0);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return NotificationScreen(
+                              token: widget.token, customerId: widget.customerId);
+                        }));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: MyColorsSample.primaryDark
+                                        .withOpacity(0.2)),
+                                child: const Icon(LineAwesomeIcons.bell)),
+                            const SizedBox(
+                              width: 10.0,
                             ),
-                          )),
-                          const Icon(LineAwesomeIcons.angle_left),
-                        ],
+                            const Center(
+                                child: Text(
+                              "الاشعارات",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                            const Icon(LineAwesomeIcons.angle_left),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-                // TextButton(
-                //   child: Card(
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(15.0),
-                //     ),
-                //     elevation: 10,
-                //     color: Colors.white70,
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: Row(
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //         children: const [
-                //           Icon(CupertinoIcons.square_list_fill),
-                //           SizedBox(width: 10.0,),
-                //           Center(child: Text("Price List",style: TextStyle(fontWeight: FontWeight.bold,),)),
-                //           Icon(LineAwesomeIcons.angle_left),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                //   onPressed: (){
-                //   },
-                // ),
+
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),

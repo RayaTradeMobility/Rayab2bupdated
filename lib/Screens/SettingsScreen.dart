@@ -24,6 +24,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final int _fontcolor = 0xFF031639;
   bool isSwitched = true;
 
+  // void unsubscribeFromAllTopics() async {
+  //   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  //   RemoteMessage? initialMessage = await _firebaseMessaging.getInitialMessage();
+  //   if (initialMessage != null) {
+  //     Map<String, dynamic> data = initialMessage.data;
+  //     if (data.containsKey('collapse_key')) {
+  //       String collapseKey = data['collapse_key'];
+  //       await _firebaseMessaging.unsubscribeFromTopic(collapseKey);
+  //     }
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,6 +133,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   'عروض',
                   style: TextStyle(color: Color(_fontcolor)),
                 ),
+                // Switch(
+                //   value: isSwitched,
+                //   onChanged: (value) {
+                //     setState(() {
+                //       isSwitched = value;
+                //       if (isSwitched) {
+                //         FirebaseMessaging.instance.subscribeToTopic('69886747923');
+                //       } else {
+                //         FirebaseMessaging.instance.unsubscribeFromTopic('69886747923');
+                //       }
+                //     });
+                //   },
+                //   activeTrackColor: Colors.blue,
+                //   activeColor: Colors.lightBlue,
+                // ),
                 Switch(
                   value: isSwitched,
                   onChanged: (value) {
@@ -134,21 +160,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   activeTrackColor: Colors.blue,
                   activeColor: Colors.lightBlue,
                 ),
-                // Switch(
-                //   value: isSwitched,
-                //   onChanged: (value) {
-                //     setState(() {
-                //       isSwitched = value;
-                //       if (isSwitched) {
-                //         FirebaseMessaging.instance.subscribeToTopic('');
-                //       } else {
-                //         FirebaseMessaging.instance.unsubscribeFromTopic('');
-                //       }
-                //     });
-                //   },
-                //   activeTrackColor: Colors.blue,
-                //   activeColor: Colors.lightBlue,
-                // ),
               ],
             ),
             Row(

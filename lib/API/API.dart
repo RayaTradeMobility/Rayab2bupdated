@@ -933,6 +933,7 @@ class API {
     if (kDebugMode) {
       print("body: ${message.notification?.body}");
     }
+    print('1');
     if (kDebugMode) {
       print("Payload: ${message.data}");
     }
