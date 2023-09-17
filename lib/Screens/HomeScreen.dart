@@ -77,13 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   bottomRight: Radius.circular(50),
                 ),
               ),
-              backgroundColor: MyColorsSample.fontColor,
+              backgroundColor: Colors.white,
               floating: false,
               pinned: false,
               snap: false,
               centerTitle: true,
               automaticallyImplyLeading: false,
               flexibleSpace: Container(
+                height: MediaQuery.of(context).size.height / 4,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -91,99 +92,114 @@ class _HomeScreenState extends State<HomeScreen> {
                     colors: [
                       MyColorsSample.primary,
                       MyColorsSample.teal,
-                      // Colors.white,
                     ],
                   ),
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20)),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/appbarlogo1.png',
-                      height: MediaQuery.of(context).size.height / 8,
-                      width: MediaQuery.of(context).size.height / 1,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 16.0, right: 20, left: 20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: MyColorsSample.primary,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: TypeAheadField<Items>(
-                          textFieldConfiguration: TextFieldConfiguration(
-                            autocorrect: false,
-                            autofocus: false,
-                            style: DefaultTextStyle.of(context).style.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.white,
-                                ),
-                            decoration: InputDecoration(
-                              labelText: 'Search',
-                              labelStyle: ArabicTextStyle(
-                                  color: Colors.white,
-                                  arabicFont: ArabicFont.dinNextLTArabic),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              prefixIcon: Icon(LineAwesomeIcons.search,
-                                  color: Colors.white),
-                            ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Image.asset(
+                        'assets/appbarlogo1.png',
+                        height: MediaQuery.of(context).size.height / 8,
+                        width: MediaQuery.of(context).size.height / 1,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 16.0, right: 20, left: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: MyColorsSample.primary,
+                            borderRadius: BorderRadius.circular(40),
                           ),
-                          suggestionsCallback: (pattern) async {
-                            return await API.searchProducts(
-                                pattern, widget.token);
-                          },
-                          itemBuilder: (context, suggestion) {
-                            return ListTile(
-                              leading: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minWidth: 44,
-                                  minHeight: 44,
-                                  maxWidth: 64,
-                                  maxHeight: 64,
+                          child: TypeAheadField<Items>(
+                            textFieldConfiguration: TextFieldConfiguration(
+                              autocorrect: false,
+                              autofocus: false,
+                              style:
+                                  DefaultTextStyle.of(context).style.copyWith(
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.white,
+                                      ),
+                              decoration: InputDecoration(
+                                labelText: "     Search",
+                                labelStyle: ArabicTextStyle(
+                                    color: Colors.white,
+                                    arabicFont: ArabicFont.dinNextLTArabic,
+                                    fontSize: 19),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(40),
                                 ),
-                                child: FadeInImage.memoryNetwork(
-                                  image: suggestion.images!.imageLink!,
-                                  placeholder: kTransparentImage,
-                                  imageErrorBuilder:
-                                      (context, error, stackTrace) {
-                                    return Image.asset(
-                                      'assets/logo-raya.png',
-                                      height: 40.0,
-                                      width: 150.0,
-                                      fit: BoxFit.fitWidth,
-                                    );
-                                  },
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.only(right: 18.0),
+                                  child: Icon(
+                                    LineAwesomeIcons.search,
+                                    color: Colors.white,
+                                    size: 48,
+                                  ),
                                 ),
                               ),
-                              title: Text(suggestion.name ?? ""),
-                              subtitle: Text('\$${suggestion.price ?? ""}'),
-                            );
-                          },
-                          onSuggestionSelected: (suggestion) {
-                            final selectedSku = suggestion.sku;
+                            ),
+                            suggestionsCallback: (pattern) async {
+                              return await API.searchProducts(
+                                  pattern, widget.token);
+                            },
+                            itemBuilder: (context, suggestion) {
+                              return ListTile(
+                                leading: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    minWidth: 44,
+                                    minHeight: 44,
+                                    maxWidth: 64,
+                                    maxHeight: 64,
+                                  ),
+                                  child: FadeInImage.memoryNetwork(
+                                    image: suggestion.images!.imageLink!,
+                                    placeholder: kTransparentImage,
+                                    imageErrorBuilder:
+                                        (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'assets/logo-raya.png',
+                                        height: 40.0,
+                                        width: 150.0,
+                                        fit: BoxFit.fitWidth,
+                                      );
+                                    },
+                                  ),
+                                ),
+                                title: Text(suggestion.name ?? ""),
+                                subtitle: Text('\$${suggestion.price ?? ""}'),
+                              );
+                            },
+                            onSuggestionSelected: (suggestion) {
+                              final selectedSku = suggestion.sku;
 
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ProductScreen(
-                                  sku: selectedSku!,
-                                  productId: suggestion.id!,
-                                  token: widget.token,
-                                  email: widget.email,
-                                  firstname: widget.firstname,
-                                  mobile: widget.mobile,
-                                  customerId: widget.customerId,
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ProductScreen(
+                                    sku: selectedSku!,
+                                    productId: suggestion.id!,
+                                    token: widget.token,
+                                    email: widget.email,
+                                    firstname: widget.firstname,
+                                    mobile: widget.mobile,
+                                    customerId: widget.customerId,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
