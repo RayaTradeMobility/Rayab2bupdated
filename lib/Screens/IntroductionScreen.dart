@@ -32,7 +32,7 @@ class IntroductionScreens extends StatelessWidget {
           centerTitle: true,
           title: Center(
             child: const Text(
-              "حول التطبيق",
+              "مقدمه",
               style: ArabicTextStyle(arabicFont: ArabicFont.avenirArabic),
             ),
           ),
@@ -56,7 +56,7 @@ class IntroductionScreens extends StatelessWidget {
               title: '  ',
               body: 'رايه للتوزيع برنامج لتجاره البضاعه و صناعه الارباح',
               image: buildImage(
-                'assets/panel.png',
+                'assets/panel1.png',
               ),
               decoration: getPageDecoration(),
             ),

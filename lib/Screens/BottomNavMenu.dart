@@ -43,7 +43,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/barr.png',
+                  'assets/home.png',
                   width: MediaQuery.of(context).size.width / 3,
                   height: MediaQuery.of(context).size.height / 30,
                 ),
@@ -60,7 +60,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/barr2.png',
+                  'assets/shopping.png',
                   width: MediaQuery.of(context).size.width / 3,
                   height: MediaQuery.of(context).size.height / 35,
                 ),
@@ -79,7 +79,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/barr1.png',
+                  'assets/category.png',
                   width: MediaQuery.of(context).size.width / 3,
                   height: MediaQuery.of(context).size.height / 35,
                 ),
@@ -98,7 +98,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/barr3.png',
+                  'assets/order.png',
                   width: MediaQuery.of(context).size.width / 3,
                   height: MediaQuery.of(context).size.height / 35,
                 ),
@@ -117,7 +117,7 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
             child: Column(
               children: [
                 Image.asset(
-                  'assets/barr4.png',
+                  'assets/profile.png',
                   width: MediaQuery.of(context).size.width / 3,
                   height: MediaQuery.of(context).size.height / 35,
                 ),

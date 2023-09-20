@@ -107,9 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 20,
                       ),
                       Image.asset(
-                        'assets/appbarlogo1.png',
+                        'assets/appbarlogo2.png',
                         height: MediaQuery.of(context).size.height / 8,
-                        width: MediaQuery.of(context).size.height / 1,
+                        width: MediaQuery.of(context).size.height / 2.2,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -240,9 +240,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       scrollDirection: Axis.horizontal,
                                     ),
                                     items: [
-                                      "assets/panel.png",
-                                      "assets/panel.png",
-                                      "assets/panel.png",
+                                      "assets/panel1.png",
+                                      "assets/panel1.png",
+                                      "assets/panel1.png",
                                     ].map((imagePath) {
                                       return Builder(
                                         builder: (BuildContext context) {
@@ -392,9 +392,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   scrollDirection: Axis.horizontal,
                                 ),
                                 items: [
-                                  "assets/panel.png",
-                                  "assets/panel.png",
-                                  "assets/panel.png",
+                                  "assets/panel1.png",
+                                  "assets/panel1.png",
+                                  "assets/panel1.png",
                                 ].map((imagePath) {
                                   return Builder(
                                     builder: (BuildContext context) {

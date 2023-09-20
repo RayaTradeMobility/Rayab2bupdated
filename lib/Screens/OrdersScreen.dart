@@ -218,7 +218,7 @@ class OrdersScreenState extends State<OrdersScreen>
                                 SizedBox(
                                     height:
                                         MediaQuery.of(context).size.height / 6),
-                                Image.asset("assets/shoppingcard1.png"),
+                                Image.asset("assets/orderscreen.png"),
                               ],
                             )
                         ]);
@@ -318,7 +318,7 @@ class OrdersScreenState extends State<OrdersScreen>
                                   height:
                                       MediaQuery.of(context).size.height / 6,
                                 ),
-                                Image.asset("assets/shoppingcard1.png"),
+                                Image.asset("assets/orderscreen.png"),
                                 const SizedBox(
                                   height: 10.0,
                                 ),
